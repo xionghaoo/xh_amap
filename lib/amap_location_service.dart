@@ -40,6 +40,10 @@ class AmapLocationService {
     return _locationStream;
   }
 
+  stop() async {
+    return await _methodChannel.invokeMethod("stopLocation");
+  }
+
 //  static stopLocationStream() async {
 //    await _locationSubscription.cancel();
 //    _locationSubscription = null;

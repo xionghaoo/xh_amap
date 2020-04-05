@@ -107,6 +107,9 @@ class LocationPlugin(
 //                    }
                 }
             }
+            "stopLocation" -> {
+                LocationService.stopService(context, connection)
+            }
             else -> result.notImplemented()
         }
     }

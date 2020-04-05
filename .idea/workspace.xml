@@ -5,65 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/AMap3DMap_7.1.0_AMapSearch_7.1.0_AMapLocation_4.7.2_20191030.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/arm64-v8a/libAMapSDK_MAP_v7_1_0.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/armeabi-v7a/libAMapSDK_MAP_v7_1_0.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/libs/x86_64/libAMapSDK_MAP_v7_1_0.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/AMapUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/ChString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/DrivingRouteOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/EnString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/PermissionManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/RideRouteOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/RouteOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/UploadLocationReceiver.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_bus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_man.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_ride.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_start.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/amap_through.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/custom_info_bubble.9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir12.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir13.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir14.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir_end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir_start.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/dir_station.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/custom_info_contents.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/custom_info_window.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/values/dimens.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/amap_location_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/amap_param.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/amap_service.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/Test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/officialDemoSwift_Bridging_Header.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/pgy/xhamap_example/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/pgy/xhamap_example/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/XhamapPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/XhamapPlugin.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/xhamap.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/xhamap.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_location_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_location_service.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,6 +75,14 @@
       <option name="presentableId" value="Default" />
       <updated>1585884950628</updated>
     </task>
+    <task id="LOCAL-00001" summary="定位插件">
+      <created>1586075857708</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586075857708</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,5 +97,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="定位插件" />
+    <option name="LAST_COMMIT_MESSAGE" value="定位插件" />
   </component>
 </project>

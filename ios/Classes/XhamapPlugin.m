@@ -8,6 +8,8 @@
 #import "xhamap-Swift.h"
 #endif
 
+#import "officialDemoSwift_Bridging_Header.h"
+
 @implementation XhamapPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   [SwiftXhamapPlugin registerWithRegistrar:registrar];

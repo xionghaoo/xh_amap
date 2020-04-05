@@ -1,0 +1,43 @@
+PODS:
+  - AMap3DMap (7.2.0):
+    - AMapFoundation (~> 1.5)
+  - AMapFoundation (1.6.2)
+  - AMapLocation (2.6.4):
+    - AMapFoundation (~> 1.6.1)
+  - AMapSearch (7.1.0):
+    - AMapFoundation (~> 1.4)
+  - Flutter (1.0.0)
+  - xhamap (0.0.1):
+    - AMap3DMap
+    - AMapLocation
+    - AMapSearch
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - xhamap (from `.symlinks/plugins/xhamap/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  xhamap:
+    :path: ".symlinks/plugins/xhamap/ios"
+
+SPEC CHECKSUMS:
+  AMap3DMap: be13191194c9aeb29a67d9d3e9a797588fb329aa
+  AMapFoundation: 672dc3a4759cb733f447c1e1b020f7ba2729f4ab
+  AMapLocation: b4162db67f813508a14ee7e05c7ee4073785221d
+  AMapSearch: 6bd6d361c5eb00110e0bffa4acf88b7bb9f7e059
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  xhamap: 78d1760d333b07a3ee86adf7e1145de1a816a8a2
+
+PODFILE CHECKSUM: 970b3da713b38729118c1fef0b929751811ef346
+
+COCOAPODS: 1.9.0
