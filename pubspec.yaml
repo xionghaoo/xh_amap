@@ -1,8 +1,8 @@
 name: xhamap
 description: A new Flutter plugin.
 version: 0.0.1
-author:
-homepage:
+author: xionghaoo
+homepage: https://github.com/xionghaoo
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

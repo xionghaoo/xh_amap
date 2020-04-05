@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:xhamap/xhamap.dart';
+import 'package:xhamap/amap_location_service.dart';
+import 'package:xhamap/amap_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,9 +16,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
+  AmapLocationService _amapLocationService;
+
   @override
   void initState() {
     super.initState();
+    AmapInitializer.setApiKey(androidKey: "10d6495de31a6f5336edfa81fa35881d", iosKey: null);
     initPlatformState();
   }
 
@@ -48,7 +53,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: <Widget>[
+              Text('Running on: $_platformVersion\n'),
+              RaisedButton(
+                child: Text("启动定位服务"),
+                onPressed: () {
+                  AmapLocationService().start().then((_) {
+                    AmapLocationService().startLocationStream().listen((data) {
+                      print("received address: ${data['address']}, ${data['lat']}, ${data['lng']}");
+                    });
+                  });
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
