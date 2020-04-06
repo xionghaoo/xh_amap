@@ -4,9 +4,10 @@ import UIKit
 import MAMapKit
 import AMapLocationKit
 
-public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDelegate {
+public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDelegate, FlutterStreamHandler {
     
     lazy var locationManager = AMapLocationManager()
+    var eventSink: FlutterEventSink!
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let initialChannel = FlutterMethodChannel(name: "com.pgy/amap_initial", binaryMessenger: registrar.messenger())
@@ -15,6 +16,7 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDele
         let instance = SwiftXhamapPlugin()
         registrar.addMethodCallDelegate(instance, channel: initialChannel)
         registrar.addMethodCallDelegate(instance, channel: locationChannel)
+        eventChannel.setStreamHandler(instance)
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -35,7 +37,7 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDele
             
             locationManager.distanceFilter = 200
             locationManager.locatingWithReGeocode = true
-
+            
             locationManager.startUpdatingLocation()
             
             print("start location")
@@ -46,8 +48,18 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDele
         result("iOS " + UIDevice.current.systemVersion)
     }
     
-    //MARK: - AMapLocationManagerDelegate
+    //MARK: - FlutterStreamHandler
+    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        eventSink = events
+        return nil
+    }
     
+    public func onCancel(withArguments arguments: Any?) -> FlutterError? {
+        eventSink = nil
+        return nil
+    }
+    
+    //MARK: - AMapLocationManagerDelegate
     public func amapLocationManager(_ manager: AMapLocationManager!, doRequireLocationAuth locationManager: CLLocationManager!) {
         locationManager.requestAlwaysAuthorization()
     }
@@ -57,18 +69,18 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, AMapLocationManagerDele
         NSLog("didFailWithError:{\(error.code) - \(error.localizedDescription)};")
     }
     
-    public func amapLocationManager(_ manager: AMapLocationManager!, didUpdate location: CLLocation!) {
-        NSLog("location:{lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)};");
-        
-//        pointAnnotation.coordinate = location.coordinate
-//        mapView.centerCoordinate = location.coordinate
-//        mapView.setZoomLevel(15.1, animated: false)
-    }
-    
     public func amapLocationManager(_ manager: AMapLocationManager!, didUpdate location: CLLocation!, reGeocode: AMapLocationReGeocode!) {
+        
         NSLog("location:{lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)};");
         if let reGeocode = reGeocode {
             NSLog("reGeocode: %@", reGeocode)
+            eventSink([
+                "address": reGeocode.formattedAddress ?? "",
+                "lat": location.coordinate.latitude,
+                "lng": location.coordinate.longitude
+            ])
+        } else {
+            eventSink(FlutterError(code: "102", message: "获取地址失败", details: nil))
         }
     }
 }

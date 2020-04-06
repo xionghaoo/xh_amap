@@ -1,3 +1,7 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+项目初始化
+
+## 0.0.2
+
+新增 Android 和 ios 定位服务

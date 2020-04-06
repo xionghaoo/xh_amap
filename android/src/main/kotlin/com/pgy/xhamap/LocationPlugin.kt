@@ -119,7 +119,7 @@ class LocationPlugin(
     }
 
     override fun onCancel(arguments: Any?) {
-
+        eventSink = null
     }
 
     private fun isLocationServiceEnabled() : Boolean {
