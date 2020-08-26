@@ -10,14 +10,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/ios/Flutter/.last_build_id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/AMapParam.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/CommonUtility.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/CommonUtility.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/CustomMAMultiPolyline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/CustomMAMultiPolyline.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/LineDashPolyline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/LineDashPolyline.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MABusStopAnnotation.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MABusStopAnnotation.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviAnnotation.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviAnnotation.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviPolyline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviPolyline.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviRoute.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/MANaviRoute.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/tools/RouteCommon.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/xhamap-unbrella.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/release/app-release.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/xhamap.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/officialDemoSwift_Bridging_Header.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/officialDemoSwift_Bridging_Header.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/xhamap.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/xhamap.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_location_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_location_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/xhamap_test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xhamap.iml" beforeDir="false" afterPath="$PROJECT_DIR$/xhamap.iml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,10 +66,15 @@
   </component>
   <component name="ProjectId" id="1a0uhKzhFLiPQxxV59lb8BzPqto" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -50,18 +85,6 @@
       <recent name="$PROJECT_DIR$/android/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/android/libs" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -88,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586178270119</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ios 定位">
+      <created>1586181177064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1586181177064</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,5 +138,35 @@
     <MESSAGE value="定位插件" />
     <MESSAGE value="ios 定位" />
     <option name="LAST_COMMIT_MESSAGE" value="ios 定位" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1598431227515">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598431227515" />
+    <state width="1638" height="228" key="GridCell.Tab.0.bottom" timestamp="1598431191634">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="228" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191634" />
+    <state width="1638" height="228" key="GridCell.Tab.0.center" timestamp="1598431191633">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="228" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191633" />
+    <state width="1638" height="228" key="GridCell.Tab.0.left" timestamp="1598431191633">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="228" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191633" />
+    <state width="1638" height="228" key="GridCell.Tab.0.right" timestamp="1598431191634">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="228" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191634" />
+    <state x="534" y="243" key="RollbackChangesDialog" timestamp="1595574275907">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1595574275907" />
+    <state x="510" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1595582079637">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="510" y="357" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1595582079637" />
   </component>
 </project>

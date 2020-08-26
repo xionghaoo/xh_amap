@@ -21,11 +21,7 @@ class AmapLocationService {
   final EventChannel _eventChannel;
   Stream<Map<String, dynamic>> _locationStream;
 
-//  static final _channel = MethodChannel("com.pgy/amap_location");
-//  static StreamSubscription<dynamic> _locationSubscription;
-
   Future<void> start() async {
-//    return await _channel.invokeMethod("startLocation");
     return await _methodChannel.invokeMethod("startLocation");
   }
 
@@ -44,8 +40,4 @@ class AmapLocationService {
     return await _methodChannel.invokeMethod("stopLocation");
   }
 
-//  static stopLocationStream() async {
-//    await _locationSubscription.cancel();
-//    _locationSubscription = null;
-//  }
 }

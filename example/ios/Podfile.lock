@@ -7,11 +7,15 @@ PODS:
   - AMapSearch (7.1.0):
     - AMapFoundation (~> 1.4)
   - Flutter (1.0.0)
+  - SwiftyJSON (4.3.0)
+  - Toast-Swift (5.0.1)
   - xhamap (0.0.1):
     - AMap3DMap
     - AMapLocation
     - AMapSearch
     - Flutter
+    - SwiftyJSON (~> 4.0)
+    - Toast-Swift (~> 5.0.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -23,6 +27,8 @@ SPEC REPOS:
     - AMapFoundation
     - AMapLocation
     - AMapSearch
+    - SwiftyJSON
+    - Toast-Swift
 
 EXTERNAL SOURCES:
   Flutter:
@@ -36,8 +42,10 @@ SPEC CHECKSUMS:
   AMapLocation: b4162db67f813508a14ee7e05c7ee4073785221d
   AMapSearch: 6bd6d361c5eb00110e0bffa4acf88b7bb9f7e059
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  xhamap: 78d1760d333b07a3ee86adf7e1145de1a816a8a2
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  xhamap: 41ccfbbfd3ea94be301fd00bf26585a213838b36
 
-PODFILE CHECKSUM: 970b3da713b38729118c1fef0b929751811ef346
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.9.0

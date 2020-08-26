@@ -2,7 +2,7 @@ name: xhamap
 description: 高德地图插件
 version: 0.0.2
 author: xionghaoo
-homepage: https://github.com/xionghaoo
+homepage: https://github.com/xionghaoo/xh_amap
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
