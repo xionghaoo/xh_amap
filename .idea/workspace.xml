@@ -11,6 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_param.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_param.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,16 +45,16 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap" />
       <recent name="$PROJECT_DIR$/android/src/main/res/values" />
       <recent name="$PROJECT_DIR$/android/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/android/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/android/libs" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -96,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598431333620</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="framework swift 调用object c">
+      <created>1598432561742</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1598432561742</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,30 +133,39 @@
     <option name="LAST_COMMIT_MESSAGE" value="framework swift 调用object c" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1598431333540">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1598432561652">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598431333540" />
-    <state width="1638" height="228" key="GridCell.Tab.0.bottom" timestamp="1598431191634">
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598432561652" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1598435201151">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435049693" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
+    <state width="1638" height="228" key="GridCell.Tab.0.bottom" timestamp="1598512303743">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="228" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191634" />
-    <state width="1638" height="228" key="GridCell.Tab.0.center" timestamp="1598431191633">
+    <state width="1638" height="228" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598512303743" />
+    <state width="1638" height="228" key="GridCell.Tab.0.center" timestamp="1598512303742">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="228" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191633" />
-    <state width="1638" height="228" key="GridCell.Tab.0.left" timestamp="1598431191633">
+    <state width="1638" height="228" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598512303742" />
+    <state width="1638" height="228" key="GridCell.Tab.0.left" timestamp="1598512303741">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="228" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191633" />
-    <state width="1638" height="228" key="GridCell.Tab.0.right" timestamp="1598431191634">
+    <state width="1638" height="228" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598512303741" />
+    <state width="1638" height="228" key="GridCell.Tab.0.right" timestamp="1598512303742">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="228" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598431191634" />
-    <state x="534" y="243" key="RollbackChangesDialog" timestamp="1595574275907">
+    <state width="1638" height="228" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598512303742" />
+    <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1595574275907" />
+    <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1598432568594">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1598432568594" />
     <state x="510" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1595582079637">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

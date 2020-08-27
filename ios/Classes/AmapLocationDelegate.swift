@@ -33,6 +33,7 @@ class AMapLocationDelegate: NSObject, AMapLocationManagerDelegate {
     
     //MARK: - AMapLocationManagerDelegate
     public func amapLocationManager(_ manager: AMapLocationManager!, doRequireLocationAuth locationManager: CLLocationManager!) {
+        // 定位权限申请
         locationManager.requestAlwaysAuthorization()
     }
     

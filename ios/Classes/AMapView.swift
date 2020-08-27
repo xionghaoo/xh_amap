@@ -343,6 +343,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     annotationView!.image = UIImage(named: "endPoint")
                 }
                 else if annotation.title == "我的位置" {
+                    print("abc show my location")
                     if let image = UIImage(named: "ic_car") {
                         annotationView!.image = scaleImage(inImage: image, scaleWidth: 50, scaleHeight: 50 / 140 * 112)
                     }
@@ -389,6 +390,25 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     // marker选择事件
     func mapView(_ mapView: MAMapView!, didSelect view: MAAnnotationView!) {
     }
+    
+//    func mapView(_ mapView: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {
+//        print("map clicked");
+//        let v = UIImageView()
+//        v.image = UIImage(named: "AMapBundle.bundle/ic_car")
+//        print("image: \(v.image)")
+//        v.backgroundColor = .red
+//        v.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//        mapView?.addSubview(v)
+//    }
+//    
+//    func getBundle() -> Bundle? {
+//        var bundle: Bundle?
+//        if let urlString = Bundle.main.path(forResource: "AMapBundle", ofType: "bundle", inDirectory: "xhamap") {
+//            bundle = (Bundle(url: URL(fileURLWithPath: urlString)))
+//        }
+//        return bundle
+//    }
+
     
     // MARK: - AMapSearchDelegate
     func aMapSearchRequest(_ request: Any!, didFailWithError error: Error!) {

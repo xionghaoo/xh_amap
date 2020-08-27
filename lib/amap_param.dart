@@ -11,8 +11,10 @@ class AmapParam {
   bool enableMyMarker;
   int mapType;
 
-  List<AddressInfo> startAddressList;
-  List<AddressInfo> endAddressList;
+  final List<AddressInfo> startAddressList;
+  final List<AddressInfo> endAddressList;
+
+  final List<AddressInfo> merchantAddressList;
 
   AmapParam({
     @required this.initialCenterPoint,
@@ -21,6 +23,7 @@ class AmapParam {
     this.enableMyMarker = false,
     this.startAddressList = const [],
     this.endAddressList = const [],
+    this.merchantAddressList = const [],
     this.mapType = routeMap
   });
 
@@ -31,18 +34,23 @@ class AmapParam {
     "enableMyMarker": enableMyMarker,
     "mapType": mapType,
     "startAddressList": startAddressList,
-    "endAddressList": endAddressList
+    "endAddressList": endAddressList,
+    "merchantAddressList": merchantAddressList
   };
 }
 
 class AddressInfo {
   GeoPoint geo;
   String address;
-  AddressInfo(this.geo, this.address);
+  int index;
+  String indexName;
+  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName});
 
   toJson() => <String, dynamic> {
     "geo": geo,
-    "address": address
+    "address": address,
+    "index": index,
+    "indexName": indexName
   };
 }
 
