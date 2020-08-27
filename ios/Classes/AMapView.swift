@@ -343,7 +343,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     annotationView!.image = UIImage(named: "endPoint")
                 }
                 else if annotation.title == "我的位置" {
-                    print("abc show my location")
+                    let bundle = Bundle(for: SwiftXhamapPlugin.self)
+                    print("bundle: \(bundle)")
                     if let image = UIImage(named: "ic_car") {
                         annotationView!.image = scaleImage(inImage: image, scaleWidth: 50, scaleHeight: 50 / 140 * 112)
                     }

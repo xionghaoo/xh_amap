@@ -52,18 +52,6 @@ class _MyAppState extends State<MyApp> {
                     // 114.087063,22.548665 华新
                     AddressInfo(GeoPoint(22.525982, 113.93569), "Pos4", index: 4, indexName: "4"),
                   ],
-//                      startAddressList: [
-//                        // 114.038225,22.618959
-//                        AddressInfo(GeoPoint(22.618959, 114.038225), "起点"),
-//                        // 114.109808,22.568798 麦德龙
-//                        AddressInfo(GeoPoint(22.568798, 114.109808), "起点"),
-//                      ],
-//                      endAddressList: [
-//                        // 114.060541,22.529242
-//                        AddressInfo(GeoPoint(22.529242, 114.060541), "终点"),
-//                        // 114.087063,22.548665 华新
-//                        AddressInfo(GeoPoint(22.548665, 114.087063), "终点"),
-//                      ]
             ),
           ),
         ),

@@ -10,14 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ios/Assets.xcassets/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Assets.xcassets/ic_car.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Assets.xcassets/ic_car.imageset/ic_car@2x.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/amap_param.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_param.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/xhamap.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/xhamap.podspec" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598432561742</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="图片测试">
+      <created>1598512325189</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1598512325189</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,13 +137,14 @@
     <MESSAGE value="定位插件" />
     <MESSAGE value="ios 定位" />
     <MESSAGE value="framework swift 调用object c" />
-    <option name="LAST_COMMIT_MESSAGE" value="framework swift 调用object c" />
+    <MESSAGE value="图片测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="图片测试" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1598432561652">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1598512325059">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598432561652" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598512325059" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1598435201151">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
