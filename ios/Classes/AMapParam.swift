@@ -9,7 +9,7 @@
 class AMapParam: Codable {
     
     static let routeMap: Int = 0
-    static let addressDescriptionMap: Int = 0
+    static let addressDescriptionMap: Int = 1
     
     let initialCenterPoint: Array<Double>
     let initialZoomLevel: CGFloat

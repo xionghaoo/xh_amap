@@ -12,6 +12,7 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
     let methodChannel: FlutterMethodChannel
     let viewController: UIViewController
     private var mapView: AMapView?
+    private var addressMapView: AddressSearchAMapView?
     
     init(_ channel: FlutterMethodChannel, vc: UIViewController) {
         self.methodChannel = channel
@@ -29,8 +30,14 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
         } catch let e {
             print("has error: \(e)")
         }
-        mapView = AMapView(viewController, param: amapParam, channel: methodChannel)
-        return mapView!
+        
+        if amapParam?.mapType == AMapParam.addressDescriptionMap {
+            addressMapView = AddressSearchAMapView(viewController, param: amapParam, channel: methodChannel)
+            return addressMapView!
+        } else {
+            mapView = AMapView(viewController, param: amapParam, channel: methodChannel)
+            return mapView!
+        }
     }
     
     // 为地图创建消息解码器，和dart端保持一致
@@ -40,5 +47,6 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
     
     func locateMyPosition() {
         mapView?.reLocate()
+        addressMapView?.reLocate()
     }
 }

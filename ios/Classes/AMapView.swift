@@ -44,7 +44,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         configLocationManager()
         
         addMyMarker()
-       
+        
     }
     
     func view() -> UIView {
@@ -343,10 +343,9 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     annotationView!.image = UIImage(named: "endPoint")
                 }
                 else if annotation.title == "我的位置" {
-                    let bundle = Bundle(for: SwiftXhamapPlugin.self)
-                    print("bundle: \(bundle)")
-                    if let image = UIImage(named: "ic_car") {
-                        annotationView!.image = scaleImage(inImage: image, scaleWidth: 50, scaleHeight: 50 / 140 * 112)
+                    if let image = UIImage(named: "ic_my_position") {
+//                        annotationView!.image = scaleImage(inImage: image, scaleWidth: 50, scaleHeight: 50 / 140 * 112)
+                        annotationView!.image = image
                     }
                 }
                 else {

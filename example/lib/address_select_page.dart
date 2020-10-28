@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:xhamap/amap_location_service.dart';
+import 'package:xhamap/amap_service.dart';
+import 'package:xhamap/amap_view.dart';
+import 'package:xhamap/amap_param.dart';
+
+class AddressSelectPage extends StatefulWidget {
+  @override
+  _AddressSelectPageState createState() => _AddressSelectPageState();
+}
+
+class _AddressSelectPageState extends State<AddressSelectPage> {
+
+  final _controller = AMapController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("地址选择"),),
+      body: Stack(
+        children: [
+          AmapView(
+            controller: _controller,
+            onMarkerClick: (index, distance) {
+            },
+            param: AmapParam(
+              initialCenterPoint: [22.630019, 114.068159],
+              enableMyMarker: true,
+              mapType: AmapParam.addressDescriptionMap,
+              // merchantAddressList: [
+              //   // 114.038225,22.618959
+              //   AddressInfo(GeoPoint(22.618959, 114.038225), "Pos1", index: 1, indexName: "1"),
+              //   // 114.109808,22.568798 麦德龙
+              //   AddressInfo(GeoPoint(22.568798, 114.109808), "Pos2", index: 2, indexName: "2"),
+              //   // 114.060541,22.529242
+              //   AddressInfo(GeoPoint(22.529242, 114.060541), "Pos3", index: 3, indexName: "3"),
+              //   // 114.087063,22.548665 华新
+              //   AddressInfo(GeoPoint(22.525982, 113.93569), "Pos4", index: 4, indexName: "4"),
+              // ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: RaisedButton(
+              child: Text("定位"),
+              onPressed: () {
+                _controller.locateMyPosition();
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

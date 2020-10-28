@@ -6,6 +6,8 @@ import 'package:xhamap/amap_location_service.dart';
 import 'package:xhamap/amap_service.dart';
 import 'package:xhamap/amap_view.dart';
 import 'package:xhamap/amap_param.dart';
+import 'package:xhamap_example/address_select_page.dart';
+import 'package:xhamap_example/home_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,35 +29,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Container(
-          child: AmapView(
-            controller: _controller,
-            onMarkerClick: (index, distance) {
-//              _showMerchantDetail(storeMap[index], index, distance);
-            },
-            param: AmapParam(
-                initialCenterPoint: [22.630019, 114.068159],
-                enableMyMarker: true,
-                mapType: AmapParam.routeMap,
-//                merchantAddressList: merchantAddresses
-                  merchantAddressList: [
-                    // 114.038225,22.618959
-                    AddressInfo(GeoPoint(22.618959, 114.038225), "Pos1", index: 1, indexName: "1"),
-                    // 114.109808,22.568798 麦德龙
-                    AddressInfo(GeoPoint(22.568798, 114.109808), "Pos2", index: 2, indexName: "2"),
-                    // 114.060541,22.529242
-                    AddressInfo(GeoPoint(22.529242, 114.060541), "Pos3", index: 3, indexName: "3"),
-                    // 114.087063,22.548665 华新
-                    AddressInfo(GeoPoint(22.525982, 113.93569), "Pos4", index: 4, indexName: "4"),
-                  ],
-            ),
-          ),
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
