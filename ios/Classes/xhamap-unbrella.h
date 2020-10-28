@@ -17,4 +17,11 @@
 #import "MABusStopAnnotation.h"
 #import "CommonUtility.h"
 
+#import "CoordinateQuadTree.h"
+#import "ClusterAnnotation.h"
+
+#import "ClusterAnnotationView.h"
+#import "ClusterTableViewCell.h"
+#import "CustomCalloutView.h"
+
 #endif /* xhamap_unbrella_h */

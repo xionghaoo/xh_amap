@@ -12,7 +12,7 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
     let methodChannel: FlutterMethodChannel
     let viewController: UIViewController
     private var mapView: AMapView?
-    private var addressMapView: AddressSearchAMapView?
+    private var addressMapView: ClusterMapView?
     
     init(_ channel: FlutterMethodChannel, vc: UIViewController) {
         self.methodChannel = channel
@@ -32,7 +32,7 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
         }
         
         if amapParam?.mapType == AMapParam.addressDescriptionMap {
-            addressMapView = AddressSearchAMapView(viewController, param: amapParam, channel: methodChannel)
+            addressMapView = ClusterMapView(viewController, param: amapParam, channel: methodChannel)
             return addressMapView!
         } else {
             mapView = AMapView(viewController, param: amapParam, channel: methodChannel)

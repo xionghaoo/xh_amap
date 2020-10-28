@@ -22,7 +22,7 @@ A new Flutter plugin.
   s.dependency 'AMapLocation'
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'Toast-Swift', '~> 5.0.1'
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '9.0'
 #  s.resources = 'xhamap/**/*.{png,storyboard}'
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
