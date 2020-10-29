@@ -27,7 +27,7 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         let controller = (UIApplication.shared.delegate?.window?!.rootViewController)!
         instance.viewFactory = AMapViewFactory(mapViewChannel, vc: controller)
         if let viewFactory = instance.viewFactory {
-            registrar.register(viewFactory, withId: "xh.zero/amap_view")
+            registrar.register(viewFactory as FlutterPlatformViewFactory, withId: "xh.zero/amap_view")
         }
     }
     
