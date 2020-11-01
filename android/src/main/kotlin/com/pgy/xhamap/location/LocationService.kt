@@ -1,16 +1,16 @@
-package com.pgy.xhamap
+package com.pgy.xhamap.location
 
 import android.app.*
 import android.content.*
 import android.os.Binder
 import android.os.Build
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
+import com.pgy.xhamap.R
 import java.util.*
 
 class LocationService : Service() {
@@ -20,7 +20,7 @@ class LocationService : Service() {
         const val EXTRA_STOP = "extra_stop"
         const val CHANNEL_ID = "location_channel"
 
-        const val ACTION_LOCATION_SERVICE_RECEIVER = "com.pgy.xhamap.LocationService.ACTION_LOCATION_SERVICE_RECEIVER"
+        const val ACTION_LOCATION_SERVICE_RECEIVER = "com.pgy.xhamap.location.LocationService.ACTION_LOCATION_SERVICE_RECEIVER"
 
 //        fun startLocationService(context: Context, bundle: Bundle? = null) {
 //            val intent = Intent(context, LocationService::class.java)
@@ -34,7 +34,7 @@ class LocationService : Service() {
 //            startLocationService(context, bundle)
 //        }
 
-        fun startService(context: Activity, connection: ServiceConnection) {
+        fun startService(context: Context, connection: ServiceConnection) {
             Intent(context, LocationService::class.java).also { intent ->
 //                intent.putExtra(EXTRA_UPDATE_URL, url)
 //                intent.putExtra(EXTRA_IS_FORCE, isForce)

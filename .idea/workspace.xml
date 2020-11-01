@@ -13,20 +13,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/FlutterLifecycleAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AddressDescriptionMapImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapLocationService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapParam.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapViewDelegate.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapViewFactory.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/GeoRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/IActualMap.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/LocationRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/LocationResult.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/MapUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/PoiAddress.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/RouteMapImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/dialog_navigation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_merchant_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lib/location_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/AMapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AMapUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/ChString.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/ChString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/DrivingRouteOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/DrivingRouteOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/EnString.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/EnString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationDelegate.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/LocationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/PermissionManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/RideRouteOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/RideRouteOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/RouteOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/RouteOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/UploadLocationReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/UploadLocationReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/pgy/xhamap_example/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/pgy/xhamap_example/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/test/widget_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/ClusterMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ClusterMapView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -59,7 +90,7 @@
       <recent name="$PROJECT_DIR$/android/src/main/res/drawable" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in widget_test.dart">
+  <component name="RunManager" selected="Flutter.example/lib/main.dart">
     <configuration name="tests in widget_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testFile" value="$PROJECT_DIR$/example/test/widget_test.dart" />
       <method v="2" />
@@ -151,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603897076411</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="依赖更新">
+      <created>1603967850580</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1603967850580</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,34 +213,35 @@
     <MESSAGE value="地图定位" />
     <MESSAGE value="ios地图定位" />
     <MESSAGE value="ios点聚合" />
-    <option name="LAST_COMMIT_MESSAGE" value="ios点聚合" />
+    <MESSAGE value="依赖更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="依赖更新" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1603897076221">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1603967850433">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1603897076221" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1603967850433" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="174" key="GridCell.Tab.0.bottom" timestamp="1603967076256">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1604228891554">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="174" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1603967076256" />
-    <state width="1638" height="174" key="GridCell.Tab.0.center" timestamp="1603967076254">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604228891554" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1604228891552">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="174" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1603967076254" />
-    <state width="1638" height="174" key="GridCell.Tab.0.left" timestamp="1603967076254">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604228891552" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1604228891551">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="174" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603967076254" />
-    <state width="1638" height="174" key="GridCell.Tab.0.right" timestamp="1603967076255">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604228891551" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1604228891553">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="174" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1603967076255" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604228891553" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -211,14 +250,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1603897082557" />
-    <state x="510" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1595582079637">
+    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604228966680">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="510" y="357" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1595582079637" />
-    <state width="494" height="115" key="javadoc.popup.new" timestamp="1603881359777">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1603881359777" />
+    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604228966680" />
     <state x="505" y="233" key="search.everywhere.popup" timestamp="1603876243953">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

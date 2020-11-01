@@ -1,4 +1,4 @@
-package com.pgy.xhamap;
+package com.pgy.xhamap.mapview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,6 +7,7 @@ import android.graphics.Color;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.*;
+import com.pgy.xhamap.R;
 
 import java.util.ArrayList;
 import java.util.List;

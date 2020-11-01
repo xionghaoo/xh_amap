@@ -49,8 +49,8 @@ android {
 dependencies {
     api files('libs/AMap3DMap_7.1.0_AMapSearch_7.1.0_AMapLocation_4.7.2_20191030.jar')
 
-    // 权限检查
-    implementation "com.karumi:dexter:5.0.0"
-
+    // okhttp
+    implementation "com.squareup.okhttp3:okhttp:3.14.1"
+    implementation "com.google.code.gson:gson:2.8.6"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

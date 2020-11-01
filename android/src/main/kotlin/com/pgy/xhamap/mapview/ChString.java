@@ -1,4 +1,4 @@
-package com.pgy.xhamap;
+package com.pgy.xhamap.mapview;
 
 public class ChString {
 	public static final String Kilometer = "\u516c\u91cc";// "公里";

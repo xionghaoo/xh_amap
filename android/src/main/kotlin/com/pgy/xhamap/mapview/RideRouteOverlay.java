@@ -1,4 +1,4 @@
-package com.pgy.xhamap;
+package com.pgy.xhamap.mapview;
 
 import android.content.Context;
 import android.view.View;
@@ -14,6 +14,7 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.RidePath;
 import com.amap.api.services.route.RideStep;
+import com.pgy.xhamap.R;
 
 import java.util.List;
 

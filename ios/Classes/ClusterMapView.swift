@@ -26,6 +26,8 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     
     private let methodChannel: FlutterMethodChannel
     
+    private var circle: MACircle?
+    
     // 点聚合
     var coordinateQuadTree = CoordinateQuadTree()
     var shouldRegionChangeReCalculate = false
@@ -200,14 +202,14 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
         })
     }
     
-    func addAnnotationsToMapView(_ annotation: MAAnnotation) {
-        mapView.addAnnotation(annotation)
-        
-        mapView.selectAnnotation(annotation, animated: true)
-        mapView.setCenter(annotation.coordinate, animated: true)
-        
-        
-    }
+//    func addAnnotationsToMapView(_ annotation: MAAnnotation) {
+//        mapView.addAnnotation(annotation)
+//
+//        mapView.selectAnnotation(annotation, animated: true)
+//        mapView.setCenter(annotation.coordinate, animated: true)
+//
+//
+//    }
     
     //MARK: - AMapLocationManagerDelegate
     func amapLocationManager(_ manager: AMapLocationManager!, doRequireLocationAuth locationManager: CLLocationManager!) {
@@ -218,6 +220,44 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     
     func mapView(_ mapView: MAMapView!, regionDidChangeAnimated animated: Bool) {
         addAnnotations(toMapView: self.mapView)
+    }
+    
+    func mapView(_ mapView: MAMapView!, mapDidZoomByUser wasUserAction: Bool) {
+        let zoomLevel = mapView.zoomLevel
+        let defaults = UserDefaults.standard
+        let lat = defaults.double(forKey: "my_location_lat")
+        let lng = defaults.double(forKey: "my_location_lng")
+    
+        if (zoomLevel > 11) {
+            // 门店级别
+            if circle != nil {
+                mapView.remove(circle)
+                circle = nil
+            }
+        } else if (zoomLevel > 10 && zoomLevel <= 11) {
+            if circle == nil {
+                circle = MACircle(center: CLLocationCoordinate2D(latitude: lat, longitude: lng), radius: 10000)
+            }
+            // 县域级别
+            mapView.add(circle)
+        } else if (zoomLevel > 8 && zoomLevel <= 10) {
+            // 片区级别
+        } else if (zoomLevel <= 8) {
+            // 区域级别
+        }
+    }
+    
+    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
+        if overlay.isKind(of: MACircle.self) {
+            let renderer: MACircleRenderer = MACircleRenderer(overlay: overlay)
+            renderer.lineWidth = 1.0
+//            renderer.strokeColor = UIColor.blue
+            renderer.fillColor = UIColor.blue.withAlphaComponent(0.5)
+            
+            
+            return renderer
+        }
+        return nil
     }
     
     // marker渲染回调
@@ -323,6 +363,7 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
         toRemove.minus(after)
         
         DispatchQueue.main.async(execute: { [weak self] () -> Void in
+//            self?.mapView.addAnnotation(self?.myPositionAnnotation)
             self?.mapView.addAnnotations(toAdd.allObjects)
             self?.mapView.removeAnnotations(toRemove.allObjects)
         })
@@ -362,4 +403,5 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     deinit {
         coordinateQuadTree.clean()
     }
+
 }

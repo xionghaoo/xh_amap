@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'address_select_page.dart';
+import 'location_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +24,17 @@ class _HomePageState extends State<HomePage> {
             ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSelectPage()));
+            },
+          ),
+          SizedBox(height: 20,),
+          GestureDetector(
+            child: Container(
+              alignment: Alignment.center,
+              height: 40,
+              child: Text("定位"),
+            ),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LocationPage()));
             },
           )
         ],

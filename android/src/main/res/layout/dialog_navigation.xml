@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingTop="10dp"
+              android:paddingBottom="10dp"
+              android:paddingStart="30dp"
+              android:paddingEnd="30dp"
+              android:gravity="center_horizontal">
+    <RadioButton
+            android:id="@+id/navigation_amap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="高德导航"/>
+    <RadioButton
+            android:id="@+id/navigation_baidu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="百度导航"/>
+    <RadioButton
+            android:id="@+id/navigation_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="腾讯导航"/>
+</LinearLayout>

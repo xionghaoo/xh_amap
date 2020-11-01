@@ -18,7 +18,7 @@
 
     <application>
         <service
-            android:name="com.pgy.xhamap.LocationService"
+            android:name="com.pgy.xhamap.location.LocationService"
             android:enabled="true"
             android:exported="true"></service>
         <!-- <meta-data -->
