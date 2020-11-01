@@ -20,6 +20,8 @@ class LocationService : Service() {
         const val EXTRA_STOP = "extra_stop"
         const val CHANNEL_ID = "location_channel"
 
+        private var isBound = false
+
         const val ACTION_LOCATION_SERVICE_RECEIVER = "com.pgy.xhamap.location.LocationService.ACTION_LOCATION_SERVICE_RECEIVER"
 
 //        fun startLocationService(context: Context, bundle: Bundle? = null) {
@@ -43,7 +45,9 @@ class LocationService : Service() {
         }
 
         fun stopService(context: Context, connection: ServiceConnection) {
-            context.unbindService(connection)
+            if (isBound) {
+                context.unbindService(connection)
+            }
         }
     }
 
@@ -141,6 +145,8 @@ class LocationService : Service() {
 //            showNotification()
 //        }
         showNotification()
+
+        isBound = true
         return binder
     }
 
@@ -151,6 +157,7 @@ class LocationService : Service() {
         // 停止系统时钟，比较省电
 //        stopAlarmClockTask()
         unregisterReceiver(receiver)
+        isBound = false
         return super.onUnbind(intent)
     }
 

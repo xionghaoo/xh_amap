@@ -57,7 +57,6 @@ class _AmapViewState extends State<AmapView> {
         creationParamsCodec: StandardMessageCodec(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-//      print("dart json: ${json.encode(widget.param.toJson())}");
       return UiKitView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,

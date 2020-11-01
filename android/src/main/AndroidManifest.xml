@@ -18,9 +18,9 @@
 
     <application>
         <service
-            android:name="com.pgy.xhamap.location.LocationService"
+            android:name=".location.LocationService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
         <!-- <meta-data -->
         <!-- android:name="com.amap.api.v2.apikey" -->
         <!-- android:value="${AMAP_APPKEY}"> -->

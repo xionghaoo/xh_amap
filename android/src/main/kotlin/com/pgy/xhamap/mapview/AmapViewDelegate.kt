@@ -8,13 +8,13 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
-class AmapViewDelegate : ActivityAware, DefaultLifecycleObserver {
+class AmapViewDelegate(
+    private var pluginBinding: FlutterPlugin.FlutterPluginBinding?
+) {
 
     private var lifecycle: Lifecycle? = null
-    private var pluginBinding: FlutterPlugin.FlutterPluginBinding? = null
 
     companion object {
-        const val VIEW_TYPE_ID = "xh.zero/amap_view"
 
         // v1版本插件的注册方式
 //        fun registerWith(registrar: PluginRegistry.Registrar) {
@@ -27,31 +27,28 @@ class AmapViewDelegate : ActivityAware, DefaultLifecycleObserver {
     }
 
     // FlutterPlugin
-    fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        pluginBinding = binding
-    }
 
-    fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+    fun onDetachedFromEngine() {
         pluginBinding = null
     }
 
     // ActivityAware
-    override fun onDetachedFromActivity() {
+    fun onDetachedFromActivity() {
     }
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+    fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
     }
 
-    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+    fun onAttachedToActivity(binding: ActivityPluginBinding) {
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
         pluginBinding?.platformViewRegistry
-                ?.registerViewFactory(VIEW_TYPE_ID, AmapViewFactory(lifecycle, pluginBinding?.binaryMessenger))
+                ?.registerViewFactory("xh.zero/amap_view", AmapViewFactory(lifecycle, pluginBinding?.binaryMessenger))
 
 
     }
 
-    override fun onDetachedFromActivityForConfigChanges() {
+    fun onDetachedFromActivityForConfigChanges() {
 
     }
 }
