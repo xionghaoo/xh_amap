@@ -22,6 +22,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
           AmapView(
             controller: _controller,
             onMarkerClick: (index, distance) {
+              print("marker: index = $index, distance: $distance");
             },
             param: AmapParam(
               initialCenterPoint: [22.630019, 114.068159],

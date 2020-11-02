@@ -102,7 +102,7 @@ CGFloat ScaledValueForValue(CGFloat value)
     _count = count;
     
     /* 按count数目设置view的大小. */
-    CGRect newBounds = CGRectMake(0, 0, roundf(44 * ScaledValueForValue(count)), roundf(44 * ScaledValueForValue(count)));
+    CGRect newBounds = CGRectMake(0, 0, roundf(54 * ScaledValueForValue(count)), roundf(54 * ScaledValueForValue(count)));
     self.frame = CenterRect(newBounds, self.center);
     
     CGRect newLabelBounds = CGRectMake(0, 0, newBounds.size.width / 1.3, newBounds.size.height / 1.3);
@@ -150,7 +150,7 @@ CGFloat ScaledValueForValue(CGFloat value)
     
     UIColor *outerCircleStrokeColor = [UIColor colorWithWhite:0 alpha:0.25];
     UIColor *innerCircleStrokeColor = [UIColor whiteColor];
-    UIColor *innerCircleFillColor = [UIColor colorWithRed:(255.0 / 255.0) green:(95 / 255.0) blue:(42 / 255.0) alpha:1.0];
+    UIColor *innerCircleFillColor = [UIColor colorWithRed:(86 / 255.0) green:(131 / 255.0) blue:(239 / 255.0) alpha:1.0];
     
     CGRect circleFrame = CGRectInset(rect, 4, 4);
     

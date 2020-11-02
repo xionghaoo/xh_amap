@@ -21,6 +21,7 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     private lazy var locationManager = AMapLocationManager()
     
     private var myPositionAnnotation: MAPointAnnotation?
+    private var currentClickMarker: MAPointAnnotation?
     
     private var annotationMap: [MAPointAnnotation:AddressInfo] = [:]
     
@@ -28,9 +29,16 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     
     private var circle: MACircle?
     
+    // 路线规划
+    var naviRoute: MANaviRoute?
+    //    var route: AMapRoute?
+    var currentSearchType: AMapRoutePlanningType = AMapRoutePlanningType.drive
+    
     // 点聚合
     var coordinateQuadTree = CoordinateQuadTree()
     var shouldRegionChangeReCalculate = false
+    
+    private var annoShowType: Int = 0
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -137,9 +145,6 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
                     pois.append(poi)
                 }
             })
-            coordinateQuadTree.build(withPOIs: pois)
-            shouldRegionChangeReCalculate = true
-            addAnnotations(toMapView: (mapView)!)
             // 显示所有的marker点
             self.mapView.showAnnotations(annoList, edgePadding: UIEdgeInsets(top: 100, left: 40, bottom: 100, right: 40), animated: true)
             
@@ -218,62 +223,82 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
     
     //MARK: - MAMapViewDelegate
     
-    func mapView(_ mapView: MAMapView!, regionDidChangeAnimated animated: Bool) {
-        addAnnotations(toMapView: self.mapView)
-    }
-    
+    // 地图缩放级别监听
     func mapView(_ mapView: MAMapView!, mapDidZoomByUser wasUserAction: Bool) {
         let zoomLevel = mapView.zoomLevel
         let defaults = UserDefaults.standard
         let lat = defaults.double(forKey: "my_location_lat")
         let lng = defaults.double(forKey: "my_location_lng")
-    
+
+        print("mapDidZoomByUser: \(zoomLevel)")
+        
+        
         if (zoomLevel > 11) {
+            annoShowType = 0
             // 门店级别
-            if circle != nil {
-                mapView.remove(circle)
-                circle = nil
-            }
+//            if circle != nil {
+//                mapView.remove(circle)
+//                circle = nil
+//            }
+//            mapView.removeAnnotation()
         } else if (zoomLevel > 10 && zoomLevel <= 11) {
-            if circle == nil {
-                circle = MACircle(center: CLLocationCoordinate2D(latitude: lat, longitude: lng), radius: 10000)
-            }
+            annoShowType = 1
+//            if circle == nil {
+//                circle = MACircle(center: CLLocationCoordinate2D(latitude: lat, longitude: lng), radius: 10000)
+//            }
             // 县域级别
-            mapView.add(circle)
+//            mapView.add(circle)
         } else if (zoomLevel > 8 && zoomLevel <= 10) {
+            annoShowType = 2
             // 片区级别
         } else if (zoomLevel <= 8) {
+            annoShowType = 3
             // 区域级别
         }
+        
+//        mapView.removeAnnotations(mapView.annotations)
+//        switch annoShowType {
+//        case 0:
+//            addMyMarker()
+//        case 1:
+//        case 2:
+//        case 3:
+//        default:
+//            break;
+//        }
+
     }
+
+//    // 渲染覆盖物，这里是圆形
+//    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
+//        if overlay.isKind(of: MACircle.self) {
+//            let renderer: MACircleRenderer = MACircleRenderer(overlay: overlay)
+//            renderer.lineWidth = 1.0
+//            renderer.fillColor = UIColor.blue.withAlphaComponent(0.5)
+//
+//
+//            return renderer
+//        }
+//        return nil
+//    }
     
-    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
-        if overlay.isKind(of: MACircle.self) {
-            let renderer: MACircleRenderer = MACircleRenderer(overlay: overlay)
-            renderer.lineWidth = 1.0
-//            renderer.strokeColor = UIColor.blue
-            renderer.fillColor = UIColor.blue.withAlphaComponent(0.5)
-            
-            
-            return renderer
-        }
-        return nil
-    }
-    
-    // marker渲染回调
+    // MARK: - marker点渲染回调
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation is ClusterAnnotation {
+            // 聚合marker点
             let pointReuseIndetifier = "pointReuseIndetifier"
             
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? ClusterAnnotationView
             
             if annotationView == nil {
                 annotationView = ClusterAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+//                annotationView = MAAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
             }
             
             annotationView?.annotation = annotation
+        
             annotationView?.count = UInt((annotation as! ClusterAnnotation).count)
-            
+
             return annotationView
         } else if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
@@ -313,7 +338,137 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
         return nil
     }
     
-    private func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+    // marker点击事件
+    func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
+        if view.annotation.isKind(of: MAPointAnnotation.self) {
+            self.currentClickMarker = view.annotation as? MAPointAnnotation
+            // 点击marker时过滤我的位置
+            if view.annotation.title == "我的位置" {
+                return
+            }
+            
+            let defaults = UserDefaults.standard
+            let lat = defaults.double(forKey: "my_location_lat")
+            let lng = defaults.double(forKey: "my_location_lng")
+            currentSearchType = AMapRoutePlanningType.drive
+            searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2DMake(lat, lng), destinationCoordinate: CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude))
+            self.view().makeToast("正在查询路线", duration: 1.0)
+        } else if view.annotation.isKind(of: ClusterAnnotation.self) {
+            let anno = view.annotation as! ClusterAnnotation
+            if anno.count == 1 {
+                self.view().makeToast("点击Marker", duration: 1.0)
+            }
+        }
+    }
+    
+    // MARK: - 路线规划
+    func searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        let request = AMapDrivingRouteSearchRequest()
+        request.origin = AMapGeoPoint.location(withLatitude: CGFloat(startCoordinate.latitude), longitude: CGFloat(startCoordinate.longitude))
+        request.destination = AMapGeoPoint.location(withLatitude: CGFloat(destinationCoordinate.latitude), longitude: CGFloat(destinationCoordinate.longitude))
+        
+        request.requireExtension = true
+        
+        search.aMapDrivingRouteSearch(request)
+    }
+    
+    func aMapSearchRequest(_ request: Any!, didFailWithError error: Error!) {
+        // 检索失败
+        //        let nsErr:NSError? = error as NSError
+        //        NSLog("Error:\(error) - \(ErrorInfoUtility.errorDescription(withCode: (nsErr?.code)!))")
+        print("Error: \(error)")
+    }
+    
+    func onRouteSearchDone(_ request: AMapRouteSearchBaseRequest!, response: AMapRouteSearchResponse!) {
+        // 当检索成功时，会进到 onRouteSearchDone 回调函数中
+        //        mapView.removeAnnotations(mapView.annotations)
+        
+        mapView.removeOverlays(mapView.overlays)
+        
+        //        addDefaultAnnotations()
+        
+        if response.count > 0 {
+            if let marker = self.currentClickMarker {
+                print("click marker: \(response.route.paths.first?.distance)")
+                self.methodChannel.invokeMethod("clickMarker", arguments: [
+                    "index": annotationMap[marker]?.index!,
+                    "distance": self.getFriendlyLength(lenMeter: response.route.paths.first?.distance)
+                ])
+            }
+            // TODO: 资源未引入
+//            presentCurrentCourse(route: response.route)
+        }
+    }
+    
+    /* 展示当前路线方案. */
+    func presentCurrentCourse(route: AMapRoute?) {
+        
+        //        let start = AMapGeoPoint.location(withLatitude: CGFloat(startCoordinate.latitude), longitude: CGFloat(startCoordinate.longitude))
+        //        let end = AMapGeoPoint.location(withLatitude: CGFloat(destinationCoordinate.latitude), longitude: CGFloat(destinationCoordinate.longitude))
+        
+        let start: AMapGeoPoint? = nil
+        let end: AMapGeoPoint? = nil
+        
+        if currentSearchType == .bus || currentSearchType == .busCrossCity {
+            naviRoute = MANaviRoute(for: route?.transits.first, start: start, end: end)
+        } else {
+            let type = MANaviAnnotationType(rawValue: currentSearchType.rawValue)
+            naviRoute = MANaviRoute(for: route?.paths.first, withNaviType: type!, showTraffic: true, start: start, end: end)
+        }
+        
+        naviRoute?.add(to: mapView)
+        
+        mapView.showOverlays(naviRoute?.routePolylines, edgePadding: UIEdgeInsets(top: 100, left: 40, bottom: 100, right: 40), animated: true)
+    }
+    
+    // 渲染路径
+    func mapView(_ mapView: MAMapView!, rendererFor overlay: MAOverlay!) -> MAOverlayRenderer! {
+        if overlay.isKind(of: LineDashPolyline.self) {
+            let naviPolyline: LineDashPolyline = overlay as! LineDashPolyline
+            let renderer: MAPolylineRenderer = MAPolylineRenderer(overlay: naviPolyline.polyline)
+            renderer.lineWidth = 8.0
+            renderer.strokeColor = UIColor.red
+            renderer.lineDashType = MALineDashType.square
+            
+            return renderer
+        }
+        if overlay.isKind(of: MANaviPolyline.self) {
+            
+            let naviPolyline: MANaviPolyline = overlay as! MANaviPolyline
+            let renderer: MAPolylineRenderer = MAPolylineRenderer(overlay: naviPolyline.polyline)
+            renderer.lineWidth = 8.0
+            
+            if naviPolyline.type == MANaviAnnotationType.walking {
+                renderer.strokeColor = naviRoute?.walkingColor
+            }
+            else if naviPolyline.type == MANaviAnnotationType.railway {
+                renderer.strokeColor = naviRoute?.railwayColor;
+            }
+            else {
+                renderer.strokeColor = naviRoute?.routeColor;
+            }
+            
+            return renderer
+        }
+        if overlay.isKind(of: MAMultiPolyline.self) {
+            let renderer: MAMultiColoredPolylineRenderer = MAMultiColoredPolylineRenderer(multiPolyline: overlay as! MAMultiPolyline?)
+            renderer.lineWidth = 8.0
+            renderer.strokeColors = naviRoute?.multiPolylineColors
+            
+            return renderer
+        }
+        
+        return nil
+    }
+    
+    private func textToImage(
+        drawText text: String,
+        inImage image: UIImage,
+        atPoint point: CGPoint,
+        width: Int = 30,
+        height: Int = 30,
+        fontSize: Int = 12
+    ) -> UIImage {
         let iconSize = CGSize(width: 30, height: 30)
         let textColor = UIColor.white
         let textFont = UIFont(name: "Helvetica Bold", size: 12)!
@@ -336,34 +491,62 @@ class ClusterMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSear
         return newImage!
     }
     
+    func getFriendlyLength(lenMeter: Int?) -> String {
+        guard let lenMeter = lenMeter else {
+            return ""
+        }
+        if lenMeter > 1000 {
+            let dis = Float(lenMeter) / 1000
+            return String(format: "%.2fkm", dis)
+        }
+        if lenMeter > 100 {
+            let dis = lenMeter / 50 * 50
+            return String(format: "%dm", dis)
+        }
+        var dis = lenMeter / 10 * 10
+        if dis == 0 {
+            dis = 10
+        }
+        return String(format: "%dm", dis)
+    }
+    
     // MARK: - CustomCalloutViewTapDelegate
     func didDetailButtonTapped(_ index: Int) {
         
     }
     
-    //MARK: - Update Annotation
+    //MARK: - 点聚合
+    func mapView(_ mapView: MAMapView!, regionDidChangeAnimated animated: Bool) {
+//        addAnnotations(toMapView: self.mapView)
+    }
     
+    // 添加聚合点
     func updateMapViewAnnotations(annotations: Array<ClusterAnnotation>) {
         
         /* 用户滑动时，保留仍然可用的标注，去除屏幕外标注，添加新增区域的标注 */
         let before = NSMutableSet(array: mapView.annotations)
-        before.remove(mapView.userLocation!)
+//        before.remove(mapView.userLocation!)
         let after: Set<NSObject> = NSSet(array: annotations) as Set<NSObject>
         
         /* 保留仍然位于屏幕内的annotation. */
         var toKeep: Set<NSObject> = NSMutableSet(set: before) as Set<NSObject>
         toKeep = toKeep.intersection(after)
         
-        /* 需要添加的annotation. */
-        let toAdd = NSMutableSet(set: after)
-        toAdd.minus(toKeep)
-        
         /* 删除位于屏幕外的annotation. */
         let toRemove = NSMutableSet(set: before)
         toRemove.minus(after)
         
+        /* 需要添加的annotation. */
+        let toAdd = NSMutableSet(set: after)
+        toAdd.minus(toKeep)
+        
+        // 保留我的位置
+        if let myPosition = myPositionAnnotation {
+            toAdd.add(myPosition)
+            toRemove.remove(myPosition)
+        }
+        
         DispatchQueue.main.async(execute: { [weak self] () -> Void in
-//            self?.mapView.addAnnotation(self?.myPositionAnnotation)
             self?.mapView.addAnnotations(toAdd.allObjects)
             self?.mapView.removeAnnotations(toRemove.allObjects)
         })

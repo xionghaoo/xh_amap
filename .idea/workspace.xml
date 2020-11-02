@@ -14,11 +14,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapViewDelegate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapViewDelegate.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/address_select_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/address_select_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/ClusterAnnotation/View/ClusterAnnotationView.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ClusterAnnotation/View/ClusterAnnotationView.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/ClusterMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ClusterMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/xhamap.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/xhamap.podspec" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604229231192</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Android高德地图定位">
+      <created>1604234138510</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604234138510</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,43 +211,43 @@
     <option name="LAST_COMMIT_MESSAGE" value="Android高德地图定位" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604229231105">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604234138395">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604229231105" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604234138395" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="257" key="GridCell.Tab.0.bottom" timestamp="1604234036552">
+    <state width="1638" height="196" key="GridCell.Tab.0.bottom" timestamp="1604280526510">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="257" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604234036552" />
-    <state width="1638" height="257" key="GridCell.Tab.0.center" timestamp="1604234036550">
+    <state width="1638" height="196" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604280526510" />
+    <state width="1638" height="196" key="GridCell.Tab.0.center" timestamp="1604280526509">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="257" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604234036550" />
-    <state width="1638" height="257" key="GridCell.Tab.0.left" timestamp="1604234036550">
+    <state width="1638" height="196" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604280526509" />
+    <state width="1638" height="196" key="GridCell.Tab.0.left" timestamp="1604280526509">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="257" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604234036550" />
-    <state width="1638" height="257" key="GridCell.Tab.0.right" timestamp="1604234036551">
+    <state width="1638" height="196" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604280526509" />
+    <state width="1638" height="196" key="GridCell.Tab.0.right" timestamp="1604280526510">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="257" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604234036551" />
+    <state width="1638" height="196" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604280526510" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604229237634">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604234146436">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604229237634" />
-    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604228966680">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604234146436" />
+    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604237967856">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604228966680" />
+    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604237967856" />
     <state x="505" y="233" key="search.everywhere.popup" timestamp="1603876243953">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

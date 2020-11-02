@@ -45,6 +45,8 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         case "startLocation":
             locationDelegate?.startLocation()
             result(nil)
+        case "stopLocation":
+            locationDelegate?.stopLocation()
         case "locateMyLocation":
             viewFactory?.locateMyPosition()
             result(nil)

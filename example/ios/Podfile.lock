@@ -7,6 +7,8 @@ PODS:
   - AMapSearch (7.1.0):
     - AMapFoundation (~> 1.4)
   - Flutter (1.0.0)
+  - "permission_handler (5.0.1+1)":
+    - Flutter
   - SwiftyJSON (4.3.0)
   - Toast-Swift (5.0.1)
   - xhamap (0.0.1):
@@ -19,6 +21,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - xhamap (from `.symlinks/plugins/xhamap/ios`)
 
 SPEC REPOS:
@@ -33,6 +36,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   xhamap:
     :path: ".symlinks/plugins/xhamap/ios"
 
@@ -42,6 +47,7 @@ SPEC CHECKSUMS:
   AMapLocation: b4162db67f813508a14ee7e05c7ee4073785221d
   AMapSearch: 6bd6d361c5eb00110e0bffa4acf88b7bb9f7e059
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   xhamap: 41ccfbbfd3ea94be301fd00bf26585a213838b36

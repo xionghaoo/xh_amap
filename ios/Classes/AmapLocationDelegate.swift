@@ -27,8 +27,10 @@ class AMapLocationDelegate: NSObject, AMapLocationManagerDelegate {
         locationManager.locatingWithReGeocode = true
         
         locationManager.startUpdatingLocation()
-        
-        print("start location")
+    }
+    
+    public func stopLocation() {
+        locationManager.stopUpdatingLocation()
     }
     
     //MARK: - AMapLocationManagerDelegate

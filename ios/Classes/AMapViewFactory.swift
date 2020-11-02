@@ -49,4 +49,5 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
         mapView?.reLocate()
         addressMapView?.reLocate()
     }
+
 }
