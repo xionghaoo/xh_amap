@@ -31,6 +31,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var annotationMap: [MAPointAnnotation:AddressInfo] = [:]
     private let methodChannel: FlutterMethodChannel
     private var currentClickMarker: MAPointAnnotation?
+    private var annoShowType: Int = 0
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -293,6 +294,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         return nil
     }
     
+    // MARK: - 渲染marker点
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
@@ -349,7 +351,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     }
                 }
                 else {
-                    if let origin = UIImage(named: "iconMerchantLocation") {
+                    if let origin = UIImage(named: "ic_merchant_position") {
                         // 单个数字居中和两位数字居中
                         let addr = annotationMap[annotation as! MAPointAnnotation]!
                         let txt: String = addr.indexName ?? "-"
@@ -367,6 +369,43 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         }
         
         return nil
+    }
+    
+    func mapView(_ mapView: MAMapView!, mapDidZoomByUser wasUserAction: Bool) {
+        let zoomLevel = mapView.zoomLevel
+        if (zoomLevel > 11) {
+            // 门店级别
+            annoShowType = 0
+        } else if (zoomLevel > 10 && zoomLevel <= 11) {
+            // 县域级别
+            annoShowType = 1
+        } else if (zoomLevel > 8 && zoomLevel <= 10) {
+            // 片区级别
+            annoShowType = 2
+        } else if (zoomLevel <= 8) {
+            // 区域级别
+            annoShowType = 3
+        }
+        
+        self.methodChannel.invokeMethod("onMapZoom", arguments: ["zoomLevel": annoShowType])
+    }
+    
+    func updateMarkers(addressList: Array<AddressInfo>?) {
+        mapView.removeAnnotations(mapView.annotations)
+        var annoList = Array<MAPointAnnotation>()
+        annotationMap.removeAll()
+        addressList?.forEach({ addr in
+            if let lat = addr.geo?.lat,
+                let lng = addr.geo?.lng {
+                
+                let anno = MAPointAnnotation()
+                anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                anno.title = addr.address
+                annoList.append(anno)
+                annotationMap[anno] = addr
+            }
+        })
+        self.mapView.addAnnotations(annoList)
     }
     
     // marker点击事件
@@ -433,7 +472,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     "distance": getFriendlyLength(lenMeter: response.route.paths.first?.distance)
                 ])
             }
-            presentCurrentCourse(route: response.route)
+            // TODO: 资源未引入
+//            presentCurrentCourse(route: response.route)
         }
     }
     

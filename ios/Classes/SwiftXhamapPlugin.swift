@@ -14,6 +14,7 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         let locationChannel = FlutterMethodChannel(name: "com.pgy/amap_location", binaryMessenger: registrar.messenger())
         let eventChannel = FlutterEventChannel(name: "com.pgy/amap_location_stream", binaryMessenger: registrar.messenger())
         let mapViewChannel = FlutterMethodChannel(name: "xh.zero/amap_view_method", binaryMessenger: registrar.messenger())
+//        let mapEventChannel = FlutterEventChannel(name: "xh.zero/amap_view_event", binaryMessenger: registrar.messenger())
         let instance = SwiftXhamapPlugin()
         registrar.addMethodCallDelegate(instance, channel: initialChannel)
         registrar.addMethodCallDelegate(instance, channel: locationChannel)
@@ -49,6 +50,17 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             locationDelegate?.stopLocation()
         case "locateMyLocation":
             viewFactory?.locateMyPosition()
+            result(nil)
+        case "updateMarkers":
+            do {
+                if let param = call.arguments! as? String,
+                    let jsonData = param.data(using: .utf8, allowLossyConversion: false) {
+                    let markerParam = try JSONDecoder().decode(MarkerParam.self, from: jsonData)
+                    viewFactory?.updateMarkers(addressList: markerParam.markerList)
+                }
+            } catch let e {
+                print("has error: \(e)")
+            }
             result(nil)
         default:
             result(FlutterMethodNotImplemented)

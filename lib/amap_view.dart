@@ -11,8 +11,9 @@ class AmapView extends StatefulWidget {
   final AMapController controller;
   final AmapParam param;
   final Function(int, String) onMarkerClick;
+  final Function(int) onMapZoom;
 
-  AmapView({this.controller, this.param, this.onMarkerClick});
+  AmapView({this.controller, this.param, this.onMarkerClick, this.onMapZoom});
 
   @override
   _AmapViewState createState() => _AmapViewState(this.controller);
@@ -23,17 +24,25 @@ class _AmapViewState extends State<AmapView> {
 
   final AMapController _controller;
   MethodChannel _channel;
+  // EventChannel _eventChannel;
+  // Stream<int> _zoomStream;
 
   _AmapViewState(this._controller) {
     _controller._setState(this);
     _channel = MethodChannel("xh.zero/amap_view_method");
+    // _eventChannel = EventChannel("xh.zero/amap_view_event");
     _channel.setMethodCallHandler((call) {
       switch (call.method) {
         case "clickMarker":
           final index = call.arguments["index"] as int;
           final distance = call.arguments["distance"] as String;
-          widget.onMarkerClick(index, distance);
+          widget.onMarkerClick?.call(index, distance);
           break;
+        case "onMapZoom":
+          final zoomLevel = call.arguments["zoomLevel"] as int;
+          widget.onMapZoom?.call(zoomLevel);
+          break;
+
       }
       return Future.value(null);
     });
@@ -42,6 +51,16 @@ class _AmapViewState extends State<AmapView> {
   locateMyLocation() {
     _channel.invokeMethod("locateMyLocation");
   }
+
+  updateMarkers(List<AddressInfo> markers) {
+    final jsonData = json.encode(MarkerParam((markers)));
+    _channel.invokeMethod("updateMarkers", jsonData);
+  }
+
+  // Stream<int> onMapZoom() {
+  //   _zoomStream = _eventChannel.receiveBroadcastStream().map((dynamic data) => data as int);
+  //   return _zoomStream;
+  // }
 
   onMarkerClick(Function(int) callback) {
 
@@ -83,6 +102,14 @@ class AMapController {
   locateMyPosition() {
     _state.locateMyLocation();
   }
+
+  updateMarkers(List<AddressInfo> markers) {
+    _state.updateMarkers(markers);
+  }
+
+  // Stream<int> onMapZoom() {
+  //   return _state.onMapZoom();
+  // }
 
   onMarkerClick(Function(int) callback) => _state.onMarkerClick(callback);
 

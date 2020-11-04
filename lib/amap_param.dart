@@ -39,6 +39,15 @@ class AmapParam {
   };
 }
 
+class MarkerParam {
+  final List<AddressInfo> markerList;
+  MarkerParam(this.markerList);
+
+  toJson() => <String, dynamic> {
+    "markerList": markerList
+  };
+}
+
 class AddressInfo {
   GeoPoint geo;
   String address;

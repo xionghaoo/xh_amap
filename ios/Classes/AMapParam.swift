@@ -41,6 +41,14 @@ class AMapParam: Codable {
     }
 }
 
+class MarkerParam: Codable {
+    let markerList: Array<AddressInfo>?
+    
+    init(markerList: Array<AddressInfo>? = []) {
+        self.markerList = markerList
+    }
+}
+
 struct AddressInfo: Codable {
     let geo: GeoPoint?
     let address: String?
