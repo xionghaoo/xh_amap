@@ -20,9 +20,9 @@ class StatisticAnnotation: NSObject {
         return hash() == NSObject.hash()
     }
     
-    init?(coordinate: CLLocationCoordinate2D, count: Int) {
-        super.init()
-        self.coordinate = coordinate
-        self.count = count
-    }
+//    init(coordinate: CLLocationCoordinate2D, count: Int) {
+//        super.init()
+//        self.coordinate = coordinate
+//        self.count = count
+//    }
 }

@@ -29,6 +29,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var myPositionAnnotation: MAPointAnnotation?
     
     private var annotationMap: [MAPointAnnotation:AddressInfo] = [:]
+    private var statisticAnnotationMap: [ClusterAnnotation:AddressInfo] = [:]
     private let methodChannel: FlutterMethodChannel
     private var currentClickMarker: MAPointAnnotation?
     private var annoShowType: Int = 0
@@ -315,7 +316,17 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     // MARK: - 渲染marker点
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
-        if annotation.isKind(of: MAPointAnnotation.self) {
+        if annotation.isKind(of: ClusterAnnotation.self) {
+            let pointReuseIndetifier = "pointReuseIndetifier"
+            var annotationView: StatisticAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? StatisticAnnotationView
+            if annotationView == nil {
+                annotationView = StatisticAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            }
+            annotationView?.annotation = annotation
+            let addr = statisticAnnotationMap[annotation as! ClusterAnnotation]
+            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
+            return annotationView!
+        } else if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var annotationView: MAAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier)
             
@@ -432,20 +443,28 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     }
     
     func updateMarkers(addressList: Array<AddressInfo>?) {
-        mapView.removeAnnotations(mapView.annotations)
-        var annoList = Array<MAPointAnnotation>()
+        var annoList = Array<NSObject>()
         annotationMap.removeAll()
+        statisticAnnotationMap.removeAll()
         addressList?.forEach({ addr in
             if let lat = addr.geo?.lat,
                 let lng = addr.geo?.lng {
-                
-                let anno = MAPointAnnotation()
-                anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
-                anno.title = addr.address
-                annoList.append(anno)
-                annotationMap[anno] = addr
+                if addr.showType == 0 {
+                    let anno = MAPointAnnotation()
+                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    anno.title = addr.address
+                    annoList.append(anno)
+                    annotationMap[anno] = addr
+                } else {
+                    let anno = ClusterAnnotation()
+                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    anno.title = addr.address
+                    annoList.append(anno)
+                    statisticAnnotationMap[anno] = addr
+                }
             }
         })
+        mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotations(annoList)
     }
     

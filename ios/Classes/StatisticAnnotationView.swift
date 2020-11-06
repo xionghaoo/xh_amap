@@ -44,23 +44,17 @@ class StatisticAnnotationView : MAAnnotationView {
     }
     
     private func setupLabel() {
-        countLabel.frame = frame
-        countLabel.backgroundColor = .clear
-        countLabel.textColor = .white
+        countLabel = UILabel(frame: frame)
+        countLabel.backgroundColor = UIColor.clear
+        countLabel.textColor = UIColor.white
         countLabel.textAlignment = .center
-        countLabel.shadowColor = .init(white: 0.0, alpha: 0.75)
-        countLabel.shadowOffset = CGSize.init(width: 0, height: -1)
+        countLabel.shadowColor = UIColor(white: 0.0, alpha: 0.75)
+        countLabel.shadowOffset = CGSize(width: 0, height: -1)
         countLabel.adjustsFontSizeToFitWidth = true
-        countLabel.numberOfLines = 1;
-        countLabel.font = .boldSystemFont(ofSize: 12)
-        countLabel.baselineAdjustment = .alignBaselines
+        countLabel.numberOfLines = 2
+        countLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        countLabel.baselineAdjustment = .alignCenters
         addSubview(countLabel)
-    }
-    
-    private func setCount(count: Int) {
-        self.count = count
-//        let newBounds = CGRect(x: CGFloat(0), y: CGFloat(0), width: roundf(54 * CGFloat(count)), height: roundf(54 * CGFloat(count)))
-//        frame = CGRect()
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
@@ -81,20 +75,25 @@ class StatisticAnnotationView : MAAnnotationView {
         return false
     }
     
-    func setCount(_ count: Int) {
+    func setCount(_ count: Int, title: String? = nil) {
         self.count = count
         
         // 按count数目设置view的大小.
         let newBounds = CGRect(x: 0, y: 0, width: CGFloat(roundf(54 * ScaledValueForValue(count))), height: CGFloat(roundf(54 * ScaledValueForValue(count))))
         frame = CenterRect(newBounds, center)
 
-        let newLabelBounds = CGRect(x: 0, y: 0, width: newBounds.size.width / 1.3, height: newBounds.size.height / 1.3)
+        let newLabelBounds = CGRect(x: 0, y: 0, width: newBounds.size.width / 2, height: newBounds.size.height / 2)
         countLabel.frame = CenterRect(newLabelBounds, RectCenter(newBounds))
-        countLabel.text = NSNumber(value: self.count).stringValue
+        if title == nil {
+            countLabel.text = NSNumber(value: self.count).stringValue
+        } else {
+            countLabel.text = "\(title!)\(NSNumber(value: self.count).stringValue)"
+        }
+        
 
         setNeedsDisplay()
     }
-
+    
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
 
