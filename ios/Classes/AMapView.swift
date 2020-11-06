@@ -388,8 +388,6 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                         }
                     case 2:
                         if let origin = UIImage(named: "ic_merchant_statistic") {
-                            // 单个数字居中和两位数字居中
-//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
                             annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 80, height: 80)
                             
                         }
