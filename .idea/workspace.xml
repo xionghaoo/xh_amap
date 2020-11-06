@@ -14,9 +14,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/address_select_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/address_select_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotation.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotation.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -240,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604673802463</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="marker测试">
+      <created>1604680646799</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1604680646799</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,31 +283,31 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604673802338">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604680646629">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604673802338" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604680646629" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1604677273235">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1604683497507">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604677273235" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1604677273234">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604683497507" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1604683497506">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604677273234" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1604677273233">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604683497506" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1604683497505">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604677273233" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1604677273235">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604683497505" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1604683497507">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604677273235" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604683497507" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

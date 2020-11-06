@@ -318,14 +318,19 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKind(of: ClusterAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
-            var annotationView: StatisticAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? StatisticAnnotationView
-            if annotationView == nil {
-                annotationView = StatisticAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            if #available(iOS 9.0, *) {
+                var annotationView: StatisticAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? StatisticAnnotationView
+                if annotationView == nil {
+                    annotationView = StatisticAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                }
+                annotationView?.annotation = annotation
+                let addr = statisticAnnotationMap[annotation as! ClusterAnnotation]
+    //            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
+                annotationView?.setLabel(title: addr?.indexName ?? "", count: addr?.index ?? 0)
+                return annotationView!
+            } else {
+                return nil
             }
-            annotationView?.annotation = annotation
-            let addr = statisticAnnotationMap[annotation as! ClusterAnnotation]
-            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
-            return annotationView!
         } else if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var annotationView: MAAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier)

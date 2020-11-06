@@ -5,8 +5,11 @@
 //  Created by xionghao on 2020/11/6.
 //
 
+@available(iOS 9.0, *)
 class StatisticAnnotationView : MAAnnotationView {
     var countLabel: UILabel!
+    var titleLabel: UILabel!
+    var stackView: UIStackView!
     var count: Int = 0
     
     private let ScaleFactorAlpha: Float = 0.3
@@ -15,8 +18,9 @@ class StatisticAnnotationView : MAAnnotationView {
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
-        setupLabel()
-        setCount(1)
+//        setupLabel()
+//        setCount(1)
+        initalView()
     }
     
     required init?(coder: NSCoder) {
@@ -55,6 +59,51 @@ class StatisticAnnotationView : MAAnnotationView {
         countLabel.font = UIFont.boldSystemFont(ofSize: 12)
         countLabel.baselineAdjustment = .alignCenters
         addSubview(countLabel)
+    }
+    
+    private func initalView() {
+        countLabel = UILabel()
+        countLabel.backgroundColor = UIColor.clear
+        countLabel.textColor = UIColor.white
+        countLabel.textAlignment = .center
+        countLabel.shadowColor = UIColor(white: 0.0, alpha: 0.75)
+        countLabel.shadowOffset = CGSize(width: 0, height: -1)
+        countLabel.adjustsFontSizeToFitWidth = true
+        countLabel.numberOfLines = 1
+        countLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        countLabel.baselineAdjustment = .alignCenters
+        
+        titleLabel = UILabel()
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .center
+        titleLabel.shadowColor = UIColor(white: 0.0, alpha: 0.75)
+        titleLabel.shadowOffset = CGSize(width: 0, height: -1)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.numberOfLines = 1
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        titleLabel.baselineAdjustment = .alignCenters
+        
+        if #available(iOS 9.0, *) {
+            stackView = UIStackView.init(arrangedSubviews: [titleLabel, countLabel])
+            stackView.frame = frame
+            stackView.axis = .vertical
+            stackView.alignment = .center
+            stackView.distribution = .equalCentering
+            stackView.backgroundColor = .clear
+            addSubview(stackView)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    func setLabel(title: String, count: Int) {
+        countLabel.text = NSNumber(value: self.count).stringValue
+        let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
+        let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+        frame = CenterRect(annoRect, center)
+        stackView.frame = CenterRect(textRect, RectCenter(annoRect))
+        setNeedsDisplay()
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
