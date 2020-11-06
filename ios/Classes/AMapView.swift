@@ -32,6 +32,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private let methodChannel: FlutterMethodChannel
     private var currentClickMarker: MAPointAnnotation?
     private var annoShowType: Int = 0
+    private var lastAnnoShowType: Int = 0
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -351,16 +352,38 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     }
                 }
                 else {
-                    if let origin = UIImage(named: "ic_merchant_position") {
-                        // 单个数字居中和两位数字居中
-                        let addr = annotationMap[annotation as! MAPointAnnotation]!
-                        let txt: String = addr.indexName ?? "-"
-                        var txtWidth = 6
-                        if txt.count > 1 {
-                            txtWidth = 13
+                    let addr = annotationMap[annotation as! MAPointAnnotation]!
+                    switch addr.showType {
+                    case 0:
+                        if let origin = UIImage(named: "ic_merchant_position") {
+                            // 单个数字居中和两位数字居中
+                            let txt: String = "\(addr.indexName!)"
+                            annotationView!.image = textToImage(drawText: txt, inImage: origin)
+                            
                         }
-                        annotationView!.image = textToImage(drawText: txt, inImage: origin, atPoint: CGPoint(x: (30 - txtWidth) / 2, y: 5))
-                        
+                    case 1:
+                        if let origin = UIImage(named: "ic_merchant_statistic") {
+                            // 单个数字居中和两位数字居中
+//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
+                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 65, height: 65)
+                            
+                        }
+                    case 2:
+                        if let origin = UIImage(named: "ic_merchant_statistic") {
+                            // 单个数字居中和两位数字居中
+//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
+                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 80, height: 80)
+                            
+                        }
+                    case 3:
+                        if let origin = UIImage(named: "ic_merchant_statistic") {
+                            // 单个数字居中和两位数字居中
+//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
+                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 110, height: 110)
+                            
+                        }
+                    default:
+                        break;
                     }
                     
                 }
@@ -373,10 +396,10 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     func mapView(_ mapView: MAMapView!, mapDidZoomByUser wasUserAction: Bool) {
         let zoomLevel = mapView.zoomLevel
-        if (zoomLevel > 11) {
+        if (zoomLevel > 12) {
             // 门店级别
             annoShowType = 0
-        } else if (zoomLevel > 10 && zoomLevel <= 11) {
+        } else if (zoomLevel > 10 && zoomLevel <= 12) {
             // 县域级别
             annoShowType = 1
         } else if (zoomLevel > 8 && zoomLevel <= 10) {
@@ -386,8 +409,10 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             // 区域级别
             annoShowType = 3
         }
-        
-        self.methodChannel.invokeMethod("onMapZoom", arguments: ["zoomLevel": annoShowType])
+        if annoShowType != lastAnnoShowType {
+            self.methodChannel.invokeMethod("onMapZoom", arguments: ["zoomLevel": annoShowType])
+            lastAnnoShowType = annoShowType
+        }
     }
     
     func updateMarkers(addressList: Array<AddressInfo>?) {
@@ -507,26 +532,52 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         return nil
     }
     
-    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
-        let iconSize = CGSize(width: 30, height: 30)
+    func textToImage(
+        drawText text: String,
+        secondText: String? = nil,
+        inImage image: UIImage,
+        width: CGFloat = 30,
+        height: CGFloat = 30,
+        textSize: CGFloat = 12
+    ) -> UIImage {
+        let iconSize = CGSize(width: width, height: height)
         let textColor = UIColor.white
-        let textFont = UIFont(name: "Helvetica Bold", size: 12)!
-        
+        let textFont = UIFont(name: "Helvetica Bold", size: textSize)!
+
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(iconSize, false, scale)
-        
+
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.foregroundColor: textColor,
             ] as [NSAttributedString.Key : Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: iconSize))
-        
-        let rect = CGRect(origin: point, size: iconSize)
-        text.draw(in: rect, withAttributes: textFontAttributes)
-        
+
+        let text_h = textFont.lineHeight
+        let textWidth = text.width(withConstrainedHeight: width, font: textFont)
+        let textHeight = text.height(withConstrainedWidth: height, font: textFont)
+        var text_y: CGFloat = 0
+        var secondText_x: CGFloat = 0
+        var secondText_y: CGFloat = 0
+        if secondText == nil {
+            text_y = (height - textHeight) / 2
+        } else {
+            text_y = (height - textHeight * 2) / 2
+            secondText_y = (height - textHeight * 2) / 2 + textHeight
+            let secondTextWidth = secondText!.width(withConstrainedHeight: width, font: textFont)
+            secondText_x = (width - secondTextWidth) / 2
+        }
+        let text_x = (width - textWidth) / 2
+        let text_rect = CGRect(x: text_x, y: text_y, width: width, height: text_h)
+        text.draw(in: text_rect, withAttributes: textFontAttributes)
+        if secondText != nil {
+            let secondText_rect = CGRect(x: secondText_x, y: secondText_y, width: width, height: text_h)
+            secondText?.draw(in: secondText_rect, withAttributes: textFontAttributes)
+        }
+
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return newImage!
     }
     
@@ -539,5 +590,21 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+}
+
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.height)
+    }
+
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.width)
     }
 }

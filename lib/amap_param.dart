@@ -16,6 +16,8 @@ class AmapParam {
 
   final List<AddressInfo> merchantAddressList;
 
+  // final List<int> zoomShowTypes;
+
   AmapParam({
     @required this.initialCenterPoint,
     this.initialZoomLevel = 14,
@@ -53,13 +55,15 @@ class AddressInfo {
   String address;
   int index;
   String indexName;
-  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName});
+  int showType;
+  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName, this.showType});
 
   toJson() => <String, dynamic> {
     "geo": geo,
     "address": address,
     "index": index,
-    "indexName": indexName
+    "indexName": indexName,
+    "showType": showType
   };
 }
 

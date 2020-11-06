@@ -54,6 +54,8 @@ struct AddressInfo: Codable {
     let address: String?
     let index: Int?
     let indexName: String?
+    let showType: Int?
+    
 }
 
 struct GeoPoint: Codable {
