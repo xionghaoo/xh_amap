@@ -36,19 +36,17 @@ class _LocationPageState extends State<LocationPage> {
               child: Text("开启定位"),
               onPressed: () async {
                 if (await Permission.location.request().isGranted) {
-                  _locationService.start();
-                  _locationService.startLocationStream().listen((location) {
-                    _address = location['address'];
-                    _lat = location['lat'];
-                    _lng = location['lng'];
-                    if (_lat != null && _lng != null) {
-                      if (mounted) {
-                        setState(() {
-
-                        });
-                      }
-                    }
-                    
+                  _locationService.locationOnce((lat, lng, province, district, city, address) {
+                    print("position: $lat, $lng");
+                    print("province: $province");
+                    print("district: $district");
+                    print("city: $city");
+                    print("address: $address");
+                    setState(() {
+                      _lat = lat;
+                      _lng = lng;
+                      _address = address;
+                    });
                   });
                 } else {
                   Map<Permission, PermissionStatus> statuses = await [Permission.location,].request();

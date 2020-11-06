@@ -22,7 +22,7 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         eventChannel.setStreamHandler(instance)
         
         // 注册高德地图定位插件
-        instance.locationDelegate = AMapLocationDelegate()
+        instance.locationDelegate = AMapLocationDelegate(channel: locationChannel)
     
         // 注册高德地图
         let controller = (UIApplication.shared.delegate?.window?!.rootViewController)!
@@ -48,6 +48,8 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             result(nil)
         case "stopLocation":
             locationDelegate?.stopLocation()
+        case "locateOnce":
+            locationDelegate?.locateOnce()
         case "locateMyLocation":
             viewFactory?.locateMyPosition()
             result(nil)
