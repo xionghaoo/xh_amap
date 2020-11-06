@@ -56,6 +56,14 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
 //        addressMapView?.reLocate()
     }
     
+    func zoomIn() {
+        mapView?.zoomIn()
+    }
+    
+    func zoomOut() {
+        mapView?.zoomOut()
+    }
+    
     func updateMarkers(addressList: Array<AddressInfo>?) {
         mapView?.updateMarkers(addressList: addressList)
     }

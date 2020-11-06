@@ -12,8 +12,9 @@ class AmapView extends StatefulWidget {
   final AmapParam param;
   final Function(int, String) onMarkerClick;
   final Function(int) onMapZoom;
+  final Function(double, double) onLocate;
 
-  AmapView({this.controller, this.param, this.onMarkerClick, this.onMapZoom});
+  AmapView({this.controller, this.param, this.onMarkerClick, this.onMapZoom, this.onLocate});
 
   @override
   _AmapViewState createState() => _AmapViewState(this.controller);
@@ -42,7 +43,11 @@ class _AmapViewState extends State<AmapView> {
           final zoomLevel = call.arguments["zoomLevel"] as int;
           widget.onMapZoom?.call(zoomLevel);
           break;
-
+        case "onLocate":
+          final lat = call.arguments["lat"] as double;
+          final lng = call.arguments["lng"] as double;
+          widget.onLocate?.call(lat, lng);
+          break;
       }
       return Future.value(null);
     });
@@ -50,6 +55,14 @@ class _AmapViewState extends State<AmapView> {
 
   locateMyLocation() {
     _channel.invokeMethod("locateMyLocation");
+  }
+
+  zoomIn() {
+    _channel.invokeMethod("zoomIn");
+  }
+
+  zoomOut() {
+    _channel.invokeMethod("zoomOut");
   }
 
   updateMarkers(List<AddressInfo> markers) {
@@ -101,6 +114,16 @@ class AMapController {
 
   locateMyPosition() {
     _state.locateMyLocation();
+  }
+
+  // 放大
+  zoomIn() {
+    _state.zoomIn();
+  }
+
+  // 缩小
+  zoomOut() {
+    _state.zoomOut();
   }
 
   updateMarkers(List<AddressInfo> markers) {

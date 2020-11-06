@@ -92,6 +92,11 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             self.mapView.addAnnotation(myPositionAnnotation)
 
             addMerchantMarkers()
+            self.methodChannel.invokeMethod("onLocate", arguments: [
+                "lat": lat,
+                "lng": lng
+            ])
+            
         } else {
             reLocate(isInitial: true)
         }
@@ -132,6 +137,15 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         defaults.set(location.coordinate.longitude, forKey: "my_location_lng")
     }
     
+    // MARK: - 地图缩放
+    func zoomIn() {
+        mapView.setZoomLevel(mapView.zoomLevel + 0.5, animated: true)
+    }
+    
+    func zoomOut() {
+        mapView.setZoomLevel(mapView.zoomLevel - 0.5, animated: true)
+    }
+    
     // MARK: - 定位相关
     func reLocate(isInitial: Bool = false) {
         locationManager.requestLocation(withReGeocode: false, completionBlock: { [weak self] (location: CLLocation?, regeocode: AMapLocationReGeocode?, error: Error?) in
@@ -170,6 +184,10 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                 }
                 // 更新本地缓存的位置信息
                 self?.saveCurrentPosition(location: location)
+                self?.methodChannel.invokeMethod("onLocate", arguments: [
+                    "lat": location.coordinate.latitude,
+                    "lng": location.coordinate.longitude
+                ])
                 if (isInitial) {
                     // 初始化我的位置，并和门店位置一起显示在屏幕上
                     self?.addMerchantMarkers()

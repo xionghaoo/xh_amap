@@ -53,6 +53,10 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         case "locateMyLocation":
             viewFactory?.locateMyPosition()
             result(nil)
+        case "zoomIn":
+            viewFactory?.zoomIn()
+        case "zoomOut":
+            viewFactory?.zoomOut()
         case "updateMarkers":
             do {
                 if let param = call.arguments! as? String,

@@ -69,6 +69,26 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
             ),
           ),
           Positioned(
+            bottom: 80,
+            right: 0,
+            child: RaisedButton(
+              child: Text("放大"),
+              onPressed: () {
+                _controller.zoomIn();
+              },
+            ),
+          ),
+          Positioned(
+            bottom: 40,
+            right: 0,
+            child: RaisedButton(
+              child: Text("缩小"),
+              onPressed: () {
+                _controller.zoomOut();
+              },
+            ),
+          ),
+          Positioned(
             bottom: 0,
             right: 0,
             child: RaisedButton(

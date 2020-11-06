@@ -14,17 +14,21 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/.last_build_id" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/.last_build_id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/location_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/location_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/address_select_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/address_select_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AmapLocationDelegate.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/amap_location_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_location_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -205,7 +209,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604632762954</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="增加单次定位">
+      <created>1604645546336</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1604645546337</updated>
+    </task>
+    <task id="LOCAL-00020" summary="增加单次定位">
+      <created>1604645567146</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1604645567146</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,50 +252,55 @@
     <MESSAGE value="ios地图测试" />
     <MESSAGE value="地图缩放回调" />
     <MESSAGE value="ios marker调整" />
-    <option name="LAST_COMMIT_MESSAGE" value="ios marker调整" />
+    <MESSAGE value="增加单次定位" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加单次定位" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604632762623">
+    <state x="100" y="100" width="1480" height="850" key="AVDManager" timestamp="1604655670398">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="100" y="100" width="1480" height="850" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604655670398" />
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604645567027">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604632762623" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604645567027" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="243" key="GridCell.Tab.0.bottom" timestamp="1604645382001">
+    <state width="1638" height="243" key="GridCell.Tab.0.bottom" timestamp="1604648626420">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="243" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604645382001" />
-    <state width="1638" height="243" key="GridCell.Tab.0.center" timestamp="1604645382000">
+    <state width="1638" height="243" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604648626420" />
+    <state width="1638" height="243" key="GridCell.Tab.0.center" timestamp="1604648626418">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="243" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604645382000" />
-    <state width="1638" height="243" key="GridCell.Tab.0.left" timestamp="1604645381999">
+    <state width="1638" height="243" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604648626418" />
+    <state width="1638" height="243" key="GridCell.Tab.0.left" timestamp="1604648626417">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="243" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604645381999" />
-    <state width="1638" height="243" key="GridCell.Tab.0.right" timestamp="1604645382000">
+    <state width="1638" height="243" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604648626417" />
+    <state width="1638" height="243" key="GridCell.Tab.0.right" timestamp="1604648626419">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="243" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604645382000" />
+    <state width="1638" height="243" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604648626419" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604282077927">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604645595913">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604282077927" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604645595913" />
     <state x="532" y="280" width="615" height="490" key="find.popup" timestamp="1604642577516">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="532" y="280" width="615" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604642577516" />
-    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604643340210">
+    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604655784194">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604643340210" />
+    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604655784194" />
     <state x="505" y="233" key="search.everywhere.popup" timestamp="1603876243953">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
