@@ -3,7 +3,9 @@ package com.pgy.xhamap.mapview
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -20,6 +22,7 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
+import java.lang.Exception
 
 /**
  * 高德地图，每次打开页面时都会创建新的MapView，
@@ -30,7 +33,7 @@ class FlutterAmapView(
     private val lifecycle: Lifecycle?,
     private val param: AmapParam,
     private val binaryMessenger: BinaryMessenger?
-) : PlatformView, DefaultLifecycleObserver, MethodChannel.MethodCallHandler {
+) : PlatformView, DefaultLifecycleObserver, MethodChannel.MethodCallHandler, AMap.OnMarkerClickListener, AMap.OnCameraChangeListener {
 
     companion object {
         private const val TAG = "FlutterAmapView"
@@ -41,6 +44,12 @@ class FlutterAmapView(
     private var myMarker: Marker? = null
 
     private var actualMap: IActualMap? = null
+
+    private val level0: Float = 12.5f
+    private val level1: Float = 10.5f
+    private val level2: Float = 8.5f
+    private var annoShowType = 0
+    private var lastAnnoShowType = 0
 
     private var methodChannel = MethodChannel(binaryMessenger, "xh.zero/amap_view_method")
 
@@ -113,6 +122,7 @@ class FlutterAmapView(
                 actualMap = AddressDescriptionMapImpl(context, aMap, param)
             else -> {}
         }
+//        actualMap = RouteMapImpl(context, aMap, param, methodChannel)
         actualMap?.onCreate()
         // 开启我当前的位置Marker
         if (param.enableMyMarker) {
@@ -120,6 +130,11 @@ class FlutterAmapView(
             addMyPositionMarker()
         }
 
+        // 监听marker点击事件
+        aMap?.setOnMarkerClickListener(this)
+
+        // 监听缩放级别变化
+        aMap?.setOnCameraChangeListener(this)
 
     }
 
@@ -137,7 +152,86 @@ class FlutterAmapView(
                 relocate()
                 result.success(null)
             }
+            "zoomIn" -> {
+                aMap?.animateCamera(CameraUpdateFactory.zoomIn())
+            }
+            "zoomOut" -> {
+                aMap?.animateCamera(CameraUpdateFactory.zoomOut())
+            }
+            "updateMarkers" -> {
+                try {
+                    val param = Gson().fromJson<MarkerParam>(call.arguments as? String, MarkerParam::class.java)
+                    updateMarkers(param.markerList)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        val args = HashMap<String, Any?>()
+        args["showType"] = annoShowType
+        args["index"] = 0
+        args["distance"] = "distance"
+        methodChannel.invokeMethod("clickMarker", args)
+        return true
+    }
+
+    override fun onCameraChange(p0: CameraPosition?) {
+        
+    }
+
+    override fun onCameraChangeFinish(cameraPos: CameraPosition?) {
+        val zoomLevel: Float = cameraPos?.zoom ?: 3f
+        if (zoomLevel > level0) {
+            // 门店级别
+            annoShowType = 0
+        } else if (zoomLevel > level1 && zoomLevel <= level0) {
+            // 县域级别
+            annoShowType = 1
+        } else if (zoomLevel > level2 && zoomLevel <= level1) {
+            // 片区级别
+            annoShowType = 2
+        } else if (zoomLevel <= level2) {
+            // 区域级别
+            annoShowType = 3
+        }
+
+        if (annoShowType != lastAnnoShowType) {
+            val args = HashMap<String, Any?>()
+            args.put("zoomLevel", annoShowType)
+            methodChannel.invokeMethod("onMapZoom", args)
+            lastAnnoShowType = annoShowType
+        }
+        
+        io.flutter.Log.d("FlutterAmapView", "zoom: $zoomLevel")
+    }
+
+    private fun updateMarkers(addresses: List<AmapParam.AddressInfo>?) {
+        aMap?.clear()
+//        val markers = ArrayList<Marker>()
+        io.flutter.Log.d("FlutterAmapView", "updateMarkers: ${addresses?.size}")
+        addresses?.forEach { address ->
+            if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
+//                lats.add(address.geo?.lat!!)
+//                lngs.add(address.geo?.lng!!)
+
+                val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
+                v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName.toString()
+
+                val marker = aMap?.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(address.geo!!.lat, address.geo!!.lng))
+                        .title(address.address)
+                        .icon(BitmapDescriptorFactory.fromView(v))
+                )
+//                if (marker != null) {
+//                    merchantMap.put(marker, address.index)
+//                }
+            }
+        }
+//        aMap?.addMarkers()
     }
 
     private fun addMyPositionMarker() {
@@ -181,6 +275,10 @@ class FlutterAmapView(
                     * */
                     io.flutter.Log.d(TAG, "定位成功: ${aMapLocation.address}, poiName: ${aMapLocation.poiName}, 纬度: ${aMapLocation.latitude}, 经度: ${aMapLocation.longitude}")
                     saveCurrentLocation(aMapLocation)
+                    val args = HashMap<String, Any?>()
+                    args["lat"] = aMapLocation.latitude
+                    args["lng"] = aMapLocation.longitude
+                    methodChannel.invokeMethod("onLocate", args)
                     if (isInitial) {
                         // 没有本地缓存经纬度的情况
                         actualMap?.addMerchantMarkers()

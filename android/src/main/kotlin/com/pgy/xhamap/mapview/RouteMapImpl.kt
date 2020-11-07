@@ -30,9 +30,7 @@ class RouteMapImpl(
     private var merchantMap = HashMap<Marker, Int>()
 
     override fun onCreate() {
-
-
-//        addMerchantMarkers()
+        addMerchantMarkers()
     }
     
     override fun addMerchantMarkers() {

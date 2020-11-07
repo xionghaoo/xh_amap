@@ -16,8 +16,8 @@ import java.lang.Exception
 
 class LocationDelegate(
     private val context: Context,
-    private val messenger: BinaryMessenger
-) : MethodChannel.MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
+    eventSink: EventChannel.EventSink?
+) : ActivityAware {
 
     private lateinit var locationService: LocationService
     private var mBound: Boolean = false
@@ -45,64 +45,12 @@ class LocationDelegate(
         }
     }
 
-    private var eventChannel: EventChannel? = null
-    private var eventSink: EventChannel.EventSink? = null
-
-    init {
-        register(messenger)
+    fun startContinuousLocation(context: Context) {
+        LocationService.startService(context, connection)
     }
 
-    private fun register(messenger: BinaryMessenger) {
-        val channel = MethodChannel(messenger, "com.pgy/amap_location")
-        channel.setMethodCallHandler(this)
-        eventChannel = EventChannel(messenger, "com.pgy/amap_location_stream")
-        eventChannel?.setStreamHandler(this)
-    }
-
-    fun unregister() {
+    fun stopContinuousLocation(context: Context) {
         LocationService.stopService(context, connection)
-    }
-
-    override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-        when (call.method) {
-            "startLocation" -> {
-//                PermissionManager.checkMulti(context,
-//                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-//                        Manifest.permission.ACCESS_FINE_LOCATION,
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                        Manifest.permission.READ_EXTERNAL_STORAGE),
-//                    disallow = {
-//                        // 权限不允许
-////                        branchActivityDelegate?.showLocationFailureCover(true, permissionForbidden = true)
-//                        result.error("101", "权限不允许", null)
-//                    },
-//                    permissionName = "位置、存储") {
-//
-//                    // 检查位置服务是否开启，如果未开启，弹出提示框
-////                    if (!isLocationServiceEnabled()) {
-////                        LocationService.startLocationService(context)
-////                        result.success(null)
-////                    } else {
-////                        result.error("100", "未开启定位服务", null)
-////                    }
-//                }
-
-                LocationService.startService(context, connection)
-                result.success(null)
-            }
-            "stopLocation" -> {
-                LocationService.stopService(context, connection)
-            }
-            else -> result.notImplemented()
-        }
-    }
-
-    override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-        eventSink = events
-    }
-
-    override fun onCancel(arguments: Any?) {
-        eventSink = null
     }
 
     private fun isLocationServiceEnabled() : Boolean {
@@ -138,10 +86,4 @@ class LocationDelegate(
     override fun onDetachedFromActivityForConfigChanges() {
         
     }
-
-//    private inner class LocationRequestPermissionsListener: PluginRegistry.RequestPermissionsResultListener {
-//        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?): Boolean {
-//
-//        }
-//    }
 }

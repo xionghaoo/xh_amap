@@ -49,6 +49,53 @@ class LocationService : Service() {
                 context.unbindService(connection)
             }
         }
+        
+        fun locateOnce(context: Context, failure: () -> Unit, success: (AMapLocation) -> Unit) {
+            val option = AMapLocationClientOption()
+            option.interval = 30_000L
+
+            val locClient = AMapLocationClient(context)
+            locClient.setLocationOption(option)
+            locClient.setLocationListener { aMapLocation ->
+                if (aMapLocation != null) {
+                    if (aMapLocation.errorCode == 0) {
+                        /*
+                        * 高德定位成功
+                        * latitude=22.630025#longitude=114.068273#province=广东省
+                        * #coordType=GCJ02#city=深圳市#district=龙岗区
+                        * #cityCode=0755#adCode=440307#address=广东省深圳市龙岗区东坡路5号靠近中坡工业园
+                        * #country=中国#road=东坡路#poiName=中坡工业园#street=东坡路
+                        * #streetNum=5号#aoiName=云里智能园#poiid=#floor=
+                        * #errorCode=0#errorInfo=success#locationDetail=
+                        * #csid:acae7889d19d4e5fab8591af49478c61#description=在中坡工业园附近
+                        * #locationType=4#conScenario=0
+                        * */
+//                    Log.d("LocationPlugin", "定位成功: ${aMapLocation.address}, poiName: ${aMapLocation.poiName}, 纬度: ${aMapLocation.latitude}, 经度: ${aMapLocation.longitude}")
+//                        listener?.onLocated(aMapLocation)
+                        success(aMapLocation)
+//                    repo.prefs.setLocation(LatLonPoint(aMapLocation.latitude, aMapLocation.longitude))
+//                    repo.prefs.setUserAddress(UserAddress(
+//                        province = aMapLocation.province,
+//                        city = aMapLocation.city,
+//                        area = aMapLocation.district,
+//                        address = aMapLocation.address,
+//                        geo = Location(aMapLocation.longitude, aMapLocation.latitude)
+//                    ))
+//                    saveLocations(aMapLocation)
+//                    sendBroadcast(Intent(MainActivity.ACTION_LOCATE_SUCCESS))
+                    } else {
+                        failure()
+//                    sendBroadcast(Intent(MainActivity.ACTION_LOCATE_FAILURE))
+                        Log.e(TAG, "定位失败：errorCode = ${aMapLocation.errorCode}, detail: ${aMapLocation.locationDetail} ")
+                    }
+                } else {
+                    failure()
+                    Log.e(TAG, "aMapLocation is null ")
+                }
+            }
+
+            locClient?.startLocation()
+        }
     }
 
     private val binder: LocationBinder = LocationBinder()

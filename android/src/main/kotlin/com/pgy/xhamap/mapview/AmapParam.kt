@@ -17,6 +17,8 @@ class AmapParam {
         var address: String? = null
         var index: Int = 0
         var indexName: String? = null
+        var showType: Int? = null
+        var id: Int? = null
     }
 
     class GeoPoint(val lat: Double, val lng: Double)
