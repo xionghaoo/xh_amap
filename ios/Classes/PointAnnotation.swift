@@ -1,14 +1,13 @@
 //
-//  StatisticAnnotation.swift
+//  PointAnnotation.swift
 //  xhamap
 //
-//  Created by xionghao on 2020/11/6.
+//  Created by xionghao on 2020/11/7.
 //
 
-class StatisticAnnotation: NSObject, MAAnnotation {
+class PointAnnotation: NSObject, MAAnnotation {
     var coordinate: CLLocationCoordinate2D
-    
-//    var coordinate: CLLocationCoordinate2D?
+
     var count: Int = 0
     var title: String?
     var subtitle: String?
@@ -21,8 +20,7 @@ class StatisticAnnotation: NSObject, MAAnnotation {
     func isEqual(_ object: NSObject) -> Bool {
         return hash() == object.hash
     }
-
-    // MARK: - Life Cycle
+    
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
         super.init()

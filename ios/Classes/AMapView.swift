@@ -29,11 +29,16 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var myPositionAnnotation: MAPointAnnotation?
     
     private var annotationMap: [MAPointAnnotation:AddressInfo] = [:]
-    private var statisticAnnotationMap: [ClusterAnnotation:AddressInfo] = [:]
+    private var statisticAnnotationMap: [StatisticAnnotation:AddressInfo] = [:]
     private let methodChannel: FlutterMethodChannel
     private var currentClickMarker: MAPointAnnotation?
     private var annoShowType: Int = 0
     private var lastAnnoShowType: Int = 0
+    
+    private let level0: CGFloat = 12.5
+    private let level1: CGFloat = 10.5
+    private let level2: CGFloat = 8.5
+//    private let level3: CGFloat = 12
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -316,7 +321,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     // MARK: - 渲染marker点
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
-        if annotation.isKind(of: ClusterAnnotation.self) {
+        if annotation.isKind(of: StatisticAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             if #available(iOS 9.0, *) {
                 var annotationView: StatisticAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? StatisticAnnotationView
@@ -324,7 +329,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     annotationView = StatisticAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
                 }
                 annotationView?.annotation = annotation
-                let addr = statisticAnnotationMap[annotation as! ClusterAnnotation]
+                let addr = statisticAnnotationMap[annotation as! StatisticAnnotation]
     //            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
                 annotationView?.setLabel(title: addr?.indexName ?? "", count: addr?.index ?? 0)
                 return annotationView!
@@ -390,30 +395,24 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     switch addr.showType {
                     case 0:
                         if let origin = UIImage(named: "ic_merchant_position") {
-                            // 单个数字居中和两位数字居中
                             let txt: String = "\(addr.indexName!)"
                             annotationView!.image = textToImage(drawText: txt, inImage: origin)
-                            
                         }
-                    case 1:
-                        if let origin = UIImage(named: "ic_merchant_statistic") {
-                            // 单个数字居中和两位数字居中
-//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
-                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 65, height: 65)
-                            
-                        }
-                    case 2:
-                        if let origin = UIImage(named: "ic_merchant_statistic") {
-                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 80, height: 80)
-                            
-                        }
-                    case 3:
-                        if let origin = UIImage(named: "ic_merchant_statistic") {
-                            // 单个数字居中和两位数字居中
-//                            let txt: String = "\(addr.address!)\n\(addr.indexName!)"
-                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 110, height: 110)
-                            
-                        }
+//                    case 1:
+//                        if let origin = UIImage(named: "ic_merchant_statistic") {
+//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 65, height: 65)
+//
+//                        }
+//                    case 2:
+//                        if let origin = UIImage(named: "ic_merchant_statistic") {
+//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 80, height: 80)
+//
+//                        }
+//                    case 3:
+//                        if let origin = UIImage(named: "ic_merchant_statistic") {
+//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 110, height: 110)
+//
+//                        }
                     default:
                         break;
                     }
@@ -428,16 +427,16 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     func mapView(_ mapView: MAMapView!, mapDidZoomByUser wasUserAction: Bool) {
         let zoomLevel = mapView.zoomLevel
-        if (zoomLevel > 12) {
+        if (zoomLevel > level0) {
             // 门店级别
             annoShowType = 0
-        } else if (zoomLevel > 10 && zoomLevel <= 12) {
+        } else if (zoomLevel > level1 && zoomLevel <= level0) {
             // 县域级别
             annoShowType = 1
-        } else if (zoomLevel > 8 && zoomLevel <= 10) {
+        } else if (zoomLevel > level2 && zoomLevel <= level1) {
             // 片区级别
             annoShowType = 2
-        } else if (zoomLevel <= 8) {
+        } else if (zoomLevel <= level2) {
             // 区域级别
             annoShowType = 3
         }
@@ -461,8 +460,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     annoList.append(anno)
                     annotationMap[anno] = addr
                 } else {
-                    let anno = ClusterAnnotation()
-                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    let anno = StatisticAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
                     anno.title = addr.address
                     annoList.append(anno)
                     statisticAnnotationMap[anno] = addr
@@ -477,18 +475,38 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
         if view.annotation.isKind(of: MAPointAnnotation.self) {
             self.currentClickMarker = view.annotation as? MAPointAnnotation
+            // 点击marker时过滤我的位置
+            if view.annotation.title == "我的位置" {
+                return
+            }
+            // 查询门店到司机当前位置的路径
+            let defaults = UserDefaults.standard
+            let lat = defaults.double(forKey: "my_location_lat")
+            let lng = defaults.double(forKey: "my_location_lng")
+            currentSearchType = AMapRoutePlanningType.drive
+            searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2DMake(lat, lng), destinationCoordinate: CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude))
+            self.view().makeToast("正在查询路线", duration: 1.0)
+        } else if view.annotation.isKind(of: StatisticAnnotation.self) {
+            let anno = view.annotation as! StatisticAnnotation
+            self.methodChannel.invokeMethod("clickMarker", arguments: [
+                "showType": annoShowType,
+                "index": statisticAnnotationMap[anno]?.id ?? -1,
+                "distance": ""
+            ])
+            
+            switch annoShowType {
+            case 1:
+                mapView.setZoomLevel(level0 + 0.5, animated: true)
+            case 2:
+                mapView.setZoomLevel(level1 + 0.5, animated: true)
+            case 3:
+                mapView.setZoomLevel(level2 + 0.5, animated: true)
+            default:
+                break;
+            }
+            mapView.setCenter(view.annotation.coordinate, animated: true)
         }
-        // 点击marker时过滤我的位置
-        if view.annotation.title == "我的位置" {
-            return
-        }
-        // 查询门店到司机当前位置的路径
-        let defaults = UserDefaults.standard
-        let lat = defaults.double(forKey: "my_location_lat")
-        let lng = defaults.double(forKey: "my_location_lng")
-        currentSearchType = AMapRoutePlanningType.drive
-        searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2DMake(lat, lng), destinationCoordinate: CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude))
-        self.view().makeToast("正在查询路线", duration: 1.0)
+        
     }
     
     // marker选择事件
@@ -533,6 +551,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             if let marker = self.currentClickMarker {
                 print("click marker: \(response.route.paths.first?.distance)")
                 self.methodChannel.invokeMethod("clickMarker", arguments: [
+                    "showType": annoShowType,
                     "index": annotationMap[marker]?.index!,
                     "distance": getFriendlyLength(lenMeter: response.route.paths.first?.distance)
                 ])

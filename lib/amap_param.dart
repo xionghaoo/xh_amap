@@ -56,14 +56,16 @@ class AddressInfo {
   int index;
   String indexName;
   int showType;
-  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName, this.showType});
+  int id;
+  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName, this.showType, this.id});
 
   toJson() => <String, dynamic> {
     "geo": geo,
     "address": address,
     "index": index,
     "indexName": indexName,
-    "showType": showType
+    "showType": showType,
+    "id": id
   };
 }
 

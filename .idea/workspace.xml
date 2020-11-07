@@ -13,9 +13,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ios/Classes/PointAnnotation.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/PointAnnotationView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Classes/TriangleView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapParam.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapParam.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotation.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotation.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_param.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_param.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604680646799</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="ios marker测试">
+      <created>1604686094775</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1604686094775</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -276,17 +291,18 @@
     <MESSAGE value="ios marker调整" />
     <MESSAGE value="增加单次定位" />
     <MESSAGE value="marker测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="marker测试" />
+    <MESSAGE value="ios marker测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="ios marker测试" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604680646629">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604686094527">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604680646629" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604686094527" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -312,10 +328,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604662073759">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604686102206">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604662073759" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604686102206" />
     <state x="532" y="280" width="615" height="490" key="find.popup" timestamp="1604642577516">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

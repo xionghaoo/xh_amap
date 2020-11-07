@@ -18,8 +18,6 @@ class StatisticAnnotationView : MAAnnotationView {
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
-//        setupLabel()
-//        setCount(1)
         initalView()
     }
     
@@ -86,7 +84,10 @@ class StatisticAnnotationView : MAAnnotationView {
         
         if #available(iOS 9.0, *) {
             stackView = UIStackView.init(arrangedSubviews: [titleLabel, countLabel])
-            stackView.frame = frame
+            let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
+            let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+            frame = CenterRect(annoRect, center)
+            stackView.frame = CenterRect(textRect, RectCenter(annoRect))
             stackView.axis = .vertical
             stackView.alignment = .center
             stackView.distribution = .equalCentering
@@ -98,11 +99,8 @@ class StatisticAnnotationView : MAAnnotationView {
     }
     
     func setLabel(title: String, count: Int) {
-        countLabel.text = NSNumber(value: self.count).stringValue
-        let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
-        let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
-        frame = CenterRect(annoRect, center)
-        stackView.frame = CenterRect(textRect, RectCenter(annoRect))
+        countLabel.text = "\(count)"
+        titleLabel.text = title
         setNeedsDisplay()
     }
     

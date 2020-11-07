@@ -10,7 +10,7 @@ class AmapView extends StatefulWidget {
 
   final AMapController controller;
   final AmapParam param;
-  final Function(int, String) onMarkerClick;
+  final Function(int, int, String) onMarkerClick;
   final Function(int) onMapZoom;
   final Function(double, double) onLocate;
 
@@ -35,9 +35,10 @@ class _AmapViewState extends State<AmapView> {
     _channel.setMethodCallHandler((call) {
       switch (call.method) {
         case "clickMarker":
+          final showType = call.arguments["showType"] as int;
           final index = call.arguments["index"] as int;
           final distance = call.arguments["distance"] as String;
-          widget.onMarkerClick?.call(index, distance);
+          widget.onMarkerClick?.call(showType, index, distance);
           break;
         case "onMapZoom":
           final zoomLevel = call.arguments["zoomLevel"] as int;
