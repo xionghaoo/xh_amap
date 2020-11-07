@@ -16,8 +16,9 @@ class TriangleView : UIView {
         pointOne = CGPoint(x: 0, y: 0)
         pointTwo = CGPoint(x: frame.width / 2, y: frame.height)
         pointThr = CGPoint(x: frame.width, y: 0)
-        fillColor = UIColor.blue
+        fillColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
         super.init(frame: frame)
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -25,8 +26,8 @@ class TriangleView : UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        // 设置背景色
-        UIColor.white.set()
+//        // 设置背景色
+//        UIColor.white.set()
 
         //拿到当前视图准备好的画板
         let context = UIGraphicsGetCurrentContext()

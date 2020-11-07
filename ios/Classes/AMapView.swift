@@ -28,10 +28,10 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private lazy var locationManager = AMapLocationManager()
     private var myPositionAnnotation: MAPointAnnotation?
     
-    private var annotationMap: [MAPointAnnotation:AddressInfo] = [:]
+    private var annotationMap: [PointAnnotation:AddressInfo] = [:]
     private var statisticAnnotationMap: [StatisticAnnotation:AddressInfo] = [:]
     private let methodChannel: FlutterMethodChannel
-    private var currentClickMarker: MAPointAnnotation?
+    private var currentClickMarker: PointAnnotation?
     private var annoShowType: Int = 0
     private var lastAnnoShowType: Int = 0
     
@@ -113,7 +113,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         if let merchantAddrList = param?.merchantAddressList {
             //            var lats = Array<Double>()
             //            var lngs = Array<Double>()
-            var annoList = Array<MAPointAnnotation>()
+            var annoList = Array<NSObject>()
             if let anno = myPositionAnnotation {
                 annoList.append(anno)
             }
@@ -121,8 +121,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                 if let lat = addr.geo?.lat,
                     let lng = addr.geo?.lng {
                     
-                    let anno = MAPointAnnotation()
-                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
+//                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
                     anno.title = addr.address
                     annotationMap[anno] = addr
                     
@@ -336,6 +336,21 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             } else {
                 return nil
             }
+        } else if annotation.isKind(of: PointAnnotation.self) {
+            let pointReuseIndetifier = "pointReuseIndetifier"
+            if #available(iOS 9.0, *) {
+                var annotationView: PointAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier) as? PointAnnotationView
+                if annotationView == nil {
+                    annotationView = PointAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                }
+                annotationView?.annotation = annotation
+                let addr = annotationMap[annotation as! PointAnnotation]
+    //            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
+                annotationView?.setLabel(title: addr?.indexName ?? "-")
+                return annotationView!
+            } else {
+                return nil
+            }
         } else if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var annotationView: MAAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier)
@@ -391,13 +406,13 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     }
                 }
                 else {
-                    let addr = annotationMap[annotation as! MAPointAnnotation]!
-                    switch addr.showType {
-                    case 0:
-                        if let origin = UIImage(named: "ic_merchant_position") {
-                            let txt: String = "\(addr.indexName!)"
-                            annotationView!.image = textToImage(drawText: txt, inImage: origin)
-                        }
+//                    let addr = annotationMap[annotation as! MAPointAnnotation]!
+//                    switch addr.showType {
+//                    case 0:
+//                        if let origin = UIImage(named: "ic_merchant_position") {
+//                            let txt: String = "\(addr.indexName!)"
+//                            annotationView!.image = textToImage(drawText: txt, inImage: origin)
+//                        }
 //                    case 1:
 //                        if let origin = UIImage(named: "ic_merchant_statistic") {
 //                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 65, height: 65)
@@ -413,9 +428,9 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
 //                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 110, height: 110)
 //
 //                        }
-                    default:
-                        break;
-                    }
+//                    default:
+//                        break;
+//                    }
                     
                 }
             }
@@ -454,8 +469,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             if let lat = addr.geo?.lat,
                 let lng = addr.geo?.lng {
                 if addr.showType == 0 {
-                    let anno = MAPointAnnotation()
-                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
+//                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
                     anno.title = addr.address
                     annoList.append(anno)
                     annotationMap[anno] = addr
@@ -473,8 +488,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     // marker点击事件
     func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
-        if view.annotation.isKind(of: MAPointAnnotation.self) {
-            self.currentClickMarker = view.annotation as? MAPointAnnotation
+        if view.annotation.isKind(of: PointAnnotation.self) {
+            self.currentClickMarker = view.annotation as? PointAnnotation
             // 点击marker时过滤我的位置
             if view.annotation.title == "我的位置" {
                 return

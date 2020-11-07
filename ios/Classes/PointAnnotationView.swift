@@ -5,13 +5,20 @@
 //  Created by xionghao on 2020/11/7.
 //
 
+//@available(iOS 9.0, *)
+@available(iOS 9.0, *)
 class PointAnnotationView: MAAnnotationView {
     
     var titleLabel: UILabel!
+    var stackView: UIStackView!
+//    var triangleView: TriangleView!
+    let triangleSize: CGFloat = 10
+    let txtHeight: CGFloat = 22
     
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +42,7 @@ class PointAnnotationView: MAAnnotationView {
     
     private func setupLabel() {
         titleLabel = UILabel()
-        titleLabel.backgroundColor = UIColor.blue
+        titleLabel.backgroundColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
         titleLabel.textColor = UIColor.white
         titleLabel.textAlignment = .center
         titleLabel.shadowColor = UIColor(white: 0.0, alpha: 0.75)
@@ -44,13 +51,37 @@ class PointAnnotationView: MAAnnotationView {
         titleLabel.numberOfLines = 1
         titleLabel.font = UIFont.boldSystemFont(ofSize: 12)
         titleLabel.baselineAdjustment = .alignCenters
-        titleLabel.layer.cornerRadius = 8.0
+        titleLabel.layer.cornerRadius = 10.0
         titleLabel.clipsToBounds = true
+        
+//        triangleView = TriangleView.init(frame: CGRect(x: 0, y: 0, width: triangleSize, height: triangleSize / 2))
         addSubview(titleLabel)
+//        if #available(iOS 9.0, *) {
+//            stackView = UIStackView.init(arrangedSubviews: [titleLabel])
+////            let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
+////            let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+////            frame = CenterRect(annoRect, center)
+////            stackView.frame = CenterRect(textRect, RectCenter(annoRect))
+//            stackView.axis = .vertical
+//            stackView.alignment = .center
+//            stackView.distribution = .equalCentering
+//            stackView.backgroundColor = .brown
+//            addSubview(stackView)
+//        } else {
+//            // Fallback on earlier versions
+//        }
     }
     
     func setLabel(title: String) {
         titleLabel.text = title
+        let txtWidth = title.width(withConstrainedHeight: 120, font: titleLabel.font) + 20
+        let triangleView = TriangleView.init(frame: CGRect(x: txtWidth / 2 - triangleSize / 2, y: txtHeight, width: triangleSize, height: triangleSize / 2))
+        let labelRect = CGRect(x: 0, y: 0, width: txtWidth, height: txtHeight)
+        titleLabel.frame = labelRect
+        addSubview(triangleView)
+        let annoHeight: CGFloat = txtHeight + triangleSize / 2
+        let annoRect = CGRect(x: 0 - txtWidth / 2, y: 0 - annoHeight, width: txtWidth, height: annoHeight)
+        frame = annoRect
         setNeedsDisplay()
     }
     
@@ -95,11 +126,11 @@ class PointAnnotationView: MAAnnotationView {
         layer.add(bounceAnimation, forKey: "bounce")
     }
     
-//    override func draw(_ rect: CGRect) {
-//        let context = UIGraphicsGetCurrentContext()
-//
-//        context?.setAllowsAntialiasing(true)
-//
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+
+        context?.setAllowsAntialiasing(true)
+
 //        let outerCircleStrokeColor = UIColor(white: 0, alpha: 0.25)
 //        let innerCircleStrokeColor = UIColor.white
 //        let innerCircleFillColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
@@ -116,5 +147,5 @@ class PointAnnotationView: MAAnnotationView {
 //
 //        innerCircleFillColor.setFill()
 //        context?.fillEllipse(in: circleFrame)
-//    }
+    }
 }
