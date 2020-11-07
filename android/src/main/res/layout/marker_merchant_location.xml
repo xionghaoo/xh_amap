@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/ic_merchant_location"/>
-    <TextView
-        android:id="@+id/tv_merchant_index"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
-        android:textColor="@android:color/white"
-        android:text="2"/>
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/tv_merchant_index"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="@color/white"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:background="@drawable/shape_title_bg"
+            android:gravity="center"
+            android:textSize="12sp"
+            tools:text="门店1"/>
+        <com.pgy.xhamap.mapview.TriangleView
+            android:layout_width="12dp"
+            android:layout_height="6dp"
+            app:triangleColor="@color/color_007AFF"
+            app:triangleStrokeColor="@color/color_007AFF"
+            app:triangleDirection="bottom"
+            app:triangleStrokeWidth="1dp"/>
+    </LinearLayout>
 </FrameLayout>

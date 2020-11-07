@@ -13,13 +13,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/TriangleView.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/shape_blue.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/shape_title_bg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_statistic_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/values/attrs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/XhamapPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationDelegate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationDelegate.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/location/LocationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapParam.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/AmapParam.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/RouteMapImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/RouteMapImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/res/layout/marker_merchant_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_merchant_location.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604739267046</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Android marker点测试">
+      <created>1604749514509</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1604749514510</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,17 +313,18 @@
     <MESSAGE value="marker测试" />
     <MESSAGE value="ios marker测试" />
     <MESSAGE value="ios 自定义门店marker" />
-    <option name="LAST_COMMIT_MESSAGE" value="ios 自定义门店marker" />
+    <MESSAGE value="Android marker点测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="Android marker点测试" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604739266893">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604749514190">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604739266893" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604749514190" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -339,10 +350,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604739273501">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604749520723">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604739273501" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604749520723" />
     <state x="532" y="280" width="615" height="490" key="find.popup" timestamp="1604642577516">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.BounceInterpolator
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -16,6 +18,9 @@ import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
 import com.amap.api.maps.model.*
+import com.amap.api.maps.model.animation.ScaleAnimation
+import com.amap.api.services.core.AMapException
+import com.amap.api.services.route.*
 import com.google.gson.Gson
 import com.pgy.xhamap.R
 import io.flutter.plugin.common.BinaryMessenger
@@ -50,6 +55,13 @@ class FlutterAmapView(
     private val level2: Float = 8.5f
     private var annoShowType = 0
     private var lastAnnoShowType = 0
+
+    private var isSearchingRoute = false
+
+    private val startAddr: AmapParam.AddressInfo = AmapParam.AddressInfo()
+
+    private val storeMap = HashMap<Marker, AmapParam.AddressInfo>()
+    private val statisticMap = HashMap<Marker, AmapParam.AddressInfo>()
 
     private var methodChannel = MethodChannel(binaryMessenger, "xh.zero/amap_view_method")
 
@@ -170,11 +182,40 @@ class FlutterAmapView(
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
-        val args = HashMap<String, Any?>()
-        args["showType"] = annoShowType
-        args["index"] = 0
-        args["distance"] = "distance"
-        methodChannel.invokeMethod("clickMarker", args)
+        if (annoShowType == 0) {
+            val address = storeMap[marker]
+            if (address != null) {
+                if (isSearchingRoute) {
+                    Toast.makeText(context, "正在查询路线，请勿重复点击", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+                Toast.makeText(context, "正在查询路线", Toast.LENGTH_SHORT).show()
+                isSearchingRoute = true
+                searchRoute(startAddr, address) { distance ->
+                    isSearchingRoute = false
+                    val args = HashMap<String, Any?>()
+                    args["showType"] = address.showType
+                    args["index"] = address.index
+                    args["distance"] = distance
+                    methodChannel.invokeMethod("clickMarker", args)
+                }
+            }
+        } else {
+            val addr = statisticMap[marker]
+            if (addr != null) {
+                val args = HashMap<String, Any?>()
+                args["showType"] = addr.showType
+                args["index"] = addr.id
+//                args["distance"] = "distance"
+                methodChannel.invokeMethod("clickMarker", args)
+            }
+            when (annoShowType) {
+                1 -> aMap?.moveCamera(CameraUpdateFactory.zoomTo(level0 + 0.5f))
+                2 -> aMap?.moveCamera(CameraUpdateFactory.zoomTo(level1 + 0.5f))
+                3 -> aMap?.moveCamera(CameraUpdateFactory.zoomTo(level2 + 0.5f))
+            }
+
+        }
         return true
     }
 
@@ -216,16 +257,41 @@ class FlutterAmapView(
             if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
 //                lats.add(address.geo?.lat!!)
 //                lngs.add(address.geo?.lng!!)
+                val markerView: View = if (address.showType == 0) {
+                    val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
+                    v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName
+                    v
+                } else {
+                    val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
+                    v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName
+                    v.findViewById<TextView>(R.id.tv_count).text = address.index.toString()
+                    v
+                }
 
-                val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
-                v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName.toString()
+                val option = MarkerOptions()
+                    .position(LatLng(address.geo!!.lat, address.geo!!.lng))
+                    .title(address.address)
+                    .icon(BitmapDescriptorFactory.fromView(markerView))
+                if (address.showType == 0) {
+                    option.anchor(0.5f, 0f)
+                } else {
+                    option.anchor(0.5f, 0.5f)
 
-                val marker = aMap?.addMarker(
-                    MarkerOptions()
-                        .position(LatLng(address.geo!!.lat, address.geo!!.lng))
-                        .title(address.address)
-                        .icon(BitmapDescriptorFactory.fromView(v))
-                )
+                }
+                val marker = aMap?.addMarker(option)
+                val anim = ScaleAnimation(0f, 1f, 0f, 1f)
+                anim.setDuration(500)
+                anim.setInterpolator(BounceInterpolator())
+                marker?.setAnimation(anim)
+                marker?.startAnimation()
+
+                if (marker != null) {
+                    if (address.showType == 0) {
+                        storeMap.put(marker, address)
+                    } else {
+                        statisticMap.put(marker, address)
+                    }
+                }
 //                if (marker != null) {
 //                    merchantMap.put(marker, address.index)
 //                }
@@ -242,12 +308,15 @@ class FlutterAmapView(
             val lat = prefs.getFloat("my_location_lat", 0f)
             val lng = prefs.getFloat("my_location_lng", 0f)
             if (lat != 0f && lng != 0f) {
+                startAddr.geo = AmapParam.GeoPoint(lat.toDouble(), lng.toDouble())
                 myMarker = aMap?.addMarker(MarkerOptions()
                     .position(LatLng(lat.toDouble(), lng.toDouble()))
                     .title("MyPosition")
                     .infoWindowEnable(false)
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car)))
                 actualMap?.addMerchantMarkers()
+
+                callOnLocate(lat.toDouble(), lng.toDouble())
             } else {
                 relocate(isInitial = true)
             }
@@ -275,16 +344,16 @@ class FlutterAmapView(
                     * */
                     io.flutter.Log.d(TAG, "定位成功: ${aMapLocation.address}, poiName: ${aMapLocation.poiName}, 纬度: ${aMapLocation.latitude}, 经度: ${aMapLocation.longitude}")
                     saveCurrentLocation(aMapLocation)
-                    val args = HashMap<String, Any?>()
-                    args["lat"] = aMapLocation.latitude
-                    args["lng"] = aMapLocation.longitude
-                    methodChannel.invokeMethod("onLocate", args)
+
+                    callOnLocate(aMapLocation.latitude, aMapLocation.longitude)
                     if (isInitial) {
                         // 没有本地缓存经纬度的情况
                         actualMap?.addMerchantMarkers()
                     } else {
                         aMap?.animateCamera(CameraUpdateFactory.newLatLng(LatLng(aMapLocation.latitude, aMapLocation.longitude)))
                     }
+                    // 保存起始地点
+                    startAddr.geo = AmapParam.GeoPoint(aMapLocation.latitude, aMapLocation.longitude)
                     if (myMarker == null) {
                         myMarker = aMap?.addMarker(MarkerOptions()
                             .position(LatLng(aMapLocation.latitude, aMapLocation.longitude))
@@ -305,6 +374,13 @@ class FlutterAmapView(
         locClient.startLocation()
     }
 
+    private fun callOnLocate(lat: Double, lng: Double) {
+        val args = HashMap<String, Any?>()
+        args["lat"] = lat
+        args["lng"] = lng
+        methodChannel.invokeMethod("onLocate", args)
+    }
+
     private fun saveCurrentLocation(location: AMapLocation) {
         if (context != null) {
             val prefs: SharedPreferences = context.getSharedPreferences(
@@ -314,6 +390,91 @@ class FlutterAmapView(
                 putFloat("my_location_lat", location.latitude.toFloat())
                 putFloat("my_location_lng", location.longitude.toFloat())
             }.apply()
+        }
+    }
+
+    private fun searchRoute(startAddr: AmapParam.AddressInfo?, endAddr: AmapParam.AddressInfo?, success: (String) -> Unit = {}) {
+        if (startAddr == null || endAddr == null) return
+        val routeSearch = RouteSearch(context)
+        routeSearch.setRouteSearchListener(MapRouteSearchListener(
+//            context = context,
+//            aMap = aMap,
+//            startAddr = startAddr,
+//            endAddr = endAddr,
+            success = success
+        ))
+
+        val fromAndTo = RouteSearch.FromAndTo(
+            MapUtil.convertGeoPointToLatLonPoint(startAddr.geo),
+            MapUtil.convertGeoPointToLatLonPoint(endAddr.geo)
+        )
+        fromAndTo.plateProvince = "粤"
+        fromAndTo.plateNumber = "B6BN05"
+        // RouteSearch.DRIVING_SINGLE_DEFAULT 驾车
+        // RouteSearch.RIDING_DEFAULT 骑行 时间最少
+        // DRIVING_PURE_ELECTRIC_VEHICLE 纯电动车(小汽车)
+        // DRIVEING_PLAN_FASTEST_SHORTEST 不考虑路况，返回速度最优、耗时最短的路
+        // 文档
+        // http://a.amap.com/lbs/static/unzip/Android_Map_Doc/Search/index.html?com/amap/api/services/route/RouteSearch.RideRouteQuery.html
+        // DRIVING_SINGLE_SHORTEST: 最短距离
+        val query = RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DRIVING_SINGLE_SHORTEST, null, null, "")
+        routeSearch.calculateDriveRouteAsyn(query)
+    }
+
+    internal class MapRouteSearchListener(
+//        private val context: Context?,
+//        private val aMap: AMap?,
+//        private val startAddr: AmapParam.AddressInfo,
+//        private val endAddr: AmapParam.AddressInfo,
+        private val success: (String) -> Unit
+    ) : RouteSearch.OnRouteSearchListener {
+        override fun onDriveRouteSearched(result: DriveRouteResult?, errorCode: Int) {
+            // 驾车路线查询
+            if (errorCode == AMapException.CODE_AMAP_SUCCESS && result?.paths != null && result.paths.size > 0) {
+                val drivePath: DrivePath = result.paths[0] ?: return
+
+//                val overlay = DrivingRouteOverlay(
+//                    context,
+//                    aMap,
+//                    drivePath,
+//                    result.startPos,
+//                    result.targetPos,
+//                    null,
+//                    null,
+//                    null
+//                )
+//                driverOverlayList.add(overlay)
+//                overlay.setNodeIconVisibility(false)//设置节点marker是否显示
+//                overlay.setIsColorfulline(true)//是否用颜色展示交通拥堵情况，默认true
+//                overlay.removeFromMap()
+//                overlay.addToMap(startAddr.address, endAddr.address)
+//
+//                // 路径缩放级别，值越小，信息越详细
+//                overlay.zoomToSpan(context?.resources?.getDimension(R.dimen.map_zoom_edge_width)?.toInt() ?: 300)
+
+                // 距离 米
+                val dis = drivePath.distance.toInt()
+                // 时间 秒
+                val dur = drivePath.duration.toInt()
+                val friendlyDistance = AMapUtil.getFriendlyLength(dis)
+                val friendlyTime = AMapUtil.getFriendlyTime(dur)
+
+                success(friendlyDistance)
+
+                Log.d("FlutterAmapView", "friendlyDistance: ${friendlyDistance}, ${friendlyTime}")
+            }
+        }
+
+        override fun onBusRouteSearched(p0: BusRouteResult?, p1: Int) {
+
+        }
+
+        override fun onRideRouteSearched(result: RideRouteResult?, errorCode: Int) {
+            // 骑行路线查询
+        }
+
+        override fun onWalkRouteSearched(p0: WalkRouteResult?, p1: Int) {
+
         }
     }
 }

@@ -39,6 +39,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private let level1: CGFloat = 10.5
     private let level2: CGFloat = 8.5
 //    private let level3: CGFloat = 12
+    private var isSearchingRoute: Bool = false
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -494,13 +495,18 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             if view.annotation.title == "我的位置" {
                 return
             }
+            if isSearchingRoute {
+                self.view().makeToast("正在查询路线, 请勿重复点击", duration: 1.0)
+                return
+            }
+            isSearchingRoute = true
+            self.view().makeToast("正在查询路线", duration: 1.0)
             // 查询门店到司机当前位置的路径
             let defaults = UserDefaults.standard
             let lat = defaults.double(forKey: "my_location_lat")
             let lng = defaults.double(forKey: "my_location_lng")
             currentSearchType = AMapRoutePlanningType.drive
             searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2DMake(lat, lng), destinationCoordinate: CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude))
-            self.view().makeToast("正在查询路线", duration: 1.0)
         } else if view.annotation.isKind(of: StatisticAnnotation.self) {
             let anno = view.annotation as! StatisticAnnotation
             self.methodChannel.invokeMethod("clickMarker", arguments: [
@@ -564,6 +570,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         
         if response.count > 0 {
             if let marker = self.currentClickMarker {
+                isSearchingRoute = false
                 print("click marker: \(response.route.paths.first?.distance)")
                 self.methodChannel.invokeMethod("clickMarker", arguments: [
                     "showType": annoShowType,
