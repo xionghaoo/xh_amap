@@ -100,17 +100,20 @@ class AMapLocationDelegate: NSObject, AMapLocationManagerDelegate {
     }
     
     public func amapLocationManager(_ manager: AMapLocationManager!, didUpdate location: CLLocation!, reGeocode: AMapLocationReGeocode!) {
-        
-        NSLog("location:{lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)};");
         if let reGeocode = reGeocode {
+//            NSLog("location:{lat:\(location.coordinate.latitude); lon:\(location.coordinate.longitude); accuracy:\(location.horizontalAccuracy)};");
             NSLog("reGeocode: %@", reGeocode)
-            eventSink([
-                "address": reGeocode.formattedAddress ?? "",
-                "lat": location.coordinate.latitude,
-                "lng": location.coordinate.longitude
-            ])
+            if eventSink != nil {
+                eventSink([
+                    "address": reGeocode.formattedAddress ?? "",
+                    "lat": location.coordinate.latitude,
+                    "lng": location.coordinate.longitude
+                ]);   
+            }
         } else {
-            eventSink(FlutterError(code: "102", message: "获取地址失败", details: nil))
+            if eventSink != nil {
+                eventSink(FlutterError(code: "102", message: "获取地址失败", details: nil))
+            }
         }
     }
     
