@@ -21,9 +21,9 @@ class _AddressSelectPageState extends State<AddressSelectPage> {
         children: [
           AmapView(
             controller: _controller,
-            onMarkerClick: (index, distance) {
-              print("marker: index = $index, distance: $distance");
-            },
+            // onMarkerClick: (index, distance) {
+            //   print("marker: index = $index, distance: $distance");
+            // },
             onMapZoom: (zoom) {
               print("zoom level: $zoom");
               switch (zoom) {
