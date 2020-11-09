@@ -34,6 +34,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var currentClickMarker: PointAnnotation?
     private var annoShowType: Int = 0
     private var lastAnnoShowType: Int = 0
+    private var clickedAreaId: Int! = nil
     
     private let level0: CGFloat = 12.5
     private let level1: CGFloat = 10.5
@@ -205,28 +206,36 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         })
     }
     
-    func clickMarker(id: Int) {
-        if annoShowType == 0 {
-            return
+    func clickMarker(id: Int, showType: Int) {
+        clickedAreaId = id
+        switch showType {
+        case 1:
+            mapView.setZoomLevel(level0 - 0.5, animated: true)
+        case 2:
+            mapView.setZoomLevel(level1 - 0.5, animated: true)
+        case 3:
+            mapView.setZoomLevel(level2 - 0.5, animated: true)
+        default:
+            break;
         }
-        mapView.annotations.forEach({ anno in
-            if let anno = anno as? StatisticAnnotation,
-               let addr = statisticAnnotationMap[anno] {
-                if addr.id == id {
-                    switch annoShowType {
-                    case 1:
-                        mapView.setZoomLevel(level0 + 0.5, animated: true)
-                    case 2:
-                        mapView.setZoomLevel(level1 + 0.5, animated: true)
-                    case 3:
-                        mapView.setZoomLevel(level2 + 0.5, animated: true)
-                    default:
-                        break;
+        if showType == annoShowType {
+            locateMarker()
+        }
+    }
+    
+    private func locateMarker() {
+        if clickedAreaId != nil {
+            mapView.annotations.forEach({ anno in
+                if let anno = anno as? StatisticAnnotation,
+                   let addr = statisticAnnotationMap[anno] {
+                    if addr.id == clickedAreaId {
+                        mapView.setCenter(anno.coordinate, animated: true)
                     }
-                    mapView.setCenter(anno.coordinate, animated: true)
                 }
-            }
-        })
+            })
+            clickedAreaId = nil
+        }
+        
     }
     
     func addAnnotationsToMapView(_ annotation: MAAnnotation) {
@@ -512,6 +521,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             self.mapView.addAnnotation(anno)
         }
         self.mapView.addAnnotations(annoList)
+        
+        locateMarker()
     }
     
     // marker点击事件

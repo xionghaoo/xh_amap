@@ -68,8 +68,8 @@ class AMapViewFactory: NSObject, FlutterPlatformViewFactory {
         mapView?.updateMarkers(addressList: addressList)
     }
     
-    func clickMarker(id: Int) {
-        mapView?.clickMarker(id: id)
+    func clickMarker(_ id: Int, _ showType: Int) {
+        mapView?.clickMarker(id: id, showType: showType)
     }
 
 //    func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {

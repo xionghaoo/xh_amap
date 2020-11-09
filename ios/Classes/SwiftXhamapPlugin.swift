@@ -69,8 +69,10 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             }
             result(nil)
         case "clickMarker":
-            if let id = call.arguments! as? Int {
-                viewFactory?.clickMarker(id: id)
+            if let args = call.arguments as? Dictionary<String, Any?>,
+               let id = args["id"] as? Int,
+               let showType = args["showType"] as? Int {
+                viewFactory?.clickMarker(id, showType)
             }
             result(nil)
         default:
