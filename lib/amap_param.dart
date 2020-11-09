@@ -57,7 +57,8 @@ class AddressInfo {
   String indexName;
   int showType;
   int id;
-  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName, this.showType, this.id});
+  int parentId;
+  AddressInfo(this.geo, this.address,{this.index = 0, this.indexName, this.showType, this.id, this.parentId});
 
   toJson() => <String, dynamic> {
     "geo": geo,
@@ -65,7 +66,8 @@ class AddressInfo {
     "index": index,
     "indexName": indexName,
     "showType": showType,
-    "id": id
+    "id": id,
+    "parentId": parentId
   };
 }
 

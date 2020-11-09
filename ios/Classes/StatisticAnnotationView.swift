@@ -82,25 +82,38 @@ class StatisticAnnotationView : MAAnnotationView {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 12)
         titleLabel.baselineAdjustment = .alignCenters
         
-        if #available(iOS 9.0, *) {
-            stackView = UIStackView.init(arrangedSubviews: [titleLabel, countLabel])
-            let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
-            let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
-            frame = CenterRect(annoRect, center)
-            stackView.frame = CenterRect(textRect, RectCenter(annoRect))
-            stackView.axis = .vertical
-            stackView.alignment = .center
-            stackView.distribution = .equalCentering
-            stackView.backgroundColor = .clear
-            addSubview(stackView)
-        } else {
-            // Fallback on earlier versions
-        }
+        let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+        frame = CenterRect(annoRect, center)
+        let txt_x: CGFloat = (80 - 70) / 2
+        let txt_top: CGFloat = (80 - 30) / 2
+        
+        titleLabel.frame = CGRect(x: txt_x, y: txt_top, width: 70, height: 15)
+        countLabel.frame = CGRect(x: txt_x, y: txt_top + 15, width: 70, height: 15)
+        
+        addSubview(countLabel)
+        addSubview(titleLabel)
+        
+//        if #available(iOS 9.0, *) {
+//            stackView = UIStackView.init(arrangedSubviews: [titleLabel, countLabel])
+//            let textRect = CGRect(x: 0, y: 0, width: 70, height: 30)
+//            let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+////            let newCenter: CGPoint = CGPoint(x: center.x, y: center.y + frame.height / 2)
+//            frame = CenterRect(annoRect, center)
+//            stackView.frame = CenterRect(textRect, RectCenter(annoRect))
+//            stackView.axis = .vertical
+//            stackView.alignment = .center
+//            stackView.distribution = .equalCentering
+//            stackView.backgroundColor = .clear
+//            addSubview(stackView)
+//        } else {
+//            // Fallback on earlier versions
+//        }
     }
     
     func setLabel(title: String, count: Int) {
         countLabel.text = "\(count)"
         titleLabel.text = title
+        
         setNeedsDisplay()
     }
     
@@ -121,25 +134,6 @@ class StatisticAnnotationView : MAAnnotationView {
         }
         return false
     }
-    
-//    func setCount(_ count: Int, title: String? = nil) {
-//        self.count = count
-//
-//        // 按count数目设置view的大小.
-//        let newBounds = CGRect(x: 0, y: 0, width: CGFloat(roundf(54 * ScaledValueForValue(count))), height: CGFloat(roundf(54 * ScaledValueForValue(count))))
-//        frame = CenterRect(newBounds, center)
-//
-//        let newLabelBounds = CGRect(x: 0, y: 0, width: newBounds.size.width / 2, height: newBounds.size.height / 2)
-//        countLabel.frame = CenterRect(newLabelBounds, RectCenter(newBounds))
-//        if title == nil {
-//            countLabel.text = NSNumber(value: self.count).stringValue
-//        } else {
-//            countLabel.text = "\(title!)\(NSNumber(value: self.count).stringValue)"
-//        }
-//
-//
-//        setNeedsDisplay()
-//    }
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)

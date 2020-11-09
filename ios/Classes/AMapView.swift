@@ -484,6 +484,9 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             }
         })
         mapView.removeAnnotations(mapView.annotations)
+        if let anno = myPositionAnnotation {
+            self.mapView.addAnnotation(anno)
+        }
         self.mapView.addAnnotations(annoList)
     }
     
