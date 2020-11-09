@@ -13,15 +13,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/proguard-rules.pro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/address_select_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/address_select_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -42,16 +43,16 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/android" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap" />
       <recent name="$PROJECT_DIR$/android/src/main/res/values" />
       <recent name="$PROJECT_DIR$/android/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/android/src/main/res/drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Flutter.example/lib/main.dart">
@@ -286,7 +287,28 @@
       <option name="project" value="LOCAL" />
       <updated>1604780832031</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="ios 连续定位bug修复">
+      <created>1604809181340</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1604809181340</updated>
+    </task>
+    <task id="LOCAL-00032" summary="ios 连续定位bug修复">
+      <created>1604809194335</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1604809194335</updated>
+    </task>
+    <task id="LOCAL-00033" summary="ios 连续定位bug修复">
+      <created>1604809208899</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1604809208899</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -320,46 +342,47 @@
     <MESSAGE value="ios marker测试" />
     <MESSAGE value="ios 自定义门店marker" />
     <MESSAGE value="Android marker点测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="Android marker点测试" />
+    <MESSAGE value="ios 连续定位bug修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="ios 连续定位bug修复" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604780831932">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604809208807">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604780831932" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604809208807" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="220" key="GridCell.Tab.0.bottom" timestamp="1604808916817">
+    <state width="1638" height="220" key="GridCell.Tab.0.bottom" timestamp="1604812094953">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604808916817" />
-    <state width="1638" height="220" key="GridCell.Tab.0.center" timestamp="1604808916816">
+    <state width="1638" height="220" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094953" />
+    <state width="1638" height="220" key="GridCell.Tab.0.center" timestamp="1604812094952">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604808916816" />
-    <state width="1638" height="220" key="GridCell.Tab.0.left" timestamp="1604808916815">
+    <state width="1638" height="220" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094952" />
+    <state width="1638" height="220" key="GridCell.Tab.0.left" timestamp="1604812094951">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604808916815" />
-    <state width="1638" height="220" key="GridCell.Tab.0.right" timestamp="1604808916816">
+    <state width="1638" height="220" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094951" />
+    <state width="1638" height="220" key="GridCell.Tab.0.right" timestamp="1604812094952">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604808916816" />
+    <state width="1638" height="220" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094952" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604780838798">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604809217236">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604780838798" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604809217236" />
     <state x="532" y="280" width="615" height="490" key="find.popup" timestamp="1604642577516">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
