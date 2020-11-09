@@ -85,7 +85,7 @@ class StatisticAnnotationView : MAAnnotationView {
         let annoRect = CGRect(x: 0, y: 0, width: 80, height: 80)
         frame = CenterRect(annoRect, center)
         let txt_x: CGFloat = (80 - 70) / 2
-        let txt_top: CGFloat = (80 - 30) / 2
+        let txt_top: CGFloat = (80 - 30) / 2 + 5
         
         titleLabel.frame = CGRect(x: txt_x, y: txt_top, width: 70, height: 15)
         countLabel.frame = CGRect(x: txt_x, y: txt_top + 15, width: 70, height: 15)

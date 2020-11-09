@@ -68,6 +68,11 @@ public class SwiftXhamapPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
                 print("has error: \(e)")
             }
             result(nil)
+        case "clickMarker":
+            if let id = call.arguments! as? Int {
+                viewFactory?.clickMarker(id: id)
+            }
+            result(nil)
         default:
             result(FlutterMethodNotImplemented)
         }

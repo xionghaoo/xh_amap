@@ -14,9 +14,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/amap_param.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_param.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/amap_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/amap_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,7 +320,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604903132606</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="ios marker点击区域bug修复">
+      <created>1604909468504</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1604909468504</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,17 +363,18 @@
     <MESSAGE value="Android marker点测试" />
     <MESSAGE value="ios 连续定位bug修复" />
     <MESSAGE value="增加proguard文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加proguard文件" />
+    <MESSAGE value="ios marker点击区域bug修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="ios marker点击区域bug修复" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604903132471">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604909468360">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604903132471" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604909468360" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -396,10 +408,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="532" y="280" width="615" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604642577516" />
-    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604655784194">
+    <state width="494" height="115" key="javadoc.popup.new" timestamp="1604910464741">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604655784194" />
+    <state width="494" height="115" key="javadoc.popup.new/0.0.1680.1050@0.0.1680.1050" timestamp="1604910464741" />
     <state x="505" y="233" key="search.everywhere.popup" timestamp="1603876243953">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

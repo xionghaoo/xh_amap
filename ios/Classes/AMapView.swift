@@ -205,6 +205,30 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         })
     }
     
+    func clickMarker(id: Int) {
+        if annoShowType == 0 {
+            return
+        }
+        mapView.annotations.forEach({ anno in
+            if let anno = anno as? StatisticAnnotation,
+               let addr = statisticAnnotationMap[anno] {
+                if addr.id == id {
+                    switch annoShowType {
+                    case 1:
+                        mapView.setZoomLevel(level0 + 0.5, animated: true)
+                    case 2:
+                        mapView.setZoomLevel(level1 + 0.5, animated: true)
+                    case 3:
+                        mapView.setZoomLevel(level2 + 0.5, animated: true)
+                    default:
+                        break;
+                    }
+                    mapView.setCenter(anno.coordinate, animated: true)
+                }
+            }
+        })
+    }
+    
     func addAnnotationsToMapView(_ annotation: MAAnnotation) {
         mapView.addAnnotation(annotation)
         

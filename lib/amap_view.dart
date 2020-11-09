@@ -71,6 +71,13 @@ class _AmapViewState extends State<AmapView> {
     _channel.invokeMethod("updateMarkers", jsonData);
   }
 
+  clickMarker(int id, int showType) {
+    _channel.invokeMethod("clickMarker", {
+      "id": id,
+      "showType": showType
+    });
+  }
+
   // Stream<int> onMapZoom() {
   //   _zoomStream = _eventChannel.receiveBroadcastStream().map((dynamic data) => data as int);
   //   return _zoomStream;
@@ -129,6 +136,10 @@ class AMapController {
 
   updateMarkers(List<AddressInfo> markers) {
     _state.updateMarkers(markers);
+  }
+
+  clickMarker(int id, int showType) {
+    _state.clickMarker(id, showType);
   }
 
   // Stream<int> onMapZoom() {

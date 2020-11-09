@@ -63,6 +63,9 @@ class FlutterAmapView(
     private val storeMap = HashMap<Marker, AmapParam.AddressInfo>()
     private val statisticMap = HashMap<Marker, AmapParam.AddressInfo>()
 
+    private var clickedAreaId: Int? = null
+    private var clickedZoom: Float = 13f
+
     private var methodChannel = MethodChannel(binaryMessenger, "xh.zero/amap_view_method")
 
     init {
@@ -178,6 +181,14 @@ class FlutterAmapView(
                     e.printStackTrace()
                 }
             }
+            "clickMarker" -> {
+                val args = call.arguments as HashMap<String, Int>
+                val id = args["id"]
+                val showType = args["showType"]
+                if (id != null) {
+                    clickMarker(id, showType ?: 0)
+                }
+            }
         }
     }
 
@@ -248,6 +259,21 @@ class FlutterAmapView(
         
         io.flutter.Log.d("FlutterAmapView", "zoom: $zoomLevel")
     }
+    
+    private fun clickMarker(id: Int, showType: Int) {
+        clickedAreaId = id
+        clickedZoom = when (showType) {
+            1 -> level0 - 0.5f
+            2 -> level1 - 0.5f
+            3 -> level2 - 0.5f
+            else -> 13f
+        }
+        aMap?.animateCamera(CameraUpdateFactory.zoomTo(clickedZoom))
+
+        if (annoShowType == showType) {
+            locateMarker()
+        }
+    }
 
     private fun updateMarkers(addresses: List<AmapParam.AddressInfo>?) {
         aMap?.clear()
@@ -297,7 +323,31 @@ class FlutterAmapView(
 //                }
             }
         }
-//        aMap?.addMarkers()
+        if (myMarker != null) {
+            aMap?.addMarker(myMarker?.options)
+        }
+
+        locateMarker()
+    }
+
+    private fun locateMarker() {
+        if (clickedAreaId != null) {
+            // 选择某个marker点
+
+            aMap?.mapScreenMarkers?.forEach { marker ->
+                val addr = statisticMap[marker]
+                if (addr != null && addr.id == clickedAreaId) {
+                    if (addr.geo?.lat != null && addr.geo?.lng != null) {
+                        aMap?.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
+                            )
+                        )
+                    }
+                }
+            }
+            clickedAreaId = null
+        }
     }
 
     private fun addMyPositionMarker() {
