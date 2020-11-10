@@ -13,18 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/shape_blue_selected.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/drawable/shape_title_bg_selected.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_my_location.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/res/mipmap-xhdpi/ic_my_location.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/TriangleView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/TriangleView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/layout/marker_merchant_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_merchant_location.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/layout/marker_statistic_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/layout/marker_statistic_location.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/mipmap-xhdpi/ic_car.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/mipmap-xxhdpi/ic_car.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -353,7 +344,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604993694984</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="android 我的位置">
+      <created>1605000479910</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1605000479910</updated>
+    </task>
+    <task id="LOCAL-00040" summary="android 我的位置">
+      <created>1605000499446</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1605000499446</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -393,17 +398,18 @@
     <MESSAGE value="perform marker click" />
     <MESSAGE value="ios perform marker click" />
     <MESSAGE value="ios 点选marker时变色" />
-    <option name="LAST_COMMIT_MESSAGE" value="ios 点选marker时变色" />
+    <MESSAGE value="android 我的位置" />
+    <option name="LAST_COMMIT_MESSAGE" value="android 我的位置" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604993694795">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605000499351">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604993694795" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605000499351" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -429,10 +435,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604809217236">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1605000507410">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604809217236" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1605000507410" />
     <state x="532" y="280" width="635" height="490" key="find.popup" timestamp="1604973884868">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

@@ -229,7 +229,7 @@ class FlutterAmapView(
             }
 
         }
-//        changeMarkerColor(marker)
+        changeMarkerColor(marker)
         return true
     }
 
@@ -342,7 +342,7 @@ class FlutterAmapView(
                 val addr = if (annoShowType == 0) storeMap[marker] else statisticMap[marker]
                 if (addr != null && addr.id == clickedAreaId) {
                     if (addr.geo?.lat != null && addr.geo?.lng != null) {
-//                        changeMarkerColor(marker)
+                        changeMarkerColor(marker)
                         aMap?.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
@@ -364,22 +364,24 @@ class FlutterAmapView(
             tvMerchantIndex.text = address?.indexName
             tvMerchantIndex.background = context!!.resources.getDrawable(R.drawable.shape_title_bg_selected)
             v.findViewById<TriangleView>(R.id.triangle_view).setTriangleColor(R.color.color_54A158)
-            marker.options.icon(BitmapDescriptorFactory.fromView(v))
-            val newMarker = aMap?.addMarker(marker.options)
-            if (newMarker != null && address != null) {
-                storeMap.put(newMarker, address)
-            }
+//            marker.options.icon(BitmapDescriptorFactory.fromView(v))
+            marker.setIcon(BitmapDescriptorFactory.fromView(v))
+//            val newMarker = aMap?.addMarker(marker.options)
+//            if (newMarker != null && address != null) {
+//                storeMap.put(newMarker, address)
+//            }
         } else {
             val address = statisticMap[marker]
             val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
             v.findViewById<TextView>(R.id.tv_merchant_index).text = address?.indexName
-            v.findViewById<TextView>(R.id.container_statistics_marker).background = context!!.resources.getDrawable(R.drawable.shape_blue_selected)
+            v.findViewById<View>(R.id.container_statistics_marker).background = context!!.resources.getDrawable(R.drawable.shape_blue_selected)
             v.findViewById<TextView>(R.id.tv_count).text = address?.index.toString()
-            marker.options.icon(BitmapDescriptorFactory.fromView(v))
-            val newMarker = aMap?.addMarker(marker.options)
-            if (newMarker != null && address != null) {
-                statisticMap.put(newMarker, address)
-            }
+//            marker.options.icon(BitmapDescriptorFactory.fromView(v))
+            marker.setIcon(BitmapDescriptorFactory.fromView(v))
+//            val newMarker = aMap?.addMarker(marker.options)
+//            if (newMarker != null && address != null) {
+//                statisticMap.put(newMarker, address)
+//            }
         }
     }
 
@@ -434,7 +436,9 @@ class FlutterAmapView(
                         // 没有本地缓存经纬度的情况
                         actualMap?.addMerchantMarkers()
                     } else {
-                        aMap?.animateCamera(CameraUpdateFactory.newLatLng(LatLng(aMapLocation.latitude, aMapLocation.longitude)))
+                        aMap?.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(LatLng(aMapLocation.latitude, aMapLocation.longitude), level0 + 0.5f)
+                        )
                     }
                     // 保存起始地点
                     startAddr.geo = AmapParam.GeoPoint(aMapLocation.latitude, aMapLocation.longitude)

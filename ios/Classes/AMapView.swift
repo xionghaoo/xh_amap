@@ -202,6 +202,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     // 初始化我的位置，并和门店位置一起显示在屏幕上
                     self?.addMerchantMarkers()
                 } else {
+                    self?.mapView.setZoomLevel(self?.level0 ?? 12.5 + 0.5, animated: true)
                     self?.mapView.setCenter(location.coordinate, animated: true)
                 }
             }
