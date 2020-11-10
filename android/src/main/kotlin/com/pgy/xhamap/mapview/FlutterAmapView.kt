@@ -68,6 +68,12 @@ class FlutterAmapView(
 
     private var methodChannel = MethodChannel(binaryMessenger, "xh.zero/amap_view_method")
 
+//    private lateinit var normalStoreMarkerView: View
+//    private lateinit var normalStatisticMarkerView: View
+
+    private var lastSelectedMarker: Marker? = null
+
+
     init {
         lifecycle?.addObserver(this)
         methodChannel.setMethodCallHandler(this)
@@ -337,25 +343,73 @@ class FlutterAmapView(
     private fun locateMarker() {
         if (clickedAreaId != null) {
             // 选择某个marker点
-
-            aMap?.mapScreenMarkers?.forEach { marker ->
-                val addr = if (annoShowType == 0) storeMap[marker] else statisticMap[marker]
-                if (addr != null && addr.id == clickedAreaId) {
-                    if (addr.geo?.lat != null && addr.geo?.lng != null) {
-                        changeMarkerColor(marker)
-                        aMap?.animateCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
+            if (annoShowType == 0) {
+                storeMap.keys.forEach { marker ->
+                    val addr = storeMap[marker]
+                    if (addr != null && addr.id == clickedAreaId) {
+                        if (addr.geo?.lat != null && addr.geo?.lng != null) {
+                            changeMarkerColor(marker)
+                            aMap?.animateCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
+                                )
                             )
-                        )
+                        }
+                    }
+                }
+            } else {
+                statisticMap.keys.forEach { marker ->
+                    val addr = statisticMap[marker]
+                    if (addr != null && addr.id == clickedAreaId) {
+                        if (addr.geo?.lat != null && addr.geo?.lng != null) {
+                            changeMarkerColor(marker)
+                            aMap?.animateCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
+                                )
+                            )
+                        }
                     }
                 }
             }
+
+//            aMap?.mapScreenMarkers?.forEach { marker ->
+//                val addr = if (annoShowType == 0) storeMap[marker] else statisticMap[marker]
+//                if (addr != null && addr.id == clickedAreaId) {
+//                    if (addr.geo?.lat != null && addr.geo?.lng != null) {
+//                        changeMarkerColor(marker)
+//                        aMap?.animateCamera(
+//                            CameraUpdateFactory.newLatLngZoom(
+//                                LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
+//                            )
+//                        )
+//                    }
+//                }
+//            }
             clickedAreaId = null
         }
     }
 
     private fun changeMarkerColor(marker: Marker?) {
+        if (lastSelectedMarker != null) {
+            if (annoShowType == 0) {
+                val address = storeMap[lastSelectedMarker!!]
+                val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
+                val tvMerchantIndex = v.findViewById<TextView>(R.id.tv_merchant_index)
+                tvMerchantIndex.text = address?.indexName
+                tvMerchantIndex.background = context!!.resources.getDrawable(R.drawable.shape_title_bg)
+                v.findViewById<TriangleView>(R.id.triangle_view).setTriangleColor(R.color.color_007AFF)
+                lastSelectedMarker!!.setIcon(BitmapDescriptorFactory.fromView(v))
+            } else {
+                val address = statisticMap[lastSelectedMarker!!]
+                val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
+                v.findViewById<TextView>(R.id.tv_merchant_index).text = address?.indexName
+                v.findViewById<View>(R.id.container_statistics_marker).background = context!!.resources.getDrawable(R.drawable.shape_blue)
+                v.findViewById<TextView>(R.id.tv_count).text = address?.index.toString()
+                lastSelectedMarker!!.setIcon(BitmapDescriptorFactory.fromView(v))
+            }
+        }
+
         if (marker == null) return
         if (annoShowType == 0) {
             val address = storeMap[marker]
@@ -364,25 +418,17 @@ class FlutterAmapView(
             tvMerchantIndex.text = address?.indexName
             tvMerchantIndex.background = context!!.resources.getDrawable(R.drawable.shape_title_bg_selected)
             v.findViewById<TriangleView>(R.id.triangle_view).setTriangleColor(R.color.color_54A158)
-//            marker.options.icon(BitmapDescriptorFactory.fromView(v))
             marker.setIcon(BitmapDescriptorFactory.fromView(v))
-//            val newMarker = aMap?.addMarker(marker.options)
-//            if (newMarker != null && address != null) {
-//                storeMap.put(newMarker, address)
-//            }
         } else {
             val address = statisticMap[marker]
             val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
             v.findViewById<TextView>(R.id.tv_merchant_index).text = address?.indexName
             v.findViewById<View>(R.id.container_statistics_marker).background = context!!.resources.getDrawable(R.drawable.shape_blue_selected)
             v.findViewById<TextView>(R.id.tv_count).text = address?.index.toString()
-//            marker.options.icon(BitmapDescriptorFactory.fromView(v))
             marker.setIcon(BitmapDescriptorFactory.fromView(v))
-//            val newMarker = aMap?.addMarker(marker.options)
-//            if (newMarker != null && address != null) {
-//                statisticMap.put(newMarker, address)
-//            }
         }
+
+        lastSelectedMarker = marker
     }
 
     private fun addMyPositionMarker() {

@@ -11,12 +11,28 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,7 +374,21 @@
       <option name="project" value="LOCAL" />
       <updated>1605000499446</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="bug修复">
+      <created>1605004419778</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1605004419778</updated>
+    </task>
+    <task id="LOCAL-00042" summary="bug修复">
+      <created>1605004439748</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1605004439748</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -374,7 +404,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="定位插件" />
     <MESSAGE value="ios 定位" />
     <MESSAGE value="framework swift 调用object c" />
     <MESSAGE value="图片测试" />
@@ -399,21 +428,22 @@
     <MESSAGE value="ios perform marker click" />
     <MESSAGE value="ios 点选marker时变色" />
     <MESSAGE value="android 我的位置" />
-    <option name="LAST_COMMIT_MESSAGE" value="android 我的位置" />
+    <MESSAGE value="bug修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug修复" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605000499351">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605004439631">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605000499351" />
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605004439631" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1605004478985">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603967837274" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605004478985" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
     <state width="1638" height="220" key="GridCell.Tab.0.bottom" timestamp="1604812094953">
       <screen x="0" y="0" width="1680" height="1050" />
@@ -435,10 +465,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1605000507410">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1605004445046">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1605000507410" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1605004445046" />
     <state x="532" y="280" width="635" height="490" key="find.popup" timestamp="1604973884868">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
