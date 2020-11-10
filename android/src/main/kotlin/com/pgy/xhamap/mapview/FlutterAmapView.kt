@@ -289,6 +289,8 @@ class FlutterAmapView(
         aMap?.clear()
 //        val markers = ArrayList<Marker>()
 //        io.flutter.Log.d("FlutterAmapView", "updateMarkers: ${addresses?.size}")
+        storeMap.clear()
+        statisticMap.clear()
         addresses?.forEach { address ->
             if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
 //                lats.add(address.geo?.lat!!)

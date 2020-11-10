@@ -231,27 +231,27 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     private func locateMarker() {
         if clickedAreaId != nil {
-            mapView.annotations.forEach({ anno in
-                if annoShowType == 0 {
-                    if let anno = anno as? PointAnnotation,
-                       let addr = annotationMap[anno] {
+            if annoShowType == 0 {
+                annotationMap.keys.forEach({ anno in
+                    if let addr = annotationMap[anno] {
                         if addr.id == clickedAreaId {
                             self.changeAnnotationViewColor(view: mapView.view(for: anno))
                             mapView.setCenter(anno.coordinate, animated: true)
+                            clickedAreaId = nil
                         }
                     }
-                } else {
-                    if let anno = anno as? StatisticAnnotation,
-                       let addr = statisticAnnotationMap[anno] {
+                })
+            } else {
+                statisticAnnotationMap.keys.forEach({ anno in
+                    if let addr = statisticAnnotationMap[anno] {
                         if addr.id == clickedAreaId {
                             self.changeAnnotationViewColor(view: mapView.view(for: anno))
                             mapView.setCenter(anno.coordinate, animated: true)
+                            clickedAreaId = nil
                         }
                     }
-                }
-                
-            })
-            clickedAreaId = nil
+                })
+            }
         }
         
     }
@@ -459,31 +459,6 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                     }
                 }
                 else {
-//                    let addr = annotationMap[annotation as! MAPointAnnotation]!
-//                    switch addr.showType {
-//                    case 0:
-//                        if let origin = UIImage(named: "ic_merchant_position") {
-//                            let txt: String = "\(addr.indexName!)"
-//                            annotationView!.image = textToImage(drawText: txt, inImage: origin)
-//                        }
-//                    case 1:
-//                        if let origin = UIImage(named: "ic_merchant_statistic") {
-//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 65, height: 65)
-//
-//                        }
-//                    case 2:
-//                        if let origin = UIImage(named: "ic_merchant_statistic") {
-//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 80, height: 80)
-//
-//                        }
-//                    case 3:
-//                        if let origin = UIImage(named: "ic_merchant_statistic") {
-//                            annotationView!.image = textToImage(drawText: addr.address!, secondText: addr.indexName!, inImage: origin, width: 110, height: 110)
-//
-//                        }
-//                    default:
-//                        break;
-//                    }
                     
                 }
             }
@@ -514,6 +489,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         }
     }
     
+    // MARK: - 更新地图annotation点
     func updateMarkers(addressList: Array<AddressInfo>?) {
         var annoList = Array<NSObject>()
         annotationMap.removeAll()
