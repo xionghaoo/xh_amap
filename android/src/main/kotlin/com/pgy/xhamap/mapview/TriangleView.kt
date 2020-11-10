@@ -128,6 +128,13 @@ class TriangleView : View {
 
     fun setTriangleColor(@ColorRes color: Int) {
         paint.color = resources.getColor(color)
+        paintFill.color = resources.getColor(color)
+        postInvalidate()
+    }
+    
+    fun resetColor() {
+        paint.color = lineColor
+        paintFill.color = fillColor
         postInvalidate()
     }
 }

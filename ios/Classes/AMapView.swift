@@ -85,6 +85,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         self.mapView.isRotateEnabled = false
         // 禁止2D旋转
         self.mapView.isRotateCameraEnabled = false
+        // 隐藏指南针
+        self.mapView.showsCompass = false
         
     }
     

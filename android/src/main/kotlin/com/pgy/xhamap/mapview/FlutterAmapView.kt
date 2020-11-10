@@ -114,21 +114,21 @@ class FlutterAmapView(
         aMap?.showIndoorMap(true)
 
         // 开启我当前的位置蓝点
-        if (param.enableMyLocation) {
-            val locationStyle = MyLocationStyle()
-            locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
-//            locationStyle.strokeColor(resources.getColor(R.color.overlay_map_location))
-            locationStyle.strokeWidth(0f)
-//            locationStyle.radiusFillColor(resources.getColor(R.color.overlay_map_location))
-            locationStyle.interval(5000)
-            aMap?.myLocationStyle = locationStyle
-            aMap?.isMyLocationEnabled = true
-
-            aMap?.setOnMyLocationChangeListener { location ->
-
-//                myMarker?.position = LatLng(location.latitude, location.longitude)
-            }
-        }
+//        if (param.enableMyLocation) {
+//            val locationStyle = MyLocationStyle()
+//            locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
+////            locationStyle.strokeColor(resources.getColor(R.color.overlay_map_location))
+//            locationStyle.strokeWidth(0f)
+////            locationStyle.radiusFillColor(resources.getColor(R.color.overlay_map_location))
+//            locationStyle.interval(5000)
+//            aMap?.myLocationStyle = locationStyle
+//            aMap?.isMyLocationEnabled = true
+//
+//            aMap?.setOnMyLocationChangeListener { location ->
+//
+////                myMarker?.position = LatLng(location.latitude, location.longitude)
+//            }
+//        }
 //        Log.d("FlutterAmapView", "${Gson().toJson(param)}")
         when(param.mapType) {
             AmapParam.ROUTE_MAP ->
@@ -193,6 +193,8 @@ class FlutterAmapView(
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
+        if (marker?.title == "我的位置") return true
+
         if (annoShowType == 0) {
             val address = storeMap[marker]
             if (address != null) {
@@ -227,6 +229,7 @@ class FlutterAmapView(
             }
 
         }
+//        changeMarkerColor(marker)
         return true
     }
 
@@ -279,7 +282,7 @@ class FlutterAmapView(
     private fun updateMarkers(addresses: List<AmapParam.AddressInfo>?) {
         aMap?.clear()
 //        val markers = ArrayList<Marker>()
-        io.flutter.Log.d("FlutterAmapView", "updateMarkers: ${addresses?.size}")
+//        io.flutter.Log.d("FlutterAmapView", "updateMarkers: ${addresses?.size}")
         addresses?.forEach { address ->
             if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
 //                lats.add(address.geo?.lat!!)
@@ -339,6 +342,7 @@ class FlutterAmapView(
                 val addr = if (annoShowType == 0) storeMap[marker] else statisticMap[marker]
                 if (addr != null && addr.id == clickedAreaId) {
                     if (addr.geo?.lat != null && addr.geo?.lng != null) {
+//                        changeMarkerColor(marker)
                         aMap?.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(addr.geo?.lat!!, addr.geo?.lng!!), clickedZoom
@@ -351,6 +355,34 @@ class FlutterAmapView(
         }
     }
 
+    private fun changeMarkerColor(marker: Marker?) {
+        if (marker == null) return
+        if (annoShowType == 0) {
+            val address = storeMap[marker]
+            val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
+            val tvMerchantIndex = v.findViewById<TextView>(R.id.tv_merchant_index)
+            tvMerchantIndex.text = address?.indexName
+            tvMerchantIndex.background = context!!.resources.getDrawable(R.drawable.shape_title_bg_selected)
+            v.findViewById<TriangleView>(R.id.triangle_view).setTriangleColor(R.color.color_54A158)
+            marker.options.icon(BitmapDescriptorFactory.fromView(v))
+            val newMarker = aMap?.addMarker(marker.options)
+            if (newMarker != null && address != null) {
+                storeMap.put(newMarker, address)
+            }
+        } else {
+            val address = statisticMap[marker]
+            val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
+            v.findViewById<TextView>(R.id.tv_merchant_index).text = address?.indexName
+            v.findViewById<TextView>(R.id.container_statistics_marker).background = context!!.resources.getDrawable(R.drawable.shape_blue_selected)
+            v.findViewById<TextView>(R.id.tv_count).text = address?.index.toString()
+            marker.options.icon(BitmapDescriptorFactory.fromView(v))
+            val newMarker = aMap?.addMarker(marker.options)
+            if (newMarker != null && address != null) {
+                statisticMap.put(newMarker, address)
+            }
+        }
+    }
+
     private fun addMyPositionMarker() {
         if (context != null) {
             val prefs: SharedPreferences = context.applicationContext.getSharedPreferences(
@@ -360,11 +392,12 @@ class FlutterAmapView(
             val lng = prefs.getFloat("my_location_lng", 0f)
             if (lat != 0f && lng != 0f) {
                 startAddr.geo = AmapParam.GeoPoint(lat.toDouble(), lng.toDouble())
+                val v = LayoutInflater.from(context).inflate(R.layout.marker_my_location, null)
                 myMarker = aMap?.addMarker(MarkerOptions()
                     .position(LatLng(lat.toDouble(), lng.toDouble()))
-                    .title("MyPosition")
-                    .infoWindowEnable(false)
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car)))
+                    .title("我的位置")
+                    .infoWindowEnable(true)
+                    .icon(BitmapDescriptorFactory.fromView(v)))
                 actualMap?.addMerchantMarkers()
 
                 callOnLocate(lat.toDouble(), lng.toDouble())
@@ -406,11 +439,12 @@ class FlutterAmapView(
                     // 保存起始地点
                     startAddr.geo = AmapParam.GeoPoint(aMapLocation.latitude, aMapLocation.longitude)
                     if (myMarker == null) {
+                        val v = LayoutInflater.from(context).inflate(R.layout.marker_my_location, null)
                         myMarker = aMap?.addMarker(MarkerOptions()
                             .position(LatLng(aMapLocation.latitude, aMapLocation.longitude))
-                            .title("MyPosition")
-                            .infoWindowEnable(false)
-                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car)))
+                            .title("我的位置")
+                            .infoWindowEnable(true)
+                            .icon(BitmapDescriptorFactory.fromView(v)))
                     } else {
                         myMarker?.position = LatLng(aMapLocation.latitude, aMapLocation.longitude)
                     }

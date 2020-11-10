@@ -24,6 +24,7 @@
             android:textSize="12sp"
             tools:text="门店1"/>
         <com.pgy.xhamap.mapview.TriangleView
+            android:id="@+id/triangle_view"
             android:layout_width="12dp"
             android:layout_height="6dp"
             app:triangleColor="@color/color_007AFF"
