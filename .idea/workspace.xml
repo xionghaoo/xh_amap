@@ -14,16 +14,19 @@
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapViewFactory.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftXhamapPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/PointAnnotation.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PointAnnotation.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/PointAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PointAnnotationView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/TriangleView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/TriangleView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -330,7 +333,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604936946732</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="ios perform marker click">
+      <created>1604938327664</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1604938327665</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -368,17 +378,18 @@
     <MESSAGE value="增加proguard文件" />
     <MESSAGE value="ios marker点击区域bug修复" />
     <MESSAGE value="perform marker click" />
-    <option name="LAST_COMMIT_MESSAGE" value="perform marker click" />
+    <MESSAGE value="ios perform marker click" />
+    <option name="LAST_COMMIT_MESSAGE" value="ios perform marker click" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604936946565">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1604938327519">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604936946565" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1604938327519" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1603967837274">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -408,10 +419,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604809217236" />
-    <state x="532" y="280" width="615" height="490" key="find.popup" timestamp="1604642577516">
+    <state x="532" y="280" width="635" height="490" key="find.popup" timestamp="1604973884868">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="532" y="280" width="615" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604642577516" />
+    <state x="532" y="280" width="635" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604973884868" />
     <state width="494" height="115" key="javadoc.popup.new" timestamp="1604910464741">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

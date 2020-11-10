@@ -10,10 +10,12 @@
 class PointAnnotationView: MAAnnotationView {
     
     var titleLabel: UILabel!
+    var triangleView: TriangleView?
     var stackView: UIStackView!
 //    var triangleView: TriangleView!
     let triangleSize: CGFloat = 10
     let txtHeight: CGFloat = 22
+    var color: UIColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
     
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -40,9 +42,11 @@ class PointAnnotationView: MAAnnotationView {
         return r
     }
     
+    
+    
     private func setupLabel() {
         titleLabel = UILabel()
-        titleLabel.backgroundColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
+        titleLabel.backgroundColor = color
         titleLabel.textColor = UIColor.white
         titleLabel.textAlignment = .center
         titleLabel.shadowColor = UIColor(white: 0.0, alpha: 0.75)
@@ -75,13 +79,28 @@ class PointAnnotationView: MAAnnotationView {
     func setLabel(title: String) {
         titleLabel.text = title
         let txtWidth = title.width(withConstrainedHeight: 120, font: titleLabel.font) + 20
-        let triangleView = TriangleView.init(frame: CGRect(x: txtWidth / 2 - triangleSize / 2, y: txtHeight, width: triangleSize, height: triangleSize / 2))
+        triangleView = TriangleView.init(frame: CGRect(x: txtWidth / 2 - triangleSize / 2, y: txtHeight, width: triangleSize, height: triangleSize / 2))
         let labelRect = CGRect(x: 0, y: 0, width: txtWidth, height: txtHeight)
         titleLabel.frame = labelRect
-        addSubview(triangleView)
+        addSubview(triangleView!)
         let annoHeight: CGFloat = txtHeight + triangleSize / 2
         let annoRect = CGRect(x: 0 - txtWidth / 2, y: 0 - annoHeight, width: txtWidth, height: annoHeight)
         frame = annoRect
+        
+        setNeedsDisplay()
+    }
+    
+    func setLabelColor(_ labelColor: UIColor?) {
+        if let labelColor = labelColor {
+            titleLabel.backgroundColor = labelColor
+            triangleView?.setColor(color: labelColor)
+        }
+        setNeedsDisplay()
+    }
+    
+    func resetColor() {
+        titleLabel.backgroundColor = color
+        triangleView?.resetColor()
         setNeedsDisplay()
     }
     

@@ -11,6 +11,7 @@ class StatisticAnnotationView : MAAnnotationView {
     var titleLabel: UILabel!
     var stackView: UIStackView!
     var count: Int = 0
+    var bgColor: UIColor!
     
     private let ScaleFactorAlpha: Float = 0.3
     private let ScaleFactorBeta: Float = 0.4
@@ -18,6 +19,7 @@ class StatisticAnnotationView : MAAnnotationView {
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        bgColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
         initalView()
     }
     
@@ -117,6 +119,16 @@ class StatisticAnnotationView : MAAnnotationView {
         setNeedsDisplay()
     }
     
+    func setColor(color: UIColor) {
+        bgColor = color
+        setNeedsDisplay()
+    }
+    
+    func resetColor() {
+        bgColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
+        setNeedsDisplay()
+    }
+    
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let subViews = subviews
         if subViews.count > 1 {
@@ -165,7 +177,7 @@ class StatisticAnnotationView : MAAnnotationView {
 
         let outerCircleStrokeColor = UIColor(white: 0, alpha: 0.25)
         let innerCircleStrokeColor = UIColor.white
-        let innerCircleFillColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
+        let innerCircleFillColor = bgColor
 
         let circleFrame = rect.insetBy(dx: 4, dy: 4)
 
@@ -177,7 +189,7 @@ class StatisticAnnotationView : MAAnnotationView {
         context?.setLineWidth(4)
         context?.strokeEllipse(in: circleFrame)
 
-        innerCircleFillColor.setFill()
+        innerCircleFillColor?.setFill()
         context?.fillEllipse(in: circleFrame)
     }
     

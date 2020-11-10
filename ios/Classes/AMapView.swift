@@ -206,9 +206,12 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         })
     }
     
+    // MARK: - 手动执行marker点击
     func clickMarker(id: Int, showType: Int) {
         clickedAreaId = id
         switch showType {
+        case 0:
+            mapView.setZoomLevel(level0 + 0.5, animated: true)
         case 1:
             mapView.setZoomLevel(level0 - 0.5, animated: true)
         case 2:
@@ -226,12 +229,24 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private func locateMarker() {
         if clickedAreaId != nil {
             mapView.annotations.forEach({ anno in
-                if let anno = anno as? StatisticAnnotation,
-                   let addr = statisticAnnotationMap[anno] {
-                    if addr.id == clickedAreaId {
-                        mapView.setCenter(anno.coordinate, animated: true)
+                if annoShowType == 0 {
+                    if let anno = anno as? PointAnnotation,
+                       let addr = annotationMap[anno] {
+                        if addr.id == clickedAreaId {
+                            self.changeAnnotationViewColor(view: mapView.view(for: anno))
+                            mapView.setCenter(anno.coordinate, animated: true)
+                        }
+                    }
+                } else {
+                    if let anno = anno as? StatisticAnnotation,
+                       let addr = statisticAnnotationMap[anno] {
+                        if addr.id == clickedAreaId {
+                            self.changeAnnotationViewColor(view: mapView.view(for: anno))
+                            mapView.setCenter(anno.coordinate, animated: true)
+                        }
                     }
                 }
+                
             })
             clickedAreaId = nil
         }
@@ -379,8 +394,9 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                 }
                 annotationView?.annotation = annotation
                 let addr = annotationMap[annotation as! PointAnnotation]
-    //            annotationView?.setCount(addr?.index ?? 0, title: addr?.indexName ?? "")
                 annotationView?.setLabel(title: addr?.indexName ?? "-")
+//                let anno = annotation as! PointAnnotation
+//                annotationView?.setLabelColor(anno.color)
                 return annotationView!
             } else {
                 return nil
@@ -525,14 +541,14 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         locateMarker()
     }
     
-    // marker点击事件
+    // MARK: - marker点击事件
     func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
+        if view.annotation.title == "我的位置" {
+            return
+        }
         if view.annotation.isKind(of: PointAnnotation.self) {
             self.currentClickMarker = view.annotation as? PointAnnotation
             // 点击marker时过滤我的位置
-            if view.annotation.title == "我的位置" {
-                return
-            }
             if isSearchingRoute {
                 self.view().makeToast("正在查询路线, 请勿重复点击", duration: 1.0)
                 return
@@ -566,6 +582,35 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             mapView.setCenter(view.annotation.coordinate, animated: true)
         }
         
+        changeAnnotationViewColor(view: view)
+    }
+    
+    func changeAnnotationViewColor(view: MAAnnotationView?) {
+        if #available(iOS 9.0, *) {
+            if let view = view {
+                if view.annotation.isKind(of: PointAnnotation.self) {
+                    mapView.annotations.forEach({anno in
+                        if let anno = anno as? PointAnnotation,
+                           let pointAnnoView = mapView.view(for: anno) as? PointAnnotationView {
+                            pointAnnoView.resetColor()
+                        }
+                    })
+                    if let pointAnnoView = view as? PointAnnotationView {
+                        pointAnnoView.setLabelColor(UIColor(red: 84 / 255.0, green: 161 / 255.0, blue: 88 / 255.0, alpha: 1.0))
+                    }
+                } else if view.annotation.isKind(of: StatisticAnnotation.self) {
+                    mapView.annotations.forEach({anno in
+                        if let anno = anno as? StatisticAnnotation,
+                           let annoView = mapView.view(for: anno) as? StatisticAnnotationView {
+                            annoView.resetColor()
+                        }
+                    })
+                    if let annoView = view as? StatisticAnnotationView {
+                        annoView.setColor(color: UIColor(red: 84 / 255.0, green: 161 / 255.0, blue: 88 / 255.0, alpha: 1.0))
+                    }
+                }
+            }
+        }
     }
     
     // marker选择事件

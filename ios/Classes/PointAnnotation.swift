@@ -8,12 +8,12 @@
 class PointAnnotation: NSObject, MAAnnotation {
     var coordinate: CLLocationCoordinate2D
 
-    var count: Int = 0
+    var color: UIColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
     var title: String?
     var subtitle: String?
     
     func hash() -> Int {
-        let toHash = String(format: "%.5F%.5F%ld", coordinate.latitude, coordinate.longitude, Int(count))
+        let toHash = String(format: "%.5F%.5F%ld", coordinate.latitude, coordinate.longitude)
         return toHash.hash
     }
 

@@ -25,6 +25,16 @@ class TriangleView : UIView {
         super.init(coder: coder)
     }
     
+    func setColor(color: UIColor) {
+        fillColor = color
+        setNeedsDisplay()
+    }
+    
+    func resetColor() {
+        fillColor = UIColor(red: 86 / 255.0, green: 131 / 255.0, blue: 239 / 255.0, alpha: 1.0)
+        setNeedsDisplay()
+    }
+    
     override func draw(_ rect: CGRect) {
 //        // 设置背景色
 //        UIColor.white.set()

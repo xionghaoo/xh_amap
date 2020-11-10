@@ -263,6 +263,7 @@ class FlutterAmapView(
     private fun clickMarker(id: Int, showType: Int) {
         clickedAreaId = id
         clickedZoom = when (showType) {
+            0 -> level0 + 0.5f
             1 -> level0 - 0.5f
             2 -> level1 - 0.5f
             3 -> level2 - 0.5f
@@ -335,7 +336,7 @@ class FlutterAmapView(
             // 选择某个marker点
 
             aMap?.mapScreenMarkers?.forEach { marker ->
-                val addr = statisticMap[marker]
+                val addr = if (annoShowType == 0) storeMap[marker] else statisticMap[marker]
                 if (addr != null && addr.id == clickedAreaId) {
                     if (addr.geo?.lat != null && addr.geo?.lng != null) {
                         aMap?.animateCamera(
