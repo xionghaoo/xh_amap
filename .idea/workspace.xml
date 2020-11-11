@@ -31,7 +31,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +38,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -402,7 +401,28 @@
       <option name="project" value="LOCAL" />
       <updated>1605028160336</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="地图移动监听">
+      <created>1605077301555</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1605077301555</updated>
+    </task>
+    <task id="LOCAL-00046" summary="地图marker过滤">
+      <created>1605077337967</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1605077337967</updated>
+    </task>
+    <task id="LOCAL-00047" summary="地图marker过滤">
+      <created>1605077393257</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1605077393257</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -418,8 +438,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="图片测试" />
-    <MESSAGE value="podspec无法访问图片资源" />
     <MESSAGE value="地图定位" />
     <MESSAGE value="ios地图定位" />
     <MESSAGE value="ios点聚合" />
@@ -443,17 +461,19 @@
     <MESSAGE value="bug修复" />
     <MESSAGE value="android 区域筛选bug修复" />
     <MESSAGE value="区域筛选优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="区域筛选优化" />
+    <MESSAGE value="地图移动监听" />
+    <MESSAGE value="地图marker过滤" />
+    <option name="LAST_COMMIT_MESSAGE" value="地图marker过滤" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605028160135">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605077393154">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605028160135" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605077393154" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1605004478985">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -479,10 +499,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="534" y="243" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598435351381" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1605025580331">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1605077453690">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1605025580331" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1605077453690" />
     <state x="532" y="280" width="635" height="490" key="find.popup" timestamp="1604973884868">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

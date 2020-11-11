@@ -319,7 +319,7 @@ class FlutterAmapView(
                     val tvTriangleView = v.findViewById<TriangleView>(R.id.triangle_view)
                     tvMerchantIndex.text = address.indexName
                     if (selectedCityId != null && selectedCityId != address.parentId) {
-                        io.flutter.Log.d("test_amap", "selectedCityId: $selectedCityId, parentId: ${address.parentId}")
+//                        io.flutter.Log.d("test_amap", "selectedCityId: $selectedCityId, parentId: ${address.parentId}")
                         // 过滤某一县域下的门店
                         tvMerchantIndex.background = context?.resources?.getDrawable(R.drawable.shape_title_bg_disable)
                         tvTriangleView.setTriangleColor(R.color.color_999999)
