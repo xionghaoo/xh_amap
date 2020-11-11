@@ -37,9 +37,9 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var clickedAreaId: Int? = nil
     private var selectedCityId: Int? = nil
     
-    private let level0: CGFloat = 12.5
-    private let level1: CGFloat = 10.5
-    private let level2: CGFloat = 8.5
+    private let level0: CGFloat = 13.5
+    private let level1: CGFloat = 11.5
+    private let level2: CGFloat = 9.5
 //    private let level3: CGFloat = 12
     private var isSearchingRoute: Bool = false
     

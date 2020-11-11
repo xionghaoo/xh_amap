@@ -31,7 +31,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/.last_build_id" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/.last_build_id" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/PointAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PointAnnotationView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/StatisticAnnotationView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -422,7 +427,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605077393257</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="地图marker过滤 测试1">
+      <created>1605106299804</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1605106299804</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,7 +450,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="地图定位" />
     <MESSAGE value="ios地图定位" />
     <MESSAGE value="ios点聚合" />
     <MESSAGE value="依赖更新" />
@@ -463,38 +474,39 @@
     <MESSAGE value="区域筛选优化" />
     <MESSAGE value="地图移动监听" />
     <MESSAGE value="地图marker过滤" />
-    <option name="LAST_COMMIT_MESSAGE" value="地图marker过滤" />
+    <MESSAGE value="地图marker过滤 测试1" />
+    <option name="LAST_COMMIT_MESSAGE" value="地图marker过滤 测试1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605077393154">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605106299827">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605077393154" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605106299827" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1605004478985">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605004478985" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1598435201151" />
-    <state width="1638" height="220" key="GridCell.Tab.0.bottom" timestamp="1604812094953">
+    <state width="1638" height="220" key="GridCell.Tab.0.bottom" timestamp="1605108759215">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094953" />
-    <state width="1638" height="220" key="GridCell.Tab.0.center" timestamp="1604812094952">
+    <state width="1638" height="220" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1605108759215" />
+    <state width="1638" height="220" key="GridCell.Tab.0.center" timestamp="1605108759214">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094952" />
-    <state width="1638" height="220" key="GridCell.Tab.0.left" timestamp="1604812094951">
+    <state width="1638" height="220" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1605108759214" />
+    <state width="1638" height="220" key="GridCell.Tab.0.left" timestamp="1605108759214">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094951" />
-    <state width="1638" height="220" key="GridCell.Tab.0.right" timestamp="1604812094952">
+    <state width="1638" height="220" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1605108759214" />
+    <state width="1638" height="220" key="GridCell.Tab.0.right" timestamp="1605108759215">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="220" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604812094952" />
+    <state width="1638" height="220" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1605108759215" />
     <state x="534" y="243" key="RollbackChangesDialog" timestamp="1598435351381">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

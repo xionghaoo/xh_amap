@@ -50,9 +50,9 @@ class FlutterAmapView(
 
     private var actualMap: IActualMap? = null
 
-    private val level0: Float = 12.5f
-    private val level1: Float = 10.5f
-    private val level2: Float = 8.5f
+    private val level0: Float = 13.5f
+    private val level1: Float = 11.5f
+    private val level2: Float = 9.5f
     private var annoShowType = 0
     private var lastAnnoShowType = 0
 
@@ -308,6 +308,7 @@ class FlutterAmapView(
     }
 
     private fun updateMarkers(addresses: List<AmapParam.AddressInfo>?) {
+
         aMap?.clear()
         storeMap.clear()
         statisticMap.clear()
@@ -345,11 +346,11 @@ class FlutterAmapView(
 
                 }
                 val marker = aMap?.addMarker(option)
-                val anim = ScaleAnimation(0f, 1f, 0f, 1f)
-                anim.setDuration(500)
-                anim.setInterpolator(BounceInterpolator())
-                marker?.setAnimation(anim)
-                marker?.startAnimation()
+//                val anim = ScaleAnimation(0f, 1f, 0f, 1f)
+//                anim.setDuration(500)
+//                anim.setInterpolator(BounceInterpolator())
+//                marker?.setAnimation(anim)
+//                marker?.startAnimation()
 
                 if (marker != null) {
                     if (address.showType == 0) {
