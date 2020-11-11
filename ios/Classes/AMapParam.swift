@@ -56,6 +56,7 @@ struct AddressInfo: Codable {
     let indexName: String?
     let showType: Int?
     let id: Int?
+    let parentId: Int?
     
 }
 

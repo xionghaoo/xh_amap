@@ -33,14 +33,13 @@
     <list default="true" id="ca49cb19-019c-4f9c-9de2-019f3316bc07" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pgy/xhamap/mapview/FlutterAmapView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/AMapView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/AMapView.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8XV5T15A20011060]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -396,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605025574343</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="区域筛选优化">
+      <created>1605028160336</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1605028160336</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -412,7 +418,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="framework swift 调用object c" />
     <MESSAGE value="图片测试" />
     <MESSAGE value="podspec无法访问图片资源" />
     <MESSAGE value="地图定位" />
@@ -437,17 +442,18 @@
     <MESSAGE value="android 我的位置" />
     <MESSAGE value="bug修复" />
     <MESSAGE value="android 区域筛选bug修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="android 区域筛选bug修复" />
+    <MESSAGE value="区域筛选优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="区域筛选优化" />
   </component>
   <component name="WindowStateProjectService">
     <state x="100" y="79" width="1480" height="870" key="AVDManager" timestamp="1604674463667">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="79" width="1480" height="870" key="AVDManager/0.23.1680.1027@0.23.1680.1027" timestamp="1604674463667" />
-    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605025574121">
+    <state x="398" y="127" key="CommitChangelistDialog2" timestamp="1605028160135">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605025574121" />
+    <state x="398" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1605028160135" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1605004478985">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

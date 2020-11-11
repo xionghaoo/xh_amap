@@ -68,7 +68,8 @@ class AddressInfo {
     "indexName": indexName,
     "showType": showType,
     "id": id,
-    "parentId": parentId
+    "parentId": parentId,
+    "provinceCode": provinceCode
   };
 }
 

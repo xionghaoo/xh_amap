@@ -34,7 +34,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var currentClickMarker: PointAnnotation?
     private var annoShowType: Int = 0
     private var lastAnnoShowType: Int = 0
-    private var clickedAreaId: Int! = nil
+    private var clickedAreaId: Int? = nil
+    private var selectedCityId: Int? = nil
     
     private let level0: CGFloat = 12.5
     private let level1: CGFloat = 10.5
@@ -87,6 +88,7 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         self.mapView.isRotateCameraEnabled = false
         // 隐藏指南针
         self.mapView.showsCompass = false
+        
         
     }
     
@@ -397,7 +399,8 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                 }
                 annotationView?.annotation = annotation
                 let addr = annotationMap[annotation as! PointAnnotation]
-                annotationView?.setLabel(title: addr?.indexName ?? "-")
+                let anno = annotation as! PointAnnotation
+                annotationView?.setLabel(title: addr?.indexName ?? "-", labelColor: anno.color)
 //                let anno = annotation as! PointAnnotation
 //                annotationView?.setLabelColor(anno.color)
                 return annotationView!
@@ -489,6 +492,16 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
         }
     }
     
+    func mapView(_ mapView: MAMapView!, mapDidMoveByUser wasUserAction: Bool) {
+        let mapCenter = mapView.centerCoordinate
+        if annoShowType == 0 {
+            methodChannel.invokeMethod("onMapCenterMove", arguments: [
+                "lat": mapCenter.latitude,
+                "lng": mapCenter.longitude
+            ])
+        }
+    }
+    
     // MARK: - 更新地图annotation点
     func updateMarkers(addressList: Array<AddressInfo>?) {
         var annoList = Array<NSObject>()
@@ -499,11 +512,16 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
                 let lng = addr.geo?.lng {
                 if addr.showType == 0 {
                     let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
-//                    anno.coordinate = CLLocationCoordinate2DMake(lat, lng)
+                    if let selectedCityId = self.selectedCityId {
+                        if selectedCityId != addr.parentId {
+                            anno.color = UIColor(red: 153 / 255.0, green: 153 / 255.0, blue: 153 / 255.0, alpha: 1.0)
+                        }
+                    }
                     anno.title = addr.address
                     annoList.append(anno)
                     annotationMap[anno] = addr
                 } else {
+                    selectedCityId = nil
                     let anno = StatisticAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
                     anno.title = addr.address
                     annoList.append(anno)
@@ -542,14 +560,16 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             searchRoutePlanningDrive(startCoordinate: CLLocationCoordinate2DMake(lat, lng), destinationCoordinate: CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude))
         } else if view.annotation.isKind(of: StatisticAnnotation.self) {
             let anno = view.annotation as! StatisticAnnotation
+            let addr = statisticAnnotationMap[anno]
             self.methodChannel.invokeMethod("clickMarker", arguments: [
                 "showType": annoShowType,
-                "index": statisticAnnotationMap[anno]?.id ?? -1,
+                "index": addr?.id ?? -1,
                 "distance": ""
             ])
             
             switch annoShowType {
             case 1:
+                selectedCityId = addr?.id
                 mapView.setZoomLevel(level0 + 0.5, animated: true)
             case 2:
                 mapView.setZoomLevel(level1 + 0.5, animated: true)

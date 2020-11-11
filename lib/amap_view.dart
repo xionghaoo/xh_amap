@@ -13,8 +13,16 @@ class AmapView extends StatefulWidget {
   final Function(int, int, String) onMarkerClick;
   final Function(int) onMapZoom;
   final Function(double, double) onLocate;
+  final Function(double, double) onMapCenterMove;
 
-  AmapView({this.controller, this.param, this.onMarkerClick, this.onMapZoom, this.onLocate});
+  AmapView({
+    this.controller,
+    this.param,
+    this.onMarkerClick,
+    this.onMapZoom,
+    this.onLocate,
+    this.onMapCenterMove
+  });
 
   @override
   _AmapViewState createState() => _AmapViewState(this.controller);
@@ -48,6 +56,11 @@ class _AmapViewState extends State<AmapView> {
           final lat = call.arguments["lat"] as double;
           final lng = call.arguments["lng"] as double;
           widget.onLocate?.call(lat, lng);
+          break;
+        case "onMapCenterMove":
+          final lat = call.arguments["lat"] as double;
+          final lng = call.arguments["lng"] as double;
+          widget.onMapCenterMove?.call(lat, lng);
           break;
       }
       return Future.value(null);

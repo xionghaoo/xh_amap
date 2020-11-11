@@ -64,14 +64,14 @@ class FlutterAmapView(
     private val statisticMap = HashMap<Marker, AmapParam.AddressInfo>()
 
     private var clickedAreaId: Int? = null
+    private var selectedCityId: Int? = null
     private var clickedZoom: Float = 13f
 
     private var methodChannel = MethodChannel(binaryMessenger, "xh.zero/amap_view_method")
 
-//    private lateinit var normalStoreMarkerView: View
-//    private lateinit var normalStatisticMarkerView: View
-
     private var lastSelectedMarker: Marker? = null
+
+    private var filterIds: List<Int>? = null
 
 
     init {
@@ -156,7 +156,6 @@ class FlutterAmapView(
 
         // 监听缩放级别变化
         aMap?.setOnCameraChangeListener(this)
-
     }
 
     override fun onResume(owner: LifecycleOwner) {
@@ -199,7 +198,7 @@ class FlutterAmapView(
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
-        if (marker?.title == "我的位置") return true
+        if (marker?.title == "我的位置") return false
 
         if (annoShowType == 0) {
             val address = storeMap[marker]
@@ -221,6 +220,10 @@ class FlutterAmapView(
             }
         } else {
             val addr = statisticMap[marker]
+            // 记录县域id
+            if (annoShowType == 1) {
+                selectedCityId = addr?.id
+            }
             if (addr != null) {
                 val args = HashMap<String, Any?>()
                 args["showType"] = addr.showType
@@ -265,6 +268,19 @@ class FlutterAmapView(
             methodChannel.invokeMethod("onMapZoom", args)
             lastAnnoShowType = annoShowType
         }
+
+        if (annoShowType == 0) {
+            val region = aMap?.projection?.visibleRegion
+            if (region != null) {
+                val centerLat: Double = (region.farLeft.latitude + region.nearRight.latitude) / 2
+                val centerLng: Double = (region.farLeft.longitude + region.nearRight.longitude) / 2
+                val args = HashMap<String, Double>().apply {
+                    put("lat", centerLat)
+                    put("lng", centerLng)
+                }
+                methodChannel.invokeMethod("onMapCenterMove", args)
+            }
+        }
         
         io.flutter.Log.d("FlutterAmapView", "zoom: $zoomLevel")
     }
@@ -285,21 +301,33 @@ class FlutterAmapView(
         }
     }
 
+    private fun filterStoreMarkers(ids: List<Int>?) {
+        filterIds = ids
+        aMap?.animateCamera(CameraUpdateFactory.zoomTo(level0 + 0.5f))
+
+    }
+
     private fun updateMarkers(addresses: List<AmapParam.AddressInfo>?) {
         aMap?.clear()
-//        val markers = ArrayList<Marker>()
-//        io.flutter.Log.d("FlutterAmapView", "updateMarkers: ${addresses?.size}")
         storeMap.clear()
         statisticMap.clear()
         addresses?.forEach { address ->
             if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
-//                lats.add(address.geo?.lat!!)
-//                lngs.add(address.geo?.lng!!)
                 val markerView: View = if (address.showType == 0) {
                     val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
-                    v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName
+                    val tvMerchantIndex = v.findViewById<TextView>(R.id.tv_merchant_index)
+                    val tvTriangleView = v.findViewById<TriangleView>(R.id.triangle_view)
+                    tvMerchantIndex.text = address.indexName
+                    if (selectedCityId != null && selectedCityId != address.parentId) {
+                        io.flutter.Log.d("test_amap", "selectedCityId: $selectedCityId, parentId: ${address.parentId}")
+                        // 过滤某一县域下的门店
+                        tvMerchantIndex.background = context?.resources?.getDrawable(R.drawable.shape_title_bg_disable)
+                        tvTriangleView.setTriangleColor(R.color.color_999999)
+                    }
                     v
                 } else {
+//                    clickedAreaId = null
+                    selectedCityId = null
                     val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
                     v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName
                     v.findViewById<TextView>(R.id.tv_count).text = address.index.toString()
@@ -450,6 +478,10 @@ class FlutterAmapView(
                     .icon(BitmapDescriptorFactory.fromView(v)))
                 actualMap?.addMerchantMarkers()
 
+                aMap?.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(LatLng(lat.toDouble(), lng.toDouble()), 17f)
+                )
+
                 callOnLocate(lat.toDouble(), lng.toDouble())
             } else {
                 relocate(isInitial = true)
@@ -483,11 +515,10 @@ class FlutterAmapView(
                     if (isInitial) {
                         // 没有本地缓存经纬度的情况
                         actualMap?.addMerchantMarkers()
-                    } else {
-                        aMap?.animateCamera(
-                            CameraUpdateFactory.newLatLngZoom(LatLng(aMapLocation.latitude, aMapLocation.longitude), level0 + 0.5f)
-                        )
                     }
+                    aMap?.animateCamera(
+                        CameraUpdateFactory.newLatLngZoom(LatLng(aMapLocation.latitude, aMapLocation.longitude), 17f)
+                    )
                     // 保存起始地点
                     startAddr.geo = AmapParam.GeoPoint(aMapLocation.latitude, aMapLocation.longitude)
                     if (myMarker == null) {

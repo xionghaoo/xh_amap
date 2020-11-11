@@ -76,7 +76,7 @@ class PointAnnotationView: MAAnnotationView {
 //        }
     }
     
-    func setLabel(title: String) {
+    func setLabel(title: String, labelColor: UIColor? = nil) {
         titleLabel.text = title
         let txtWidth = title.width(withConstrainedHeight: 120, font: titleLabel.font) + 20
         triangleView = TriangleView.init(frame: CGRect(x: txtWidth / 2 - triangleSize / 2, y: txtHeight, width: triangleSize, height: triangleSize / 2))
@@ -86,6 +86,11 @@ class PointAnnotationView: MAAnnotationView {
         let annoHeight: CGFloat = txtHeight + triangleSize / 2
         let annoRect = CGRect(x: 0 - txtWidth / 2, y: 0 - annoHeight, width: txtWidth, height: annoHeight)
         frame = annoRect
+        
+        if let labelColor = labelColor {
+            titleLabel.backgroundColor = labelColor
+            triangleView?.setColor(color: labelColor)
+        }
         
         setNeedsDisplay()
     }

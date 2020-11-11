@@ -19,6 +19,7 @@ class AmapParam {
         var indexName: String? = null
         var showType: Int? = null
         var id: Int? = null
+        var parentId: Int? = null
     }
 
     class GeoPoint(val lat: Double, val lng: Double)
