@@ -23,7 +23,7 @@ class AmapParam {
         var parentId: Int? = null
 
         override fun hashCode(): Int {
-            return id.hashCode()
+            return id ?: 0
         }
 
         override fun equals(other: Any?): Boolean {

@@ -37,11 +37,14 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     private var clickedAreaId: Int? = nil
     private var selectedCityId: Int? = nil
     
-    private let level0: CGFloat = 13.5
+    private let level0: CGFloat = 13
     private let level1: CGFloat = 11.5
     private let level2: CGFloat = 9.5
 //    private let level3: CGFloat = 12
     private var isSearchingRoute: Bool = false
+    
+    private var lastUpdateAddrMarkers: Array<AddressAnnotation> = Array()
+    private var needRefreshStore: Bool = false
     
     init(_ viewController: UIViewController, param: AMapParam?, channel: FlutterMethodChannel) {
         self.viewController = viewController
@@ -504,37 +507,165 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
     
     // MARK: - 更新地图annotation点
     func updateMarkers(addressList: Array<AddressInfo>?) {
-        var annoList = Array<NSObject>()
-        annotationMap.removeAll()
-        statisticAnnotationMap.removeAll()
-        addressList?.forEach({ addr in
-            if let lat = addr.geo?.lat,
-                let lng = addr.geo?.lng {
-                if addr.showType == 0 {
-                    let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
-                    if let selectedCityId = self.selectedCityId {
-                        if selectedCityId != addr.parentId {
-                            anno.color = UIColor(red: 153 / 255.0, green: 153 / 255.0, blue: 153 / 255.0, alpha: 1.0)
+        print("updateMarkers: \(addressList?.count)")
+        guard let addresses = addressList else {
+            return
+        }
+        if addresses.count == 0 {
+            return
+        }
+        print("updateMarkers: \(addresses.count)")
+        if annoShowType == 0 {
+            // 门店级别
+            if needRefreshStore {
+                needRefreshStore = false
+//                print("重新显示门店")
+                // 清除所有Marker
+                lastUpdateAddrMarkers.removeAll()
+                annotationMap.removeAll()
+                statisticAnnotationMap.removeAll()
+                
+                var annoList = Array<NSObject>()
+                addresses.forEach({ addr in
+                    if let lat = addr.geo?.lat,
+                        let lng = addr.geo?.lng {
+                        let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
+                        if let selectedCityId = self.selectedCityId {
+                            if selectedCityId != addr.parentId {
+                                anno.color = UIColor(red: 153 / 255.0, green: 153 / 255.0, blue: 153 / 255.0, alpha: 1.0)
+                            }
                         }
+                        anno.title = addr.address
+                        annoList.append(anno)
+                        annotationMap[anno] = addr
                     }
-                    anno.title = addr.address
-                    annoList.append(anno)
-                    annotationMap[anno] = addr
-                } else {
+                })
+                mapView.removeAnnotations(mapView.annotations)
+                self.mapView.addAnnotations(annoList)
+            } else {
+//                print("门店移动，差异化更新门店")
+                // 差异化门店Marker，需要清除统计级别marker
+                statisticAnnotationMap.keys.forEach({ anno in
+                    mapView.removeAnnotation(anno)
+                })
+                statisticAnnotationMap.removeAll()
+                
+                var oldAddressList = Array<AddressInfo>()
+                var oldMarkerMap = [AddressInfo:PointAnnotation]()
+                lastUpdateAddrMarkers.forEach({ am in
+                    oldAddressList.append(am.address)
+                    oldMarkerMap[am.address] = am.annotation
+                })
+                
+//                var oldAddrIds = Array<Int>()
+//                oldAddressList.forEach({ addr in
+//                    oldAddrIds.append(addr.id ?? -1)
+//                })
+//                print("旧门店id： \(oldAddrIds)")
+//
+//                var newAddrIds = Array<Int>()
+//                addresses.forEach({ addr in
+//                    newAddrIds.append(addr.id ?? -1)
+//                })
+//                print("新门店id： \(newAddrIds)")
+                
+                
+                let before = NSMutableSet(array: oldAddressList)
+                let after: Set<AddressInfo> = NSMutableSet(array: addresses) as! Set<AddressInfo>
+                var toKeep: Set<AddressInfo> = NSMutableSet(set: before) as! Set<AddressInfo>
+                // 需要保留
+                toKeep = toKeep.intersection(after)
+                
+                let toRemove = NSMutableSet(set: before)
+                toRemove.minus(toKeep)
+                
+                let toAdd = NSMutableSet(set: after)
+                toAdd.minus(toKeep)
+                
+                toRemove.forEach({ addr in
+                    if let addr = addr as? AddressInfo,
+                        let anno = oldMarkerMap[addr] {
+                        mapView.removeAnnotation(anno)
+                        annotationMap.removeValue(forKey: anno)
+                    }
+                })
+                
+//                print("保留的点: \(toKeep.count)")
+//                print("删除的点: \(toRemove.count)")
+//                print("新增的点: \(toAdd.count)")
+                
+                lastUpdateAddrMarkers.removeAll()
+                toKeep.forEach({ addr in
+                    if let addr = addr as? AddressInfo,
+                        let anno = oldMarkerMap[addr] {
+                        lastUpdateAddrMarkers.append(AddressAnnotation(address: addr, annotation: anno))
+                    }
+                })
+                var annoList = Array<NSObject>()
+                toAdd.forEach({ addr in
+                    if let addr = addr as? AddressInfo,
+                        let lat = addr.geo?.lat,
+                        let lng = addr.geo?.lng {
+                        let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
+                        if let selectedCityId = self.selectedCityId {
+                            if selectedCityId != addr.parentId {
+                                anno.color = UIColor(red: 153 / 255.0, green: 153 / 255.0, blue: 153 / 255.0, alpha: 1.0)
+                            }
+                        }
+                        anno.title = addr.address
+                        annoList.append(anno)
+                        annotationMap[anno] = addr
+                        lastUpdateAddrMarkers.append(AddressAnnotation(address: addr, annotation: anno))
+                    }
+                    
+//                    if let addr = addr as? AddressInfo,
+//                        let anno = oldMarkerMap[addr],
+//                        let lat = addr.geo?.lat,
+//                        let lng = addr.geo?.lng {
+//                        let anno = PointAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
+//                        if let selectedCityId = self.selectedCityId {
+//                            if selectedCityId != addr.parentId {
+//                                anno.color = UIColor(red: 153 / 255.0, green: 153 / 255.0, blue: 153 / 255.0, alpha: 1.0)
+//                            }
+//                        }
+//                        anno.title = addr.address
+//                        annotationMap[anno] = addr
+//                        annoList.append(anno)
+//                        lastUpdateAddrMarkers.append(AddressAnnotation(address: addr, annotation: anno))
+//                    }
+                })
+                mapView.addAnnotations(annoList)
+                
+//                print("lastUpdateAddrMarkers: \(lastUpdateAddrMarkers.count)")
+            }
+        } else {
+//            print("显示统计级别")
+            // 统计级别清除所有Marker
+            lastUpdateAddrMarkers.removeAll()
+            annotationMap.removeAll()
+            statisticAnnotationMap.removeAll()
+            needRefreshStore = true
+            
+            var annoList = Array<NSObject>()
+            addresses.forEach({ addr in
+                if let lat = addr.geo?.lat,
+                    let lng = addr.geo?.lng {
+                    
                     selectedCityId = nil
                     let anno = StatisticAnnotation(coordinate: CLLocationCoordinate2DMake(lat, lng))
                     anno.title = addr.address
                     annoList.append(anno)
                     statisticAnnotationMap[anno] = addr
+                    
                 }
-            }
-        })
-        mapView.removeAnnotations(mapView.annotations)
+            })
+            mapView.removeAnnotations(mapView.annotations)
+            self.mapView.addAnnotations(annoList)
+        }
+        // 添加我的位置
         if let anno = myPositionAnnotation {
             self.mapView.addAnnotation(anno)
         }
-        self.mapView.addAnnotations(annoList)
-        
         locateMarker()
     }
     

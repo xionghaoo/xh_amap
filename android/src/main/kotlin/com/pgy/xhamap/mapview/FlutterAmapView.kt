@@ -74,7 +74,7 @@ class FlutterAmapView(
 
     private var filterIds: List<Int>? = null
 
-    private var lastRequestTime: Long = 0L
+//    private var lastRequestTime: Long = 0L
     private var lastUpdateAddrMarkers: ArrayList<AddressMarker> = ArrayList()
 
 
@@ -305,20 +305,17 @@ class FlutterAmapView(
             lastAnnoShowType = annoShowType
         }
 
-        if (lastRequestTime == 0L || System.currentTimeMillis() - lastRequestTime > 1500) {
-             if (annoShowType == 0) {
-                val region = aMap?.projection?.visibleRegion
-                if (region != null) {
-                    val centerLat: Double = (region.farLeft.latitude + region.nearRight.latitude) / 2
-                    val centerLng: Double = (region.farLeft.longitude + region.nearRight.longitude) / 2
-                    val args = HashMap<String, Double>().apply {
-                        put("lat", centerLat)
-                        put("lng", centerLng)
-                    }
-                    methodChannel.invokeMethod("onMapCenterMove", args)
+        if (annoShowType == 0) {
+            val region = aMap?.projection?.visibleRegion
+            if (region != null) {
+                val centerLat: Double = (region.farLeft.latitude + region.nearRight.latitude) / 2
+                val centerLng: Double = (region.farLeft.longitude + region.nearRight.longitude) / 2
+                val args = HashMap<String, Double>().apply {
+                    put("lat", centerLat)
+                    put("lng", centerLng)
                 }
+                methodChannel.invokeMethod("onMapCenterMove", args)
             }
-            lastRequestTime = System.currentTimeMillis()
         }
         
         io.flutter.Log.d("FlutterAmapView", "zoom: $zoomLevel")
@@ -351,7 +348,7 @@ class FlutterAmapView(
         if (annoShowType == 0) {
             // 门店级别
             if (needRefreshStore) {
-                io.flutter.Log.d("diff_test", "重新显示门店")
+//                io.flutter.Log.d("diff_test", "重新显示门店")
                 // 清除所有Marker
                 needRefreshStore = false
                 aMap?.clear()
@@ -363,12 +360,13 @@ class FlutterAmapView(
                     addNewMarkerForStore(address)
                 }
             } else {
-                io.flutter.Log.d("diff_test", "门店移动，差异化更新门店")
+//                io.flutter.Log.d("diff_test", "门店移动，差异化更新门店")
                 // 差异化门店Marker，需要清除统计级别marker
-                statisticMap.clear()
                 statisticMap.keys.forEach { marker ->
                     marker.remove()
                 }
+                statisticMap.clear()
+
                 val oldAddressList = ArrayList<AmapParam.AddressInfo>()
                 val oldMarkerMap = HashMap<AmapParam.AddressInfo, Marker>()
                 lastUpdateAddrMarkers.forEach { am ->
@@ -386,9 +384,9 @@ class FlutterAmapView(
                 toAdd.addAll(addresses)
                 toAdd.removeAll(toKeep)
 
-                io.flutter.Log.d("diff_test", "保留的点：${toKeep.size}")
-                io.flutter.Log.d("diff_test", "删除的点：${toRemove.size}")
-                io.flutter.Log.d("diff_test", "新增的点：${toAdd.size}")
+//                io.flutter.Log.d("diff_test", "保留的点：${toKeep.size}")
+//                io.flutter.Log.d("diff_test", "删除的点：${toRemove.size}")
+//                io.flutter.Log.d("diff_test", "新增的点：${toAdd.size}")
 
                 // 移除Marker
                 toRemove.forEach { addr ->
@@ -416,11 +414,11 @@ class FlutterAmapView(
                     addNewMarkerForStore(address)
                 }
 
-                io.flutter.Log.d("diff_test", "lastUpdateAddrMarkers: ${lastUpdateAddrMarkers.size}")
+//                io.flutter.Log.d("diff_test", "lastUpdateAddrMarkers: ${lastUpdateAddrMarkers.size}")
 
             }
         } else {
-            io.flutter.Log.d("diff_test", "统计级别显示")
+//            io.flutter.Log.d("diff_test", "统计级别显示")
             // 统计级别清除所有Marker
             aMap?.clear()
             lastUpdateAddrMarkers.clear()
@@ -458,63 +456,6 @@ class FlutterAmapView(
                 }
             }
         }
-
-        // ----------------- 原来的代码 ---------------
-//        aMap?.clear()
-//        storeMap.clear()
-//        statisticMap.clear()
-//        addresses.forEach { address ->
-//            if (address.geo != null && address.geo?.lat != null && address.geo?.lng != null) {
-//                val markerView: View = if (address.showType == 0) {
-//                    val v = LayoutInflater.from(context).inflate(R.layout.marker_merchant_location, null)
-//                    val tvMerchantIndex = v.findViewById<TextView>(R.id.tv_merchant_index)
-//                    val tvTriangleView = v.findViewById<TriangleView>(R.id.triangle_view)
-//                    tvMerchantIndex.text = address.indexName
-//                    if (selectedCityId != null && selectedCityId != address.parentId) {
-////                        io.flutter.Log.d("test_amap", "selectedCityId: $selectedCityId, parentId: ${address.parentId}")
-//                        // 过滤某一县域下的门店
-//                        tvMerchantIndex.background = context?.resources?.getDrawable(R.drawable.shape_title_bg_disable)
-//                        tvTriangleView.setTriangleColor(R.color.color_999999)
-//                    }
-//                    v
-//                } else {
-////                    clickedAreaId = null
-//                    selectedCityId = null
-//                    val v = LayoutInflater.from(context).inflate(R.layout.marker_statistic_location, null)
-//                    v.findViewById<TextView>(R.id.tv_merchant_index).text = address.indexName
-//                    v.findViewById<TextView>(R.id.tv_count).text = address.index.toString()
-//                    v
-//                }
-//
-//                val option = MarkerOptions()
-//                    .position(LatLng(address.geo!!.lat, address.geo!!.lng))
-//                    .title(address.address)
-//                    .icon(BitmapDescriptorFactory.fromView(markerView))
-//                if (address.showType == 0) {
-//                    option.anchor(0.5f, 0f)
-//                } else {
-//                    option.anchor(0.5f, 0.5f)
-//
-//                }
-//                val marker = aMap?.addMarker(option)
-//                val anim = ScaleAnimation(0f, 1f, 0f, 1f)
-//                anim.setDuration(500)
-//                anim.setInterpolator(BounceInterpolator())
-//                marker?.setAnimation(anim)
-//                marker?.startAnimation()
-//
-//                if (marker != null) {
-//                    if (address.showType == 0) {
-//                        storeMap.put(marker, address)
-//                    } else {
-//                        statisticMap.put(marker, address)
-//                    }
-//                }
-////                if (marker != null) {
-////                    merchantMap.put(marker, address.index)
-////                }
-//            }
-//        }
 
         // 添加我的位置
         if (myMarker != null) {

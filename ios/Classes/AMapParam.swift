@@ -19,12 +19,14 @@ class AMapParam: Codable {
     let startAddressList: Array<AddressInfo>?
     let endAddressList: Array<AddressInfo>?
     let merchantAddressList: Array<AddressInfo>?
+    let markerClickable: Bool
     
     init(
         initialCenterPoint: Array<Double>,
         initialZoomLevel: CGFloat,
         enableMyLocation: Bool? = false,
         enableMyMarker: Bool? = false,
+        markerClickable: Bool = true,
         mapType: Int = routeMap,
         startAddressList: Array<AddressInfo>? = [],
         endAddressList: Array<AddressInfo>? = [],
@@ -38,6 +40,7 @@ class AMapParam: Codable {
         self.startAddressList = startAddressList
         self.endAddressList = endAddressList
         self.merchantAddressList = merchantAddressList
+        self.markerClickable = markerClickable
     }
 }
 
@@ -49,7 +52,15 @@ class MarkerParam: Codable {
     }
 }
 
-struct AddressInfo: Codable {
+struct AddressInfo: Codable, Hashable {
+    static func == (lhs: AddressInfo, rhs: AddressInfo) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     let geo: GeoPoint?
     let address: String?
     let index: Int?
@@ -60,7 +71,17 @@ struct AddressInfo: Codable {
     
 }
 
-struct GeoPoint: Codable {
+struct GeoPoint: Codable, Hashable {
     let lat: Double?
     let lng: Double?
+}
+
+class AddressAnnotation {
+    let address: AddressInfo
+    let annotation: PointAnnotation
+    
+    init(address: AddressInfo, annotation: PointAnnotation) {
+        self.address = address
+        self.annotation = annotation
+    }
 }
