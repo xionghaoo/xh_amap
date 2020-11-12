@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.BounceInterpolator
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -18,7 +17,6 @@ import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
 import com.amap.api.maps.model.*
-import com.amap.api.maps.model.animation.ScaleAnimation
 import com.amap.api.services.core.AMapException
 import com.amap.api.services.route.*
 import com.google.gson.Gson
@@ -72,6 +70,9 @@ class FlutterAmapView(
     private var lastSelectedMarker: Marker? = null
 
     private var filterIds: List<Int>? = null
+
+    private var lastRequestTime: Long = 0L
+    private var lastUpdateAddrMarkers: ArrayList<AddressMarker> = ArrayList()
 
 
     init {
@@ -156,6 +157,35 @@ class FlutterAmapView(
 
         // 监听缩放级别变化
         aMap?.setOnCameraChangeListener(this)
+
+//        aMap?.setAMapGestureListener(object : AMapGestureListener {
+//            override fun onDoubleTap(p0: Float, p1: Float) {
+//
+//            }
+//
+//            override fun onSingleTap(p0: Float, p1: Float) {
+//            }
+//
+//            override fun onFling(p0: Float, p1: Float) {
+//            }
+//
+//            override fun onScroll(p0: Float, p1: Float) {
+//            }
+//
+//            override fun onLongPress(p0: Float, p1: Float) {
+//            }
+//
+//            override fun onDown(p0: Float, p1: Float) {
+//            }
+//
+//            override fun onUp(p0: Float, p1: Float) {
+//                io.flutter.Log.d("FlutterAMapView", "onUp")
+//            }
+//
+//            override fun onMapStable() {
+//                io.flutter.Log.d("FlutterAMapView", "onMapStable")
+//            }
+//        })
     }
 
     override fun onResume(owner: LifecycleOwner) {
@@ -269,17 +299,20 @@ class FlutterAmapView(
             lastAnnoShowType = annoShowType
         }
 
-        if (annoShowType == 0) {
-            val region = aMap?.projection?.visibleRegion
-            if (region != null) {
-                val centerLat: Double = (region.farLeft.latitude + region.nearRight.latitude) / 2
-                val centerLng: Double = (region.farLeft.longitude + region.nearRight.longitude) / 2
-                val args = HashMap<String, Double>().apply {
-                    put("lat", centerLat)
-                    put("lng", centerLng)
+        if (lastRequestTime == 0L || System.currentTimeMillis() - lastRequestTime > 1500) {
+             if (annoShowType == 0) {
+                val region = aMap?.projection?.visibleRegion
+                if (region != null) {
+                    val centerLat: Double = (region.farLeft.latitude + region.nearRight.latitude) / 2
+                    val centerLng: Double = (region.farLeft.longitude + region.nearRight.longitude) / 2
+                    val args = HashMap<String, Double>().apply {
+                        put("lat", centerLat)
+                        put("lng", centerLng)
+                    }
+                    methodChannel.invokeMethod("onMapCenterMove", args)
                 }
-                methodChannel.invokeMethod("onMapCenterMove", args)
             }
+            lastRequestTime = System.currentTimeMillis()
         }
         
         io.flutter.Log.d("FlutterAmapView", "zoom: $zoomLevel")
