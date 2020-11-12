@@ -50,7 +50,7 @@ class FlutterAmapView(
 
     private var actualMap: IActualMap? = null
 
-    private val level0: Float = 14f
+    private val level0: Float = 13f
     private val level1: Float = 11.5f
     private val level2: Float = 9.5f
     private var annoShowType = 0
@@ -231,6 +231,9 @@ class FlutterAmapView(
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
+        if (!param.markerClickable) {
+            return true
+        }
         if (marker?.title == "我的位置") return false
 
         if (annoShowType == 0) {
@@ -412,6 +415,8 @@ class FlutterAmapView(
                 toAdd.forEach { address ->
                     addNewMarkerForStore(address)
                 }
+
+                io.flutter.Log.d("diff_test", "lastUpdateAddrMarkers: ${lastUpdateAddrMarkers.size}")
 
             }
         } else {

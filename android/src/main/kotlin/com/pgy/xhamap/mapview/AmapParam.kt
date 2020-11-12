@@ -6,6 +6,7 @@ class AmapParam {
     val enableMyLocation: Boolean = false
     val enableMyMarker: Boolean = false
     val mapType: Int? = ROUTE_MAP
+    val markerClickable: Boolean = true
 
     val startAddressList: ArrayList<AddressInfo>? = null
     val endAddressList: ArrayList<AddressInfo>? = null
