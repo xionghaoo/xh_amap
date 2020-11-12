@@ -20,6 +20,18 @@ class AmapParam {
         var showType: Int? = null
         var id: Int? = null
         var parentId: Int? = null
+
+        override fun hashCode(): Int {
+            return id.hashCode()
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (other is AddressInfo) {
+                return id == other.id
+            } else {
+                return false
+            }
+        }
     }
 
     class GeoPoint(val lat: Double, val lng: Double)
