@@ -6,3 +6,11 @@
 ```xml
 <key>io.flutter.embedded_views_preview</key><true/>
 ```
+## 效果
+
+![Demo 1][1]
+
+![demo 2][2]
+
+[1]:https://github.com/xionghaoo/assets/blob/master/map_ios_1.jpeg?raw=true
+[2]:https://github.com/xionghaoo/assets/blob/master/map_ios_2.PNG?raw=true
