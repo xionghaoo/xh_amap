@@ -13,6 +13,8 @@ class AmapParam {
 
     val merchantAddressList: ArrayList<AddressInfo>? = null
 
+    val isScalable: Boolean = true
+
     class AddressInfo {
         var geo: GeoPoint? = null
         var address: String? = null

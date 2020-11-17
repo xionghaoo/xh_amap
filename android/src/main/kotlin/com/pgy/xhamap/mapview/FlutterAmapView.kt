@@ -123,6 +123,8 @@ class FlutterAmapView(
         // 显示室内地图
         aMap?.showIndoorMap(true)
 
+        aMap?.uiSettings?.isScaleControlsEnabled = param.isScalable
+        
         // 开启我当前的位置蓝点
 //        if (param.enableMyLocation) {
 //            val locationStyle = MyLocationStyle()
