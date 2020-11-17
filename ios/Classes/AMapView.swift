@@ -489,6 +489,10 @@ class AMapView: NSObject, FlutterPlatformView, MAMapViewDelegate, AMapSearchDele
             // 区域级别
             annoShowType = 3
         }
+        if let param = param,
+           param.fixToLevel0 {
+            annoShowType = 0
+        }
         if annoShowType != lastAnnoShowType {
             self.methodChannel.invokeMethod("onMapZoom", arguments: ["zoomLevel": annoShowType])
             lastAnnoShowType = annoShowType

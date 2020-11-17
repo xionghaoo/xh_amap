@@ -122,8 +122,6 @@ class FlutterAmapView(
         aMap?.uiSettings?.isScaleControlsEnabled = true
         // 显示室内地图
         aMap?.showIndoorMap(true)
-
-        aMap?.uiSettings?.isScaleControlsEnabled = param.isScalable
         
         // 开启我当前的位置蓝点
 //        if (param.enableMyLocation) {
@@ -298,6 +296,10 @@ class FlutterAmapView(
         } else if (zoomLevel <= level2) {
             // 区域级别
             annoShowType = 3
+        }
+
+        if (param.fixToLevel0) {
+            annoShowType = 0
         }
 
         if (annoShowType != lastAnnoShowType) {

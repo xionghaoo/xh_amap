@@ -11,7 +11,7 @@ class AmapParam {
   bool enableMyMarker;
   int mapType;
   bool markerClickable;
-  bool isScalable;
+  bool fixToLevel0;
 
   final List<AddressInfo> startAddressList;
   final List<AddressInfo> endAddressList;
@@ -30,7 +30,7 @@ class AmapParam {
     this.merchantAddressList = const [],
     this.mapType = routeMap,
     this.markerClickable = true,
-    this.isScalable = true
+    this.fixToLevel0 = false
   });
 
   toJson() => <String, dynamic> {
@@ -43,7 +43,7 @@ class AmapParam {
     "endAddressList": endAddressList,
     "merchantAddressList": merchantAddressList,
     "markerClickable": markerClickable,
-    "isScalable": isScalable
+    "fixToLevel0": fixToLevel0
   };
 }
 

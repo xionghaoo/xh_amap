@@ -20,6 +20,7 @@ class AMapParam: Codable {
     let endAddressList: Array<AddressInfo>?
     let merchantAddressList: Array<AddressInfo>?
     let markerClickable: Bool
+    let fixToLevel0: Bool
     
     init(
         initialCenterPoint: Array<Double>,
@@ -27,6 +28,7 @@ class AMapParam: Codable {
         enableMyLocation: Bool? = false,
         enableMyMarker: Bool? = false,
         markerClickable: Bool = true,
+        fixToLevel0: Bool = false,
         mapType: Int = routeMap,
         startAddressList: Array<AddressInfo>? = [],
         endAddressList: Array<AddressInfo>? = [],
@@ -41,6 +43,7 @@ class AMapParam: Codable {
         self.endAddressList = endAddressList
         self.merchantAddressList = merchantAddressList
         self.markerClickable = markerClickable
+        self.fixToLevel0 = fixToLevel0
     }
 }
 
